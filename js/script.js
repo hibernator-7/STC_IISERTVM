@@ -113,30 +113,73 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Leadership Page
     if (pagePath.includes('leadership.html')) {
+        const directorContainer = document.getElementById('director-section');
         const leadershipContainer = document.getElementById('leadership-grid-container');
-        if (leadershipContainer && typeof leadershipData !== 'undefined') {
-            const { fic, dosa } = leadershipData;
-            leadershipContainer.innerHTML = `
-                <div class="leadership-card">
-                    <img src="${fic.imageUrl}" alt="${fic.name}">
-                    <div class="leadership-details">
-                        <h3>${fic.name}</h3>
-                        <h4>${fic.title}</h4>
-                        <p>"${fic.message}"</p>
+        const councilContainer = document.getElementById('council-grid-container');
+        const formerAdvisorsContainer = document.getElementById('former-advisors-container');
+        const pastSecretariesContainer = document.getElementById('past-secretaries-container');
+
+        if (typeof leadershipData !== 'undefined') {
+            // Populate Director
+            if (directorContainer && leadershipData.director) {
+                const { director } = leadershipData;
+                directorContainer.innerHTML = `
+                    <div class="director-card">
+                        <img src="${director.imageUrl}" alt="${director.name}">
+                        <div class="leadership-details">
+                            <h3>${director.name}</h3>
+                            <h4>${director.title}</h4>
+                            <p>"${director.message}"</p>
+                        </div>
                     </div>
-                </div>
-                <div class="leadership-card">
-                    <img src="${dosa.imageUrl}" alt="${dosa.name}">
-                    <div class="leadership-details">
-                        <h3>${dosa.name}</h3>
-                        <h4>${dosa.title}</h4>
-                        <p>"${dosa.message}"</p>
-                    </div>
-                </div>
-            `;
+                `;
+            }
+
+            // Populate Dean and Current Advisors
+            if (leadershipContainer) {
+                let leadershipHtml = '';
+                if (leadershipData.dosa) {
+                    const { dosa } = leadershipData;
+                    leadershipHtml += `
+                        <div class="leadership-card">
+                            <img src="${dosa.imageUrl}" alt="${dosa.name}">
+                            <div class="leadership-details">
+                                <h3>${dosa.name}</h3>
+                                <h4>${dosa.title}</h4>
+                                <p>"${dosa.message}"</p>
+                            </div>
+                        </div>
+                    `;
+                }
+                if (leadershipData.currentAdvisors) {
+                    leadershipData.currentAdvisors.forEach(advisor => {
+                        leadershipHtml += `
+                        <div class="leadership-card">
+                            <img src="${advisor.imageUrl}" alt="${advisor.name}">
+                            <div class="leadership-details">
+                                <h3>${advisor.name}</h3>
+                                <h4>${advisor.title}</h4>
+                                <p>"${advisor.message}"</p>
+                            </div>
+                        </div>
+                    `;
+                    });
+                }
+                leadershipContainer.innerHTML = leadershipHtml;
+            }
+            
+            // Populate Former Advisors
+            if (formerAdvisorsContainer && leadershipData.formerAdvisors) {
+                let listHtml = '<ul>';
+                leadershipData.formerAdvisors.forEach(adv => {
+                    listHtml += `<li>${adv.name}</li>`;
+                });
+                listHtml += '</ul>';
+                formerAdvisorsContainer.innerHTML = listHtml;
+            }
         }
 
-        const councilContainer = document.getElementById('council-grid-container');
+        // Populate Council Members
         if (councilContainer && typeof councilMembers !== 'undefined') {
             councilMembers.forEach(member => {
                 councilContainer.innerHTML += `
@@ -149,7 +192,7 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         }
 
-        const pastSecretariesContainer = document.getElementById('past-secretaries-container');
+        // Populate Past Secretaries
         if (pastSecretariesContainer && typeof pastSecretaries !== 'undefined') {
             let listHtml = '<ul>';
             pastSecretaries.forEach(sec => {
