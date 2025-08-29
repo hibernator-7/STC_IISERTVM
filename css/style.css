@@ -57,15 +57,42 @@ nav .logo a {
     color: var(--text-color);
 }
 
-nav ul {
+nav #nav-links {
     list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
 }
 
-nav ul li {
+nav #nav-links li {
     margin-left: 2rem;
+}
+
+.hamburger {
+    display: none; /* Hidden by default, shown on mobile */
+    flex-direction: column;
+    justify-content: space-around;
+    width: 2rem;
+    height: 2rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 10;
+}
+
+.hamburger:focus {
+    outline: none;
+}
+
+.hamburger-line {
+    width: 2rem;
+    height: 0.25rem;
+    background: var(--text-color);
+    border-radius: 10px;
+    transition: all 0.3s linear;
+    position: relative;
+    transform-origin: 1px;
 }
 
 nav ul li a {
@@ -125,7 +152,7 @@ main {
 
 /* Hero Section */
 #hero {
-    background-image: url('https://www.iisertvm.ac.in/files/read/2_arial_5_img_20211101_170435-01_cropped'); /* Placeholder image */
+    background-image: url('https://picsum.photos/seed/stc-hero/1920/1080'); /* Placeholder image */
     background-size: cover;
     background-position: center;
     color: var(--secondary-color);
@@ -1017,6 +1044,44 @@ footer {
 }
 
 @media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+
+    #nav-links {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: white;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        border-top: 1px solid var(--accent-color);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        transform: translateY(-150%);
+        transition: transform 0.3s ease-in-out;
+        padding: 1rem 0;
+    }
+
+    #nav-links li {
+        margin: 1rem 0;
+    }
+
+    #main-nav.nav-active #nav-links {
+        transform: translateY(0);
+    }
+
+    /* Animate hamburger to a cross */
+    #main-nav.nav-active .hamburger-line:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+    #main-nav.nav-active .hamburger-line:nth-child(2) {
+        opacity: 0;
+    }
+    #main-nav.nav-active .hamburger-line:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+    }
+
     .leadership-card {
         flex-direction: column;
         text-align: center;
@@ -1028,10 +1093,6 @@ footer {
 
     .anvesha-content {
         flex-direction: column;
-    }
-
-    nav ul {
-        display: none; /* Simple hiding for now, can be replaced with a hamburger menu */
     }
 
     .hero-content h1 {
