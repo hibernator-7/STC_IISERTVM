@@ -17,7 +17,7 @@ const leadershipData = {
         name: "Professor Jarugu Narasimha Moorthy",
         title: "Director, IISER TVM",
         message: "A message from the director can be placed here.", // Placeholder message
-        imageUrl: "https://drive.google.com/file/d/1qCmhnGR43BbWcx2CDk5tF5zxRiMA93Pu/view?usp=drive_link"
+        imageUrl: "https://home.iitk.ac.in/~moorthy/assets/images/prof-jnm-74-independence-minified.jpg"
     },
     dosa: {
         name: "Prof Rajeev N Kini",
