@@ -47,7 +47,7 @@ const leadershipData = {
 };
 
 const councilMembers = [
-    { name: "Ishaani R Kamath", position: "Secretary (BS-MS 21)", imageUrl: "https://github.com/Coding-Club-of-IISER-Thiruvananthapuram/STC_IISERTVM/blob/cc5730f3d080ea80ed9700f98799362d62e2a883/images/members/24-25/Secretary_Ishaani_R_Kamath_BSMS%20_21.jpg" },
+    { name: "Ishaani R Kamath", position: "Secretary (BS-MS 21)", imageUrl: "https://raw.githubusercontent.com/Coding-Club-of-IISER-Thiruvananthapuram/STC_IISERTVM/cc5730f3d080ea80ed9700f98799362d62e2a883/images/members/24-25/Secretary_Ishaani_R_Kamath_BSMS%20_21.jpg" },
     { name: "Pearl", position: "Member", imageUrl: "https://github.com/Coding-Club-of-IISER-Thiruvananthapuram/STC_IISERTVM/blob/cc5730f3d080ea80ed9700f98799362d62e2a883/images/members/24-25/Pearl_23.jpg" },
     { name: "Arvind Lomrore", position: "Member", imageUrl: "images/members/24-25/Arvind Lomrore BSMS 23.jpg" },
     { name: "Alan Varghese Jophy", position: "Member", imageUrl: "https://picsum.photos/seed/mem3/200/200" },
