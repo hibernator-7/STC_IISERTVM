@@ -48,13 +48,13 @@ const leadershipData = {
 
 const councilMembers = [
     { name: "Ishaani R Kamath", position: "Secretary (BS-MS 21)", imageUrl: "https://raw.githubusercontent.com/Coding-Club-of-IISER-Thiruvananthapuram/STC_IISERTVM/cc5730f3d080ea80ed9700f98799362d62e2a883/images/members/24-25/Secretary_Ishaani_R_Kamath_BSMS%20_21.jpg" },
-    { name: "Pearl", position: "Member", imageUrl: "https://github.com/Coding-Club-of-IISER-Thiruvananthapuram/STC_IISERTVM/blob/cc5730f3d080ea80ed9700f98799362d62e2a883/images/members/24-25/Pearl_23.jpg" },
-    { name: "Arvind Lomrore", position: "Member", imageUrl: "images/members/24-25/Arvind Lomrore BSMS 23.jpg" },
+    { name: "Pearl", position: "Member", imageUrl: "https://raw.githubusercontent.com/Coding-Club-of-IISER-Thiruvananthapuram/STC_IISERTVM/refs/heads/main/images/members/24-25/Pearl_23.jpg" },
+    { name: "Arvind Lomrore", position: "Member", imageUrl: "https://raw.githubusercontent.com/Coding-Club-of-IISER-Thiruvananthapuram/STC_IISERTVM/refs/heads/main/images/members/24-25/Arvind%20Lomrore%20BSMS%2023.jpg" },
     { name: "Alan Varghese Jophy", position: "Member", imageUrl: "https://picsum.photos/seed/mem3/200/200" },
-    { name: "Adheena Lakshmi", position: "Member", imageUrl: "https://picsum.photos/seed/mem4/200/200" },
-    { name: "Abhiram Mahesh", position: "Member", imageUrl: "https://picsum.photos/seed/mem5/200/200" },
-    { name: "Aashlesha Chavan", position: "Member", imageUrl: "https://picsum.photos/seed/mem6/200/200" },
-    { name: "A J Nithin", position: "Member", imageUrl: "https://picsum.photos/seed/mem7/200/200" }
+    { name: "Adheena Lakshmi", position: "Member", imageUrl: "https://raw.githubusercontent.com/Coding-Club-of-IISER-Thiruvananthapuram/STC_IISERTVM/refs/heads/main/images/members/24-25/Adheena%20Lakshmi_BSMS21.jpg" },
+    { name: "Abhiram Mahesh", position: "Member", imageUrl: "https://raw.githubusercontent.com/Coding-Club-of-IISER-Thiruvananthapuram/STC_IISERTVM/refs/heads/main/images/members/24-25/Abhiram%20Mahesh_21.jpg" },
+    { name: "Aashlesha Chavan", position: "Member", imageUrl: "https://raw.githubusercontent.com/Coding-Club-of-IISER-Thiruvananthapuram/STC_IISERTVM/refs/heads/main/images/members/24-25/Aashlesha_Chavan_BSMS22.jpeg" },
+    { name: "A J Nithin", position: "Member", imageUrl: "https://raw.githubusercontent.com/Coding-Club-of-IISER-Thiruvananthapuram/STC_IISERTVM/refs/heads/main/images/members/24-25/A%20J%20Nithin%20Batch23.jpg" }
 ];
 
 const pastSecretaries = [
