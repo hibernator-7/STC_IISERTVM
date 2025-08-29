@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - STC IISER TVM</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <!-- Header content is loaded dynamically by js/script.js -->
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>Gallery</h1>
+                <p>A visual journey through our events and activities.</p>
+            </div>
+        </section>
+
+        <section id="gallery-page" class="container">
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="anvesha">Anvesha</button>
+                <button class="filter-btn" data-filter="ccit">CCIT</button>
+                <button class="filter-btn" data-filter="parsec">Parsec</button>
+                <button class="filter-btn" data-filter="2023">2023</button>
+                <button class="filter-btn" data-filter="2024">2024</button>
+            </div>
+
+            <div class="gallery-container">
+                <div class="gallery-item-full" data-category="anvesha 2024"><img src="https://picsum.photos/seed/g1/400/300" alt="Gallery Image"></div>
+                <div class="gallery-item-full" data-category="ccit 2024"><img src="https://picsum.photos/seed/g2/400/500" alt="Gallery Image"></div>
+                <div class="gallery-item-full" data-category="parsec 2023"><img src="https://picsum.photos/seed/g3/400/350" alt="Gallery Image"></div>
+                <div class="gallery-item-full" data-category="anvesha 2024"><img src="https://picsum.photos/seed/g4/400/600" alt="Gallery Image"></div>
+                <div class="gallery-item-full" data-category="ccit 2023"><img src="https://picsum.photos/seed/g5/400/400" alt="Gallery Image"></div>
+                <div class="gallery-item-full" data-category="parsec 2024"><img src="https://picsum.photos/seed/g6/400/300" alt="Gallery Image"></div>
+                <div class="gallery-item-full" data-category="anvesha 2023"><img src="https://picsum.photos/seed/g7/400/550" alt="Gallery Image"></div>
+                <div class="gallery-item-full" data-category="ccit 2024"><img src="https://picsum.photos/seed/g8/400/450" alt="Gallery Image"></div>
+                 <div class="gallery-item-full" data-category="proteus 2024"><img src="https://picsum.photos/seed/g9/400/420" alt="Gallery Image"></div>
+                <div class="gallery-item-full" data-category="anvesha 2024"><img src="https://picsum.photos/seed/g10/400/380" alt="Gallery Image"></div>
+                <div class="gallery-item-full" data-category="cmit 2023"><img src="https://picsum.photos/seed/g11/400/520" alt="Gallery Image"></div>
+                <div class="gallery-item-full" data-category="psit 2024"><img src="https://picsum.photos/seed/g12/400/480" alt="Gallery Image"></div>
+            </div>
+        </section>
+    </main>
+
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+    </div>
+
+    <footer>
+        <!-- Footer content is loaded dynamically by js/script.js -->
+    </footer>
+
+    <script src="../js/data.js"></script>
+    <script src="../js/script.js"></script>
+</body>
+</html>
