@@ -23,7 +23,7 @@ const leadershipData = {
         name: "Prof Rajeev N Kini",
         title: "Dean of Student Affairs",
         message: "A message from the Dean of Student Affairs can be placed here.", // Placeholder message
-        imageUrl: "https://github.com/Coding-Club-of-IISER-Thiruvananthapuram/STC_IISERTVM/blob/main/images/members/Faculty%20Advisors/Prof.%20Rajeev%20N%20Kini.jpg"
+        imageUrl: "images/members/faculty_advisors/prof_rajeev_n_kini.jpg"
     },
     currentAdvisors: [
         {
