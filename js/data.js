@@ -13,32 +13,54 @@ Instructions:
 
 // --- LEADERSHIP DATA ---
 const leadershipData = {
-    fic: {
-        name: "Dr. John Doe",
-        title: "Faculty-in-Charge, STC",
-        message: "The Science and Technology Council is a cornerstone of student-led innovation at IISER TVM. It's a pleasure to see our students take such initiative in fostering a vibrant scientific community.",
-        imageUrl: "https://picsum.photos/seed/fic/250/250"
+    director: {
+        name: "Professor Jarugu Narasimha Moorthy",
+        title: "Director, IISER TVM",
+        message: "A message from the director can be placed here.", // Placeholder message
+        imageUrl: "https://picsum.photos/seed/director/250/250"
     },
     dosa: {
-        name: "Dr. Jane Smith",
+        name: "Prof Rajeev N Kini",
         title: "Dean of Student Affairs",
-        message: "The activities organized by the STC are integral to the holistic development of our students. We are proud to support their endeavors and look forward to their future achievements.",
+        message: "A message from the Dean of Student Affairs can be placed here.", // Placeholder message
         imageUrl: "https://picsum.photos/seed/dosa/250/250"
-    }
+    },
+    currentAdvisors: [
+        {
+            name: "Dr. Sanu Shameer",
+            title: "Faculty Advisor, STC",
+            message: "A message from the faculty advisor can be placed here.",
+            imageUrl: "https://picsum.photos/seed/fic1/250/250"
+        },
+        {
+            name: "Dr. Krishnendu Gope",
+            title: "Faculty Advisor, STC",
+            message: "A message from the faculty advisor can be placed here.",
+            imageUrl: "https://picsum.photos/seed/fic2/250/250"
+        }
+    ],
+    formerAdvisors: [
+        { name: "Prof Utpal Manna" },
+        { name: "Dr. Jishy Varghese" },
+        { name: "Dr. Nisha N Kannan" }
+    ]
 };
 
 const councilMembers = [
-    { name: "Alex Johnson", position: "General Secretary", imageUrl: "https://picsum.photos/seed/sec1/200/200" },
-    { name: "Maria Garcia", position: "Joint Secretary", imageUrl: "https://picsum.photos/seed/sec2/200/200" },
-    { name: "Chen Wei", position: "Treasurer", imageUrl: "https://picsum.photos/seed/sec3/200/200" },
-    { name: "Fatima Ahmed", position: "Events Head", imageUrl: "https://picsum.photos/seed/sec4/200/200" }
+    { name: "Ishaani R Kamath", position: "Secretary (BS-MS 21)", imageUrl: "https://picsum.photos/seed/sec1/200/200" },
+    { name: "Pearl", position: "Member", imageUrl: "https://picsum.photos/seed/mem1/200/200" },
+    { name: "Arvind Lomrore", position: "Member", imageUrl: "https://picsum.photos/seed/mem2/200/200" },
+    { name: "Alan Varghese Jophy", position: "Member", imageUrl: "https://picsum.photos/seed/mem3/200/200" },
+    { name: "Adheena Lakshmi", position: "Member", imageUrl: "https://picsum.photos/seed/mem4/200/200" },
+    { name: "Abhiram Mahesh", position: "Member", imageUrl: "https://picsum.photos/seed/mem5/200/200" },
+    { name: "Aashlesha Chavan", position: "Member", imageUrl: "https://picsum.photos/seed/mem6/200/200" },
+    { name: "A J Nithin", position: "Member", imageUrl: "https://picsum.photos/seed/mem7/200/200" }
 ];
 
 const pastSecretaries = [
-    { year: "2023", name: "Priya Sharma" },
-    { year: "2022", name: "Rahul Verma" },
-    { year: "2021", name: "Anjali Menon" },
-    { year: "2020", name: "David Lee" }
+    { year: "BS-MS 20", name: "Devashish Kalmegh" },
+    { year: "BS-MS 19", name: "Ravikiran Hegde" },
+    { year: "BS-MS 18", name: "Sharang Rajesh Iyer" }
 ];
 
 
@@ -100,9 +122,9 @@ const latestUpdates = [
 // You can add team members for each club here.
 const clubTeams = {
     ccit: [
-        { name: "Jane Doe", position: "President", imageUrl: "https://picsum.photos/seed/member1/200/200" },
-        { name: "John Smith", position: "Vice President", imageUrl: "https://picsum.photos/seed/member2/200/200" },
-        { name: "Emily Jones", position: "Events Coordinator", imageUrl: "https://picsum.photos/seed/member3/200/200" }
+        { name: "Saurab Mishra", position: "President", imageUrl: "https://picsum.photos/seed/member1/200/200" },
+        { name: "Satyam", position: "Vice President", imageUrl: "https://picsum.photos/seed/member2/200/200" },
+        { name: "ABC", position: "Events Coordinator", imageUrl: "https://picsum.photos/seed/member3/200/200" }
     ],
     psit: [
         // Add PSIT team members here
