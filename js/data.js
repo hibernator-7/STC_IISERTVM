@@ -76,19 +76,22 @@ const latestUpdates = [
         date: "Jan 10, 2024",
         title: "New STC Council Elected",
         excerpt: "The results for the student council elections are out. We are excited to welcome the new team who will be leading the STC for the next academic year. Read on to meet the new secretaries and learn about their vision for the council.",
-        link: "#"
+        link: "#",
+        imageUrl: "https://picsum.photos/seed/update1/400/250"
     },
     {
         date: "Dec 28, 2023",
         title: "Anvesha '24 Post-Event Report",
         excerpt: "Anvesha '24 was a massive success, with over 1000 participants from across the country...",
-        link: "#"
+        link: "#",
+        imageUrl: "https://picsum.photos/seed/update2/400/250"
     },
     {
         date: "Nov 15, 2023",
         title: "Club Registrations for Spring Semester are Open",
         excerpt: "Want to be a part of the STC family? Registrations for all our affiliated clubs are now open...",
-        link: "#"
+        link: "#",
+        imageUrl: "https://picsum.photos/seed/update3/400/250"
     }
 ];
 
