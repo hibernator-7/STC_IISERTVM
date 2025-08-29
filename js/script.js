@@ -246,9 +246,12 @@ document.addEventListener("DOMContentLoaded", function() {
         latestUpdates.slice(0, 3).forEach(update => { // Show max 3 on homepage
             latestUpdatesGrid.innerHTML += `
                 <article class="update-card">
-                    <h4>${update.title}</h4>
-                    <p>${update.excerpt}</p>
-                    <a href="${update.link}">Read More</a>
+                    <img src="${update.imageUrl}" alt="Image for ${update.title}">
+                    <div class="update-card-content">
+                        <h4>${update.title}</h4>
+                        <p>${update.excerpt}</p>
+                        <a href="${update.link}">Read More</a>
+                    </div>
                 </article>
             `;
         });
@@ -259,12 +262,34 @@ document.addEventListener("DOMContentLoaded", function() {
         latestUpdates.forEach(update => {
             updatesListContainer.innerHTML += `
                 <article class="update-item">
-                    <div class="update-item-date">${update.date}</div>
-                    <h3>${update.title}</h3>
-                    <p>${update.excerpt}</p>
-                    <a href="${update.link}" class="learn-more">Read Full Article</a>
+                    <img src="${update.imageUrl}" alt="Image for ${update.title}">
+                    <div class="update-item-content">
+                        <div class="update-item-date">${update.date}</div>
+                        <h3>${update.title}</h3>
+                        <p>${update.excerpt}</p>
+                        <a href="${update.link}" class="learn-more">Read Full Article</a>
+                    </div>
                 </article>
             `;
+        });
+    }
+
+    // --- SCROLL-TO-REVEAL ANIMATION ---
+    const sectionsToAnimate = document.querySelectorAll('.fade-in-section');
+    if (sectionsToAnimate.length > 0) {
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target); // Stop observing once it's visible
+                }
+            });
+        }, {
+            threshold: 0.1 // Trigger when 10% of the element is visible
+        });
+
+        sectionsToAnimate.forEach(section => {
+            observer.observe(section);
         });
     }
 });
