@@ -23,20 +23,20 @@ const leadershipData = {
         name: "Prof Rajeev N Kini",
         title: "Dean of Student Affairs",
         message: "A message from the Dean of Student Affairs can be placed here.", // Placeholder message
-        imageUrl: "images/members/faculty_advisors/prof_rajeev_n_kini.jpg"
+        imageUrl: "https://www.iisertvm.ac.in/assets/uploads/faculties/Kini-2022_square1.JPG"
     },
     currentAdvisors: [
         {
             name: "Dr. Sanu Shameer",
             title: "Faculty Advisor, STC",
             message: "A message from the faculty advisor can be placed here.",
-            imageUrl: "https://picsum.photos/seed/fic1/250/250"
+            imageUrl: "https://www.iisertvm.ac.in/assets/uploads/faculties/Sanu_Shameer_photo.jpg"
         },
         {
             name: "Dr. Krishnendu Gope",
             title: "Faculty Advisor, STC",
             message: "A message from the faculty advisor can be placed here.",
-            imageUrl: "https://picsum.photos/seed/fic2/250/250"
+            imageUrl: "https://www.iisertvm.ac.in/assets/uploads/faculties/gope.jpg"
         }
     ],
     formerAdvisors: [
