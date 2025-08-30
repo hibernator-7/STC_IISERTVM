@@ -15,18 +15,18 @@
     
     <style>
         :root {
-            --primary-color: #6366f1;
-            --primary-dark: #4f46e5;
-            --secondary-color: #0ea5e9;
-            --text-primary: #1e293b;
-            --text-secondary: #64748b;
-            --bg-light: #f8fafc;
+            --primary-color: #8B5CF6;
+            --primary-dark: #7C3AED;
+            --secondary-color: #A855F7;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --bg-light: #faf9fc;
             --bg-white: #ffffff;
-            --border-light: #e2e8f0;
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
-            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
-            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
-            --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1);
+            --border-light: #e5e7eb;
+            --shadow-sm: 0 1px 3px rgba(139, 92, 246, 0.08);
+            --shadow-md: 0 4px 6px -1px rgba(139, 92, 246, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(139, 92, 246, 0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(139, 92, 246, 0.1);
         }
 
         * {
@@ -43,24 +43,52 @@
             overflow-x: hidden;
         }
 
-        /* Hero Section with Modern Gradient */
+        /* Hero Section with Gallery Background */
         #hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #ffffff 0%, #8B5CF6 100%);
             overflow: hidden;
+            --hero-bg-image: url('images/gallery/Events/Anvesha/Inauguration/_AAR6973 (1).JPG');
         }
 
         #hero::before {
             content: '';
             position: absolute;
-            width: 200%;
-            height: 200%;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            animation: float 20s ease-in-out infinite;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: var(--hero-bg-image);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.4;
+            z-index: 1;
+            transition: all 2s ease-in-out;
+            animation: kenBurns 20s infinite linear;
+        }
+
+        @keyframes kenBurns {
+            0% { transform: scale(1) translate(0, 0); }
+            25% { transform: scale(1.1) translate(-2%, -2%); }
+            50% { transform: scale(1.05) translate(2%, -1%); }
+            75% { transform: scale(1.08) translate(-1%, 2%); }
+            100% { transform: scale(1) translate(0, 0); }
+        }
+
+        #hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.7) 0%, rgba(124, 58, 237, 0.8) 100%);
+            z-index: 2;
         }
 
         @keyframes float {
@@ -118,11 +146,14 @@
             box-shadow: var(--shadow-lg);
             position: relative;
             overflow: hidden;
+            border: 2px solid white;
         }
 
         .cta-button:hover {
             transform: translateY(-2px);
             box-shadow: var(--shadow-xl);
+            background: var(--primary-color);
+            color: white;
         }
 
         .cta-button::before {
@@ -133,7 +164,7 @@
             width: 0;
             height: 0;
             border-radius: 50%;
-            background: rgba(99, 102, 241, 0.1);
+            background: rgba(139, 92, 246, 0.1);
             transform: translate(-50%, -50%);
             transition: width 0.5s, height 0.5s;
         }
@@ -174,127 +205,265 @@
             transform: translateX(-50%);
             width: 60px;
             height: 4px;
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            background: var(--primary-color);
             border-radius: 2px;
         }
 
-        /* Anvesha Highlight Section */
-        .anvesha-highlight {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            padding: 60px 0;
+        /* Enhanced STC Hero Section */
+        .stc-hero-section {
+            background: linear-gradient(135deg, #ffffff 0%, #8B5CF6 100%);
+            padding: 80px 0;
             margin: 80px 0;
             position: relative;
             overflow: hidden;
         }
 
-        .anvesha-content {
+        .stc-hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.1;
+        }
+
+        .stc-hero-content {
             text-align: center;
             position: relative;
             z-index: 10;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
-        .anvesha-highlight h2 {
+        .stc-hero-section h2 {
             color: white;
-            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-size: clamp(2rem, 5vw, 3rem);
             font-family: 'Space Grotesk', sans-serif;
-            margin-bottom: 1rem;
-            animation: pulse 2s ease-in-out infinite;
+            font-weight: 700;
+            margin-bottom: 16px;
+            line-height: 1.2;
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        .anvesha-highlight p {
+        .stc-hero-section p {
             color: rgba(255, 255, 255, 0.95);
-            font-size: 1.25rem;
-            margin-bottom: 2rem;
+            font-size: clamp(1rem, 2vw, 1.125rem);
+            margin-bottom: 32px;
+            line-height: 1.6;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .anvesha-btn {
+        .stc-hero-ctas {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 48px;
+        }
+
+        .stc-hero-btn-primary {
             background: white;
-            color: #f5576c;
-            padding: 18px 40px;
+            color: var(--primary-color);
+            padding: 16px 32px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
-            display: inline-block;
+            font-size: 1rem;
             transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.2);
+            border: 2px solid white;
         }
 
-        .anvesha-btn:hover {
+        .stc-hero-btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            box-shadow: 0 15px 40px rgba(139, 92, 246, 0.3);
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+        }
+
+        .stc-hero-btn-secondary {
+            background: transparent;
+            color: white;
+            padding: 16px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .stc-hero-btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: white;
+            color: white;
+            text-decoration: none;
+        }
+
+        .stc-highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+            margin-top: 48px;
+        }
+
+        .stc-highlight-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .stc-highlight-card:hover {
+            transform: translateY(-4px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .stc-highlight-icon {
+            width: 32px;
+            height: 32px;
+            margin: 0 auto 16px;
+            fill: white;
+        }
+
+        .stc-highlight-card h3 {
+            color: white;
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .stc-highlight-card p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.875rem;
+            line-height: 1.5;
+            margin: 0;
         }
 
         /* Featured Clubs Grid */
-        .clubs-grid {
+        .stc-clubs-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
             margin-top: 3rem;
         }
 
-        .club-card {
+        .stc-club-card {
             background: white;
-            border-radius: 20px;
-            padding: 30px;
+            border-radius: 16px;
+            padding: 0;
             text-align: center;
-            transition: all 0.3s ease;
-            box-shadow: var(--shadow-md);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 6px -1px rgba(139, 92, 246, 0.1), 0 2px 4px -1px rgba(139, 92, 246, 0.06);
             position: relative;
             overflow: hidden;
+            height: 360px;
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: inherit;
+            border: 2px solid transparent;
         }
 
-        .club-card::before {
+        .stc-club-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             height: 4px;
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            background: var(--primary-color);
             transform: scaleX(0);
             transition: transform 0.3s ease;
         }
 
-        .club-card:hover::before {
+        .stc-club-card:hover::before {
             transform: scaleX(1);
         }
 
-        .club-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-xl);
+        .stc-club-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(139, 92, 246, 0.15), 0 10px 10px -5px rgba(139, 92, 246, 0.1);
+            border-color: var(--primary-color);
         }
 
-        .club-card img {
-            width: 100px;
-            height: 100px;
+        .stc-club-card:focus {
+            outline: 2px solid var(--primary-color);
+            outline-offset: 2px;
+        }
+
+        .stc-club-card-content {
+            padding: 32px 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+        }
+
+        .stc-club-card img {
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
             margin-bottom: 20px;
             object-fit: cover;
             border: 3px solid var(--border-light);
             transition: all 0.3s ease;
+            flex-shrink: 0;
+            background: var(--bg-light);
         }
 
-        .club-card:hover img {
-            transform: scale(1.1) rotate(5deg);
+        .stc-club-card img[src*=".png"],
+        .stc-club-card img[src*=".jpg"],
+        .stc-club-card img[src*=".jpeg"] {
+            object-fit: contain;
+            padding: 8px;
+        }
+
+        .stc-club-card:hover img {
+            transform: scale(1.1);
             border-color: var(--primary-color);
         }
 
-        .club-card h3 {
+        .stc-club-card h3 {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.5rem;
+            font-size: 1.25rem;
+            font-weight: 600;
             color: var(--text-primary);
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            flex-shrink: 0;
         }
 
-        .club-card p {
+        .stc-club-card p {
             color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.6;
+            font-size: 0.875rem;
+            line-height: 1.5;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .club-contact {
+            margin-top: auto;
+            padding-top: 12px;
+            border-top: 1px solid var(--border-light);
+            width: 100%;
+        }
+
+        .club-contact small {
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            display: block;
+            text-align: center;
+            opacity: 0.8;
         }
 
         /* Sliding Gallery */
@@ -322,6 +491,38 @@
             border-radius: 20px;
         }
 
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            padding: 2rem 2rem 1.5rem;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-slide:hover .gallery-caption {
+            transform: translateY(0);
+        }
+
+        .gallery-caption h4 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.25rem;
+            font-weight: 600;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .gallery-caption p {
+            margin: 0;
+            font-size: 0.875rem;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+
         .gallery-controls {
             position: absolute;
             top: 50%;
@@ -334,8 +535,8 @@
         }
 
         .gallery-btn {
-            background: rgba(255, 255, 255, 0.9);
-            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--primary-color);
             border: none;
             width: 50px;
             height: 50px;
@@ -353,6 +554,7 @@
         .gallery-btn:hover {
             background: white;
             transform: scale(1.1);
+            color: var(--primary-dark);
         }
 
         .gallery-dots {
@@ -374,48 +576,80 @@
         }
 
         .dot.active {
-            background: white;
+            background: var(--primary-color);
             transform: scale(1.3);
         }
 
         /* Events Timeline */
-        .events-timeline {
+        .stc-events-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
             margin-top: 3rem;
         }
 
-        .event-card {
+        .stc-event-card {
             background: white;
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: var(--shadow-md);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 6px -1px rgba(139, 92, 246, 0.1), 0 2px 4px -1px rgba(139, 92, 246, 0.06);
             border-left: 4px solid var(--primary-color);
             transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 200px;
         }
 
-        .event-card:hover {
-            transform: translateX(10px);
-            box-shadow: var(--shadow-lg);
+        .stc-event-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(139, 92, 246, 0.1), 0 4px 6px -2px rgba(139, 92, 246, 0.05);
         }
 
-        .event-date {
+        .stc-event-date {
             color: var(--primary-color);
             font-weight: 600;
-            font-size: 0.9rem;
-            margin-bottom: 10px;
+            font-size: 0.875rem;
+            margin-bottom: 12px;
+            flex-shrink: 0;
         }
 
-        .event-card h3 {
+        .stc-event-card h3 {
             color: var(--text-primary);
-            margin-bottom: 10px;
-            font-size: 1.25rem;
+            margin-bottom: 12px;
+            font-size: 1.125rem;
+            font-weight: 600;
+            line-height: 1.4;
+            flex-shrink: 0;
         }
 
-        .event-card p {
+        .stc-event-card p {
             color: var(--text-secondary);
-            font-size: 0.95rem;
+            font-size: 0.875rem;
+            line-height: 1.5;
+            flex: 1;
+        }
+
+        .stc-event-cta {
+            margin-top: 16px;
+            padding: 8px 16px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .stc-event-cta:hover {
+            background: var(--primary-dark);
+            color: white;
+            text-decoration: none;
         }
 
         /* Updates Grid */
@@ -472,8 +706,18 @@
 
         /* Responsive Design */
         @media (max-width: 992px) {
-            .clubs-grid {
+            .stc-clubs-grid {
+                grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+                gap: 20px;
+            }
+
+            .stc-events-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+
+            .stc-highlights-grid {
                 grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 20px;
             }
 
             .gallery-slide img {
@@ -490,22 +734,35 @@
                 font-size: 2rem;
             }
 
-            .clubs-grid {
+            .stc-clubs-grid {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 20px;
+                gap: 16px;
             }
 
-            .events-timeline,
-            .updates-grid {
+            .stc-club-card {
+                height: 280px;
+            }
+
+            .stc-events-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stc-event-card {
+                height: auto;
+                min-height: 160px;
+            }
+
+            .stc-hero-ctas {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .stc-highlights-grid {
                 grid-template-columns: 1fr;
             }
 
             .gallery-slide img {
                 height: 300px;
-            }
-
-            .anvesha-highlight h2 {
-                font-size: 2.5rem;
             }
         }
 
@@ -514,8 +771,12 @@
                 font-size: 1.8rem;
             }
 
-            .clubs-grid {
+            .stc-clubs-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .stc-club-card {
+                height: 260px;
             }
 
             .gallery-slide img {
@@ -523,6 +784,12 @@
             }
 
             .cta-button {
+                padding: 14px 28px;
+                font-size: 0.95rem;
+            }
+
+            .stc-hero-btn-primary,
+            .stc-hero-btn-secondary {
                 padding: 14px 28px;
                 font-size: 0.95rem;
             }
@@ -578,15 +845,45 @@
             </div>
         </section>
 
-        <!-- Anvesha Highlight Section -->
-        <section class="anvesha-highlight">
+        <!-- STC — Fostering Innovation Section -->
+        <section class="stc-hero-section">
             <div class="container">
-                <div class="anvesha-content">
-                    <h2>ANVESHA 2025</h2>
-                    <p>Join us for the biggest science and technology fest of the year!</p>
-                    <a href="pages/events.html#anvesha" class="anvesha-btn" aria-label="Learn more about Anvesha">
-                        Discover Anvesha →
-                    </a>
+                <div class="stc-hero-content">
+                    <h2>STC — Fostering Innovation, Inspiring Minds</h2>
+                    <p>The Science and Technology Council serves as the hub for academic excellence and technological advancement at IISER Thiruvananthapuram. We bridge the gap between theoretical knowledge and practical application.</p>
+                    
+                    <div class="stc-hero-ctas">
+                        <a href="pages/about.html" class="stc-hero-btn-primary" aria-label="Learn more about STC">
+                            Learn More About STC
+                        </a>
+                        <a href="pages/contact.html" class="stc-hero-btn-secondary" aria-label="Get in touch with STC">
+                            Get Involved
+                        </a>
+                    </div>
+
+                    <div class="stc-highlights-grid">
+                        <div class="stc-highlight-card">
+                            <svg class="stc-highlight-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                            </svg>
+                            <h3>Workshops</h3>
+                            <p>Regular skill-building workshops covering cutting-edge technologies and research methodologies.</p>
+                        </div>
+                        <div class="stc-highlight-card">
+                            <svg class="stc-highlight-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+                            </svg>
+                            <h3>Project Support</h3>
+                            <p>Comprehensive support for student research projects and innovative ideas with mentorship and resources.</p>
+                        </div>
+                        <div class="stc-highlight-card">
+                            <svg class="stc-highlight-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63A3.003 3.003 0 0 0 16.98 6c-.8 0-1.54.37-2.03.97L12 11l2.97 5.97L16 22h4zM12.5 11.5c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5S11 9.17 11 10s.67 1.5 1.5 1.5zm-2 7c-.28 0-.5-.22-.5-.5s.22-.5.5-.5.5.22.5.5-.22.5-.5.5zm-7 0c-.28 0-.5-.22-.5-.5s.22-.5.5-.5.5.22.5.5-.22.5-.5.5zm14-4.5c-.28 0-.5-.22-.5-.5s.22-.5.5-.5.5.22.5.5-.22.5-.5.5z"/>
+                            </svg>
+                            <h3>Community</h3>
+                            <p>A vibrant community of passionate students, researchers, and innovators working together.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -594,64 +891,114 @@
         <!-- Featured Clubs -->
         <section id="featured-clubs" class="container fade-in-section">
             <h2 class="section-title">Our Clubs</h2>
-            <div class="clubs-grid">
-                <div class="club-card">
-                    <img src="https://picsum.photos/seed/ccit/200/200" alt="CCIT Club Logo">
-                    <h3>CCIT</h3>
-                    <p>The Coding Club, promoting programming and technology on campus.</p>
-                </div>
-                <div class="club-card">
-                    <img src="https://picsum.photos/seed/psit/200/200" alt="PSIT Club Logo">
-                    <h3>PSIT</h3>
-                    <p>The Physics Society, sharing a passion for all things physics.</p>
-                </div>
-                <div class="club-card">
-                    <img src="https://picsum.photos/seed/proteus/200/200" alt="Proteus Club Logo">
-                    <h3>Proteus</h3>
-                    <p>The Biology Club, fostering knowledge and appreciation for life sciences.</p>
-                </div>
-                <div class="club-card">
-                    <img src="https://picsum.photos/seed/csit/200/200" alt="CSIT Club Logo">
-                    <h3>CSIT</h3>
-                    <p>The Chemical Society, uniting chemistry enthusiasts for scientific exchange.</p>
-                </div>
-                <div class="club-card">
-                    <img src="https://picsum.photos/seed/cmit/200/200" alt="CMIT Club Logo">
-                    <h3>CMIT</h3>
-                    <p>The Club of Mathematics, fostering mathematical exploration and appreciation.</p>
-                </div>
-                <div class="club-card">
-                    <img src="https://picsum.photos/seed/esi/200/200" alt="ESI Club Logo">
-                    <h3>ESI</h3>
-                    <p>A club for ecology enthusiasts creating awareness about the natural world.</p>
-                </div>
-                <div class="club-card">
-                    <img src="https://picsum.photos/seed/parsec/200/200" alt="Parsec Club Logo">
-                    <h3>Parsec</h3>
-                    <p>The astronomy club, bringing together stargazers and explorers.</p>
-                </div>
-                <div class="club-card">
-                    <img src="https://picsum.photos/seed/qsi/200/200" alt="QSI Club Logo">
-                    <h3>QSI</h3>
-                    <p>The Quizzing Society, fostering a vibrant quizzing atmosphere on campus.</p>
-                </div>
-                <div class="club-card">
-                    <img src="https://picsum.photos/seed/exhibita/200/200" alt="Exhibit A Logo">
-                    <h3>Exhibit A</h3>
-                    <p>The student-led science magazine, where curiosity meets creativity.</p>
-                </div>
-                <div class="club-card">
-                    <img src="https://picsum.photos/seed/compass/200/200" alt="Compass Club Logo">
-                    <h3>Compass</h3>
-                    <p>The Earth, Environmental, and Sustainability sciences club.</p>
-                </div>
+            <div class="stc-clubs-grid">
+                <a href="pages/club-ccit.html" class="stc-club-card" aria-label="Visit CCIT Club page">
+                    <div class="stc-club-card-content">
+                        <img src="https://picsum.photos/seed/ccit/200/200" alt="CCIT Club Logo" loading="lazy">
+                        <h3>CCIT</h3>
+                        <p>The Coding Club, promoting programming and technology on campus.</p>
+                        <div class="club-contact">
+                            <small>📧 ccit@iisertvm.ac.in</small>
+                        </div>
+                    </div>
+                </a>
+                <a href="pages/club-psit.html" class="stc-club-card" aria-label="Visit PSIT Club page">
+                    <div class="stc-club-card-content">
+                        <img src="images/logos/PSI(t) White background logo.png" alt="PSIT Club Logo" loading="lazy">
+                        <h3>PSIT</h3>
+                        <p>Exploring the universe through physics - from quantum to cosmos.</p>
+                        <div class="club-contact">
+                            <small>📧 psit@iisertvm.ac.in</small>
+                        </div>
+                    </div>
+                </a>
+                <a href="pages/club-proteus.html" class="stc-club-card" aria-label="Visit Proteus Club page">
+                    <div class="stc-club-card-content">
+                        <img src="images/logos/Proteus_Logo_black.png" alt="Proteus Club Logo" loading="lazy">
+                        <h3>Proteus</h3>
+                        <p>Diving deep into life sciences and biological wonders.</p>
+                        <div class="club-contact">
+                            <small>📧 proteus@iisertvm.ac.in</small>
+                        </div>
+                    </div>
+                </a>
+                <a href="pages/club-csit.html" class="stc-club-card" aria-label="Visit CSIT Club page">
+                    <div class="stc-club-card-content">
+                        <img src="images/logos/CSIT logo.png" alt="CSIT Club Logo" loading="lazy">
+                        <h3>CSIT</h3>
+                        <p>Uniting chemistry enthusiasts for molecular discoveries.</p>
+                        <div class="club-contact">
+                            <small>📧 csit@iisertvm.ac.in</small>
+                        </div>
+                    </div>
+                </a>
+                <a href="pages/club-cmit.html" class="stc-club-card" aria-label="Visit CMIT Club page">
+                    <div class="stc-club-card-content">
+                        <img src="images/logos/CMIT_Logo_Transparent.png" alt="CMIT Club Logo" loading="lazy">
+                        <h3>CMIT</h3>
+                        <p>Fostering mathematical thinking and problem-solving skills.</p>
+                        <div class="club-contact">
+                            <small>📧 cmit@iisertvm.ac.in</small>
+                        </div>
+                    </div>
+                </a>
+                <a href="pages/club-esi.html" class="stc-club-card" aria-label="Visit ESI Club page">
+                    <div class="stc-club-card-content">
+                        <img src="images/logos/ESIVarLogoNew (1).png" alt="ESI Club Logo" loading="lazy">
+                        <h3>ESI</h3>
+                        <p>Creating awareness about ecology and environmental conservation.</p>
+                        <div class="club-contact">
+                            <small>📧 esi@iisertvm.ac.in</small>
+                        </div>
+                    </div>
+                </a>
+                <a href="pages/club-parsec.html" class="stc-club-card" aria-label="Visit Parsec Club page">
+                    <div class="stc-club-card-content">
+                        <img src="images/logos/Parsec.png" alt="Parsec Club Logo" loading="lazy">
+                        <h3>Parsec</h3>
+                        <p>Exploring the cosmos and mysteries of space together.</p>
+                        <div class="club-contact">
+                            <small>📧 parsec@iisertvm.ac.in</small>
+                        </div>
+                    </div>
+                </a>
+                <a href="pages/club-qsi.html" class="stc-club-card" aria-label="Visit QSI Club page">
+                    <div class="stc-club-card-content">
+                        <img src="images/logos/QSI logo.png" alt="QSI Club Logo" loading="lazy">
+                        <h3>QSI</h3>
+                        <p>Building knowledge through quizzing and intellectual challenges.</p>
+                        <div class="club-contact">
+                            <small>📧 qsi@iisertvm.ac.in</small>
+                        </div>
+                    </div>
+                </a>
+                <a href="pages/club-exhibita.html" class="stc-club-card" aria-label="Visit Exhibit A page">
+                    <div class="stc-club-card-content">
+                        <img src="images/logos/Exhibit_A_nobg_black.png" alt="Exhibit A Logo" loading="lazy">
+                        <h3>Exhibit A</h3>
+                        <p>Where scientific curiosity meets creative storytelling.</p>
+                        <div class="club-contact">
+                            <small>📧 exhibita@iisertvm.ac.in</small>
+                        </div>
+                    </div>
+                </a>
+                <a href="pages/club-compass.html" class="stc-club-card" aria-label="Visit Compass Club page">
+                    <div class="stc-club-card-content">
+                        <img src="images/logos/Compass_logo.jpg" alt="Compass Club Logo" loading="lazy">
+                        <h3>Compass</h3>
+                        <p>Navigating Earth's environmental and sustainability challenges.</p>
+                        <div class="club-contact">
+                            <small>📧 compass@iisertvm.ac.in</small>
+                        </div>
+                    </div>
+                </a>
             </div>
         </section>
 
         <!-- Upcoming Events -->
         <section id="upcoming-events" class="container fade-in-section">
             <h2 class="section-title">Upcoming Events</h2>
-            <div id="upcoming-events-timeline" class="events-timeline">
+            <div id="upcoming-events-grid" class="stc-events-grid">
                 <!-- Events will be dynamically loaded here -->
             </div>
         </section>
@@ -671,22 +1018,60 @@
                 <div class="gallery-container">
                     <div class="gallery-slider" id="gallerySlider">
                         <div class="gallery-slide">
-                            <img src="https://picsum.photos/seed/gallery1/1200/500" alt="Event Gallery Image 1">
+                            <img src="images/gallery/Events/Anvesha/Inauguration/_AAR6973 (1).JPG" alt="Anvesha Inauguration Event" loading="lazy">
+                            <div class="gallery-caption">
+                                <h4>Anvesha Inauguration</h4>
+                                <p>The grand opening of our annual science festival</p>
+                            </div>
                         </div>
                         <div class="gallery-slide">
-                            <img src="https://picsum.photos/seed/gallery2/1200/500" alt="Event Gallery Image 2">
+                            <img src="images/gallery/Events/Anvesha/Afficionados/_AAR7137.JPG" alt="Anvesha Afficionados Event" loading="lazy">
+                            <div class="gallery-caption">
+                                <h4>Afficionados Competition</h4>
+                                <p>Students showcasing their scientific prowess</p>
+                            </div>
                         </div>
                         <div class="gallery-slide">
-                            <img src="https://picsum.photos/seed/gallery3/1200/500" alt="Event Gallery Image 3">
+                            <img src="images/gallery/Events/Crucible/opticsboard.jpeg" alt="Crucible Optics Workshop" loading="lazy">
+                            <div class="gallery-caption">
+                                <h4>Crucible Optics Workshop</h4>
+                                <p>Hands-on experiments with optical phenomena</p>
+                            </div>
                         </div>
                         <div class="gallery-slide">
-                            <img src="https://picsum.photos/seed/gallery4/1200/500" alt="Event Gallery Image 4">
+                            <img src="images/gallery/Events/National Science Day/_AJN4997 (1).JPG" alt="National Science Day Celebration" loading="lazy">
+                            <div class="gallery-caption">
+                                <h4>National Science Day</h4>
+                                <p>Celebrating scientific achievements and innovation</p>
+                            </div>
                         </div>
                         <div class="gallery-slide">
-                            <img src="https://picsum.photos/seed/gallery5/1200/500" alt="Event Gallery Image 5">
+                            <img src="images/gallery/Events/Panel Discussion/IMG-20250615-PANELISTS.jpg" alt="Panel Discussion Event" loading="lazy">
+                            <div class="gallery-caption">
+                                <h4>Expert Panel Discussion</h4>
+                                <p>Industry leaders sharing insights with students</p>
+                            </div>
                         </div>
                         <div class="gallery-slide">
-                            <img src="https://picsum.photos/seed/gallery6/1200/500" alt="Event Gallery Image 6">
+                            <img src="images/gallery/Events/Anvesha/BahFest/_OMJ8296 (1).JPG" alt="Anvesha BahFest Event" loading="lazy">
+                            <div class="gallery-caption">
+                                <h4>BahFest Event</h4>
+                                <p>Creative presentations and scientific humor</p>
+                            </div>
+                        </div>
+                        <div class="gallery-slide">
+                            <img src="images/gallery/Events/Cafe Scientifique/WhatsApp Image 2025-06-15 at 21.15.23.jpeg" alt="Cafe Scientifique Event" loading="lazy">
+                            <div class="gallery-caption">
+                                <h4>Cafe Scientifique</h4>
+                                <p>Informal science discussions over coffee</p>
+                            </div>
+                        </div>
+                        <div class="gallery-slide">
+                            <img src="images/gallery/Events/Anvesha/Blender Workshop/_ESV4906.JPG" alt="Blender Workshop" loading="lazy">
+                            <div class="gallery-caption">
+                                <h4>Blender Workshop</h4>
+                                <p>Learning 3D modeling and animation</p>
+                            </div>
                         </div>
                     </div>
                     <div class="gallery-controls">
@@ -714,6 +1099,30 @@
     
     <!-- Enhanced JavaScript for new features -->
     <script>
+        // Hero Background Image Rotation
+        const heroBackgroundImages = [
+            'images/gallery/Events/Anvesha/Inauguration/_AAR6973 (1).JPG',
+            'images/gallery/Events/Anvesha/Afficionados/_AAR7137.JPG',
+            'images/gallery/Events/Crucible/opticsboard.jpeg',
+            'images/gallery/Events/National Science Day/_AJN4997 (1).JPG',
+            'images/gallery/Events/Panel Discussion/IMG-20250615-PANELISTS.jpg',
+            'images/gallery/Events/Anvesha/BahFest/_OMJ8296 (1).JPG',
+            'images/gallery/Events/Anvesha/Blender Workshop/_ESV4906.JPG'
+        ];
+        
+        let currentHeroImageIndex = 0;
+        
+        function rotateHeroBackground() {
+            const hero = document.getElementById('hero');
+            if (hero) {
+                currentHeroImageIndex = (currentHeroImageIndex + 1) % heroBackgroundImages.length;
+                hero.style.setProperty('--hero-bg-image', `url('${heroBackgroundImages[currentHeroImageIndex]}')`);
+            }
+        }
+        
+        // Start hero background rotation
+        setInterval(rotateHeroBackground, 8000); // Change every 8 seconds
+        
         // Gallery Slider Functionality
         const slider = document.getElementById('gallerySlider');
         const slides = slider.querySelectorAll('.gallery-slide');
@@ -761,17 +1170,43 @@
         prevBtn.addEventListener('click', prevSlide);
         nextBtn.addEventListener('click', nextSlide);
         
-        // Auto-play slider
-        let autoPlayInterval = setInterval(nextSlide, 5000);
+        // Auto-play functionality
+        let autoPlayInterval;
         
-        // Pause on hover
-        const galleryContainer = document.querySelector('.gallery-container');
-        galleryContainer.addEventListener('mouseenter', () => {
+        function startAutoPlay() {
+            autoPlayInterval = setInterval(nextSlide, 5000); // Change slide every 5 seconds
+        }
+        
+        function stopAutoPlay() {
             clearInterval(autoPlayInterval);
+        }
+        
+        // Start auto-play when page loads
+        startAutoPlay();
+        
+        // Pause auto-play when user hovers over gallery
+        const galleryContainer = document.querySelector('.gallery-container');
+        if (galleryContainer) {
+            galleryContainer.addEventListener('mouseenter', stopAutoPlay);
+            galleryContainer.addEventListener('mouseleave', startAutoPlay);
+        }
+        
+        // Pause auto-play when user interacts with controls
+        prevBtn.addEventListener('click', () => {
+            stopAutoPlay();
+            setTimeout(startAutoPlay, 3000); // Restart after 3 seconds
         });
         
-        galleryContainer.addEventListener('mouseleave', () => {
-            autoPlayInterval = setInterval(nextSlide, 5000);
+        nextBtn.addEventListener('click', () => {
+            stopAutoPlay();
+            setTimeout(startAutoPlay, 3000); // Restart after 3 seconds
+        });
+        
+        dots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                stopAutoPlay();
+                setTimeout(startAutoPlay, 3000); // Restart after 3 seconds
+            });
         });
         
         // Keyboard navigation
@@ -784,14 +1219,16 @@
         let touchStartX = 0;
         let touchEndX = 0;
         
-        galleryContainer.addEventListener('touchstart', (e) => {
-            touchStartX = e.changedTouches[0].screenX;
-        });
-        
-        galleryContainer.addEventListener('touchend', (e) => {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        });
+        if (galleryContainer) {
+            galleryContainer.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            });
+            
+            galleryContainer.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            });
+        }
         
         function handleSwipe() {
             if (touchEndX < touchStartX - 50) nextSlide();
@@ -833,33 +1270,57 @@
         
         // Sample data for events and updates (replace with actual data from data.js)
         function loadSampleEvents() {
-            const eventsContainer = document.getElementById('upcoming-events-timeline');
+            const eventsContainer = document.getElementById('upcoming-events-grid');
             const sampleEvents = [
                 {
                     date: 'December 15, 2024',
                     title: 'Quantum Computing Workshop',
-                    description: 'Introduction to quantum algorithms and programming'
+                    description: 'Introduction to quantum algorithms and programming with hands-on coding sessions.',
+                    link: 'pages/events.html#quantum-workshop'
                 },
                 {
                     date: 'December 20, 2024',
                     title: 'AI/ML Symposium',
-                    description: 'Latest trends in artificial intelligence and machine learning'
+                    description: 'Latest trends in artificial intelligence and machine learning with industry experts.',
+                    link: 'pages/events.html#ai-symposium'
                 },
                 {
                     date: 'January 5, 2025',
                     title: 'Anvesha 2025 Launch',
-                    description: 'Kickoff event for the annual science fest'
+                    description: 'Kickoff event for the annual science fest featuring competitions and exhibitions.',
+                    link: 'pages/events.html#anvesha'
+                },
+                {
+                    date: 'January 12, 2025',
+                    title: 'Research Presentation Day',
+                    description: 'Students present their ongoing research projects to faculty and peers.',
+                    link: 'pages/events.html#research-day'
+                },
+                {
+                    date: 'January 18, 2025',
+                    title: 'Innovation Challenge',
+                    description: 'Interdisciplinary competition for developing solutions to real-world problems.',
+                    link: 'pages/events.html#innovation-challenge'
+                },
+                {
+                    date: 'February 2, 2025',
+                    title: 'Guest Lecture Series',
+                    description: 'Renowned scientists and researchers share their insights and experiences.',
+                    link: 'pages/events.html#guest-lectures'
                 }
             ];
             
             if (eventsContainer && eventsContainer.children.length === 0) {
                 sampleEvents.forEach(event => {
                     const eventCard = document.createElement('div');
-                    eventCard.className = 'event-card';
+                    eventCard.className = 'stc-event-card';
                     eventCard.innerHTML = `
-                        <div class="event-date">${event.date}</div>
+                        <div class="stc-event-date">${event.date}</div>
                         <h3>${event.title}</h3>
                         <p>${event.description}</p>
+                        <a href="${event.link}" class="stc-event-cta" aria-label="Learn more about ${event.title}">
+                            Learn More
+                        </a>
                     `;
                     eventsContainer.appendChild(eventCard);
                 });
