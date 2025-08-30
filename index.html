@@ -5,11 +5,118 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Science and Technology Council - IISER Thiruvananthapuram</title>
     <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* This is a placeholder for your existing styles. 
+        The responsive styles below will build upon them.
+        For example, your original CSS might look something like this:
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .clubs-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+        }
+        #hero h1 {
+            font-size: 3em;
+        }
+        */
+
+        /* --- Responsive Styles --- */
+
+        /* For Tablets and smaller devices (max-width: 992px) */
+        @media (max-width: 992px) {
+            .clubs-grid {
+                /* Allows 3 or 4 clubs per row on tablets */
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+
+            .gallery-grid {
+                /* Shows 2 images per row */
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* For smaller tablets and mobile phones (max-width: 768px) */
+        @media (max-width: 768px) {
+            .container {
+                /* Reduces side padding on smaller screens */
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+
+            #hero h1 {
+                /* Reduces heading size for readability */
+                font-size: 2.2em;
+                line-height: 1.2;
+            }
+            
+            #hero .tagline {
+                font-size: 1.1em;
+            }
+
+            .section-title {
+                font-size: 1.8em;
+            }
+
+            .clubs-grid {
+                /* Shows 2 clubs per row */
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            
+            .updates-grid, .events-timeline {
+                /* Stacks updates and events vertically */
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid {
+                /* Ensures gallery items don't get too small */
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+        }
+
+        /* For small mobile phones (max-width: 480px) */
+        @media (max-width: 480px) {
+            #hero h1 {
+                /* Further reduces heading size */
+                font-size: 1.8em;
+            }
+
+            #hero .tagline {
+                font-size: 1em;
+            }
+
+            .clubs-grid {
+                /* Stacks club cards into a single column */
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-grid {
+                /* Stacks gallery images into a single column */
+                grid-template-columns: 1fr;
+            }
+
+            .cta-button {
+                /* Makes button slightly smaller */
+                padding: 12px 20px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
-        <!-- Header content is loaded dynamically by js/script.js -->
-    </header>
+        </header>
 
     <main>
         <section id="hero">
@@ -79,15 +186,13 @@
         <section id="upcoming-events" class="container fade-in-section">
             <h2 class="section-title">Upcoming Events</h2>
             <div id="upcoming-events-timeline" class="events-timeline">
-                <!-- Upcoming events are loaded dynamically from js/data.js -->
-            </div>
+                </div>
         </section>
 
         <section id="latest-updates" class="container fade-in-section">
             <h2 class="section-title">Latest Updates</h2>
             <div id="latest-updates-grid" class="updates-grid">
-                <!-- Latest updates are loaded dynamically from js/data.js -->
-            </div>
+                </div>
         </section>
 
         <section id="gallery-preview" class="fade-in-section">
@@ -109,8 +214,7 @@
     </main>
 
     <footer>
-        <!-- Footer content is loaded dynamically by js/script.js -->
-    </footer>
+        </footer>
 
     <script src="js/data.js"></script>
     <script src="js/script.js"></script>
