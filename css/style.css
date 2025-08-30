@@ -1775,7 +1775,7 @@ footer::before {
         grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     }
 
-    /* Event items */
+    /* Event itemss */
     .event-item {
         flex-direction: column;
         text-align: center;
