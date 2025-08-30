@@ -4,105 +4,596 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Science and Technology Council - IISER Thiruvananthapuram</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Original CSS link preserved -->
     <link rel="stylesheet" href="css/style.css">
-
+    
     <style>
-  
+        :root {
+            --primary-color: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary-color: #0ea5e9;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --bg-light: #f8fafc;
+            --bg-white: #ffffff;
+            --border-light: #e2e8f0;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
+            line-height: 1.6;
+            background: var(--bg-white);
+            overflow-x: hidden;
+        }
+
+        /* Hero Section with Modern Gradient */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow: hidden;
+        }
+
+        #hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
+            50% { transform: translate(-30%, -70%) rotate(180deg); }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 10;
+            position: relative;
+            max-width: 900px;
+            padding: 0 20px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        #hero h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .tagline {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2.5rem;
+            font-weight: 400;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 16px 32px;
+            background: white;
+            color: var(--primary-color);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(99, 102, 241, 0.1);
+            transform: translate(-50%, -50%);
+            transition: width 0.5s, height 0.5s;
+        }
+
+        .cta-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Section Styling */
+        section {
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            font-weight: 700;
+            color: var(--text-primary);
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: 2px;
+        }
+
+        /* Anvesha Highlight Section */
+        .anvesha-highlight {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 60px 0;
+            margin: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .anvesha-content {
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .anvesha-highlight h2 {
+            color: white;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-family: 'Space Grotesk', sans-serif;
+            margin-bottom: 1rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .anvesha-highlight p {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+        }
+
+        .anvesha-btn {
+            background: white;
+            color: #f5576c;
+            padding: 18px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .anvesha-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        /* Featured Clubs Grid */
+        .clubs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 3rem;
+        }
+
+        .club-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .club-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .club-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .club-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .club-card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            object-fit: cover;
+            border: 3px solid var(--border-light);
+            transition: all 0.3s ease;
+        }
+
+        .club-card:hover img {
+            transform: scale(1.1) rotate(5deg);
+            border-color: var(--primary-color);
+        }
+
+        .club-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+
+        .club-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Sliding Gallery */
+        .gallery-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            margin: 3rem 0;
+        }
+
+        .gallery-slider {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-slide {
+            min-width: 100%;
+            position: relative;
+        }
+
+        .gallery-slide img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+
+        .gallery-controls {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            pointer-events: none;
+        }
+
+        .gallery-btn {
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--text-primary);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            pointer-events: all;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .gallery-btn:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+
+        .gallery-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: white;
+            transform: scale(1.3);
+        }
+
+        /* Events Timeline */
+        .events-timeline {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 3rem;
+        }
+
+        .event-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: var(--shadow-md);
+            border-left: 4px solid var(--primary-color);
+            transition: all 0.3s ease;
+        }
+
+        .event-card:hover {
+            transform: translateX(10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .event-date {
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .event-card h3 {
+            color: var(--text-primary);
+            margin-bottom: 10px;
+            font-size: 1.25rem;
+        }
+
+        .event-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Updates Grid */
+        .updates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 3rem;
+        }
+
+        .update-card {
+            background: linear-gradient(135deg, var(--bg-white), var(--bg-light));
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+        }
+
+        .update-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .update-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .update-card h3 {
+            color: var(--text-primary);
+            margin-bottom: 10px;
+            font-size: 1.25rem;
+        }
+
+        .update-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Fade in animation */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
         @media (max-width: 992px) {
             .clubs-grid {
-                /* Allows 3 or 4 clubs per row on tablets */
                 grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             }
 
-            .gallery-grid {
-                /* Shows 2 images per row */
-                grid-template-columns: repeat(2, 1fr);
+            .gallery-slide img {
+                height: 400px;
             }
         }
 
-        /* For smaller tablets and mobile phones (max-width: 768px) */
         @media (max-width: 768px) {
-            .container {
-                /* Reduces side padding on smaller screens */
-                padding-left: 15px;
-                padding-right: 15px;
-            }
-
             #hero h1 {
-                /* Reduces heading size for readability */
-                font-size: 2.2em;
-                line-height: 1.2;
-            }
-            
-            #hero .tagline {
-                font-size: 1.1em;
+                font-size: 2.2rem;
             }
 
             .section-title {
-                font-size: 1.8em;
+                font-size: 2rem;
             }
 
             .clubs-grid {
-                /* Shows 2 clubs per row */
                 grid-template-columns: repeat(2, 1fr);
-                gap: 15px;
+                gap: 20px;
             }
-            
-            .updates-grid, .events-timeline {
-                /* Stacks updates and events vertically */
+
+            .events-timeline,
+            .updates-grid {
                 grid-template-columns: 1fr;
             }
 
-            .gallery-grid {
-                /* Ensures gallery items don't get too small */
-                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            .gallery-slide img {
+                height: 300px;
+            }
+
+            .anvesha-highlight h2 {
+                font-size: 2.5rem;
             }
         }
 
-        /* For small mobile phones (max-width: 480px) */
         @media (max-width: 480px) {
             #hero h1 {
-                /* Further reduces heading size */
-                font-size: 1.8em;
-            }
-
-            #hero .tagline {
-                font-size: 1em;
+                font-size: 1.8rem;
             }
 
             .clubs-grid {
-                /* Stacks club cards into a single column */
-                grid-template-columns: 1fr;
-            }
-            
-            .gallery-grid {
-                /* Stacks gallery images into a single column */
                 grid-template-columns: 1fr;
             }
 
-            .cta-button {
-                /* Makes button slightly smaller */
-                padding: 12px 20px;
-                font-size: 0.9em;
+            .gallery-slide img {
+                height: 250px;
             }
+
+            .cta-button {
+                padding: 14px 28px;
+                font-size: 0.95rem;
+            }
+        }
+
+        /* Accessibility */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* Focus styles */
+        a:focus,
+        button:focus {
+            outline: 2px solid var(--primary-color);
+            outline-offset: 2px;
+        }
+
+        /* Loading animation */
+        .skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
         }
     </style>
 </head>
 <body>
     <header>
-        </header>
+        <!-- Header content preserved as per requirement -->
+    </header>
 
     <main>
+        <!-- Hero Section -->
         <section id="hero">
             <div class="hero-content">
                 <h1>Science and Technology Council, IISER Thiruvananthapuram</h1>
                 <p class="tagline">Fostering Innovation, Inspiring Minds.</p>
-                <a href="pages/clubs.html" class="cta-button">Explore Our Clubs</a>
+                <a href="pages/clubs.html" class="cta-button" aria-label="Explore our clubs">
+                    <span>Explore Our Clubs</span>
+                </a>
             </div>
         </section>
 
+        <!-- Anvesha Highlight Section -->
+        <section class="anvesha-highlight">
+            <div class="container">
+                <div class="anvesha-content">
+                    <h2>ANVESHA 2025</h2>
+                    <p>Join us for the biggest science and technology fest of the year!</p>
+                    <a href="pages/events.html#anvesha" class="anvesha-btn" aria-label="Learn more about Anvesha">
+                        Discover Anvesha →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Clubs -->
         <section id="featured-clubs" class="container fade-in-section">
-            <h2 class="section-title">Featured Clubs</h2>
+            <h2 class="section-title">Our Clubs</h2>
             <div class="clubs-grid">
                 <div class="club-card">
                     <img src="https://picsum.photos/seed/ccit/200/200" alt="CCIT Club Logo">
@@ -157,40 +648,322 @@
             </div>
         </section>
 
+        <!-- Upcoming Events -->
         <section id="upcoming-events" class="container fade-in-section">
             <h2 class="section-title">Upcoming Events</h2>
             <div id="upcoming-events-timeline" class="events-timeline">
-                </div>
+                <!-- Events will be dynamically loaded here -->
+            </div>
         </section>
 
+        <!-- Latest Updates -->
         <section id="latest-updates" class="container fade-in-section">
             <h2 class="section-title">Latest Updates</h2>
             <div id="latest-updates-grid" class="updates-grid">
-                </div>
+                <!-- Updates will be dynamically loaded here -->
+            </div>
         </section>
 
+        <!-- Gallery Section with Sliding Carousel -->
         <section id="gallery-preview" class="fade-in-section">
             <div class="container">
                 <h2 class="section-title">Glimpses from Our Events</h2>
-            </div>
-            <div class="gallery-grid">
-                <div class="gallery-item"><img src="https://picsum.photos/seed/gallery1/400/300" alt="Gallery Image 1"></div>
-                <div class="gallery-item"><img src="https://picsum.photos/seed/gallery2/400/300" alt="Gallery Image 2"></div>
-                <div class="gallery-item"><img src="https://picsum.photos/seed/gallery3/400/300" alt="Gallery Image 3"></div>
-                <div class="gallery-item"><img src="https://picsum.photos/seed/gallery4/400/300" alt="Gallery Image 4"></div>
-                <div class="gallery-item"><img src="https://picsum.photos/seed/gallery5/400/300" alt="Gallery Image 5"></div>
-                <div class="gallery-item"><img src="https://picsum.photos/seed/gallery6/400/300" alt="Gallery Image 6"></div>
-            </div>
-            <div class="text-center" style="margin-top: 2rem; padding-bottom: 4rem;">
-                <a href="pages/gallery.html" class="cta-button">View Full Gallery</a>
+                <div class="gallery-container">
+                    <div class="gallery-slider" id="gallerySlider">
+                        <div class="gallery-slide">
+                            <img src="https://picsum.photos/seed/gallery1/1200/500" alt="Event Gallery Image 1">
+                        </div>
+                        <div class="gallery-slide">
+                            <img src="https://picsum.photos/seed/gallery2/1200/500" alt="Event Gallery Image 2">
+                        </div>
+                        <div class="gallery-slide">
+                            <img src="https://picsum.photos/seed/gallery3/1200/500" alt="Event Gallery Image 3">
+                        </div>
+                        <div class="gallery-slide">
+                            <img src="https://picsum.photos/seed/gallery4/1200/500" alt="Event Gallery Image 4">
+                        </div>
+                        <div class="gallery-slide">
+                            <img src="https://picsum.photos/seed/gallery5/1200/500" alt="Event Gallery Image 5">
+                        </div>
+                        <div class="gallery-slide">
+                            <img src="https://picsum.photos/seed/gallery6/1200/500" alt="Event Gallery Image 6">
+                        </div>
+                    </div>
+                    <div class="gallery-controls">
+                        <button class="gallery-btn" id="prevBtn" aria-label="Previous image">‹</button>
+                        <button class="gallery-btn" id="nextBtn" aria-label="Next image">›</button>
+                    </div>
+                    <div class="gallery-dots" id="galleryDots"></div>
+                </div>
+                <div style="text-align: center; margin-top: 3rem;">
+                    <a href="pages/gallery.html" class="cta-button" aria-label="View full gallery">
+                        View Full Gallery
+                    </a>
+                </div>
             </div>
         </section>
     </main>
 
     <footer>
-        </footer>
+        <!-- Footer content preserved as per requirement -->
+    </footer>
 
+    <!-- Original JS files preserved -->
     <script src="js/data.js"></script>
     <script src="js/script.js"></script>
+    
+    <!-- Enhanced JavaScript for new features -->
+    <script>
+        // Gallery Slider Functionality
+        const slider = document.getElementById('gallerySlider');
+        const slides = slider.querySelectorAll('.gallery-slide');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const dotsContainer = document.getElementById('galleryDots');
+        
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+        
+        // Create dots
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('span');
+            dot.classList.add('dot');
+            if (i === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToSlide(i));
+            dotsContainer.appendChild(dot);
+        }
+        
+        const dots = dotsContainer.querySelectorAll('.dot');
+        
+        function updateSlider() {
+            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+        
+        function goToSlide(slideIndex) {
+            currentSlide = slideIndex;
+            updateSlider();
+        }
+        
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlider();
+        }
+        
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateSlider();
+        }
+        
+        prevBtn.addEventListener('click', prevSlide);
+        nextBtn.addEventListener('click', nextSlide);
+        
+        // Auto-play slider
+        let autoPlayInterval = setInterval(nextSlide, 5000);
+        
+        // Pause on hover
+        const galleryContainer = document.querySelector('.gallery-container');
+        galleryContainer.addEventListener('mouseenter', () => {
+            clearInterval(autoPlayInterval);
+        });
+        
+        galleryContainer.addEventListener('mouseleave', () => {
+            autoPlayInterval = setInterval(nextSlide, 5000);
+        });
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') prevSlide();
+            if (e.key === 'ArrowRight') nextSlide();
+        });
+        
+        // Touch/Swipe support for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        galleryContainer.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+        
+        galleryContainer.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+        
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) nextSlide();
+            if (touchEndX > touchStartX + 50) prevSlide();
+        }
+        
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all sections with fade-in-section class
+        document.querySelectorAll('.fade-in-section').forEach(section => {
+            observer.observe(section);
+        });
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Sample data for events and updates (replace with actual data from data.js)
+        function loadSampleEvents() {
+            const eventsContainer = document.getElementById('upcoming-events-timeline');
+            const sampleEvents = [
+                {
+                    date: 'December 15, 2024',
+                    title: 'Quantum Computing Workshop',
+                    description: 'Introduction to quantum algorithms and programming'
+                },
+                {
+                    date: 'December 20, 2024',
+                    title: 'AI/ML Symposium',
+                    description: 'Latest trends in artificial intelligence and machine learning'
+                },
+                {
+                    date: 'January 5, 2025',
+                    title: 'Anvesha 2025 Launch',
+                    description: 'Kickoff event for the annual science fest'
+                }
+            ];
+            
+            if (eventsContainer && eventsContainer.children.length === 0) {
+                sampleEvents.forEach(event => {
+                    const eventCard = document.createElement('div');
+                    eventCard.className = 'event-card';
+                    eventCard.innerHTML = `
+                        <div class="event-date">${event.date}</div>
+                        <h3>${event.title}</h3>
+                        <p>${event.description}</p>
+                    `;
+                    eventsContainer.appendChild(eventCard);
+                });
+            }
+        }
+        
+        function loadSampleUpdates() {
+            const updatesContainer = document.getElementById('latest-updates-grid');
+            const sampleUpdates = [
+                {
+                    date: 'Dec 10, 2024',
+                    category: 'CCIT',
+                    title: 'Hackathon Winners Announced',
+                    description: 'Congratulations to Team Alpha for winning the 48-hour coding marathon with their innovative healthcare solution.'
+                },
+                {
+                    date: 'Dec 8, 2024',
+                    category: 'Parsec',
+                    title: 'Meteor Shower Observation',
+                    description: 'Join us for a special night sky observation session to witness the Geminids meteor shower.'
+                },
+                {
+                    date: 'Dec 5, 2024',
+                    category: 'Proteus',
+                    title: 'New Research Publication',
+                    description: 'Our members have published groundbreaking research on CRISPR gene editing in Nature Biotechnology.'
+                }
+            ];
+            
+            if (updatesContainer && updatesContainer.children.length === 0) {
+                sampleUpdates.forEach(update => {
+                    const updateCard = document.createElement('div');
+                    updateCard.className = 'update-card';
+                    updateCard.innerHTML = `
+                        <div class="update-meta">
+                            <span>${update.date}</span>
+                            <span>${update.category}</span>
+                        </div>
+                        <h3>${update.title}</h3>
+                        <p>${update.description}</p>
+                    `;
+                    updatesContainer.appendChild(updateCard);
+                });
+            }
+        }
+        
+        // Load sample data on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadSampleEvents();
+            loadSampleUpdates();
+            
+            // Add loading animation for images
+            const images = document.querySelectorAll('img');
+            images.forEach(img => {
+                img.addEventListener('load', function() {
+                    this.style.opacity = '1';
+                });
+                img.style.opacity = '0';
+                img.style.transition = 'opacity 0.5s ease';
+            });
+        });
+        
+        // Performance optimization: Lazy loading for images
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src || img.src;
+                        img.classList.add('loaded');
+                        observer.unobserve(img);
+                    }
+                });
+            });
+            
+            document.querySelectorAll('img').forEach(img => {
+                imageObserver.observe(img);
+            });
+        }
+        
+        // Add parallax effect to hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.getElementById('hero');
+            if (hero && scrolled < window.innerHeight) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+        
+        // Add hover effect sound (optional - can be removed if not needed)
+        const addHoverSound = () => {
+            const buttons = document.querySelectorAll('.cta-button, .anvesha-btn, .gallery-btn');
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', () => {
+                    // Add subtle hover feedback
+                    button.style.transform = 'scale(1.05)';
+                });
+                button.addEventListener('mouseleave', () => {
+                    button.style.transform = 'scale(1)';
+                });
+            });
+        };
+        
+        addHoverSound();
+    </script>
 </body>
 </html>
