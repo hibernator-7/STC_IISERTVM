@@ -6,65 +6,224 @@
     <title>Contact - STC IISER TVM</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="contact-enhanced.css">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- EmailJS for email functionality -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 </head>
 <body>
     <!-- navbar-->
-     <div id="navbar"> </div>
+    <div id="navbar"></div>
 
     <main>
         <section class="page-header">
             <div class="container">
                 <h1>Contact Us</h1>
-                <p>We'd love to hear from you. Reach out with any questions or inquiries.</p>
+                <p>Connect with the Science and Technology Council at IISER Thiruvananthapuram</p>
             </div>
         </section>
 
         <section id="contact-page" class="container">
-            <div class="contact-grid">
+            <!-- Contact Form Section -->
+            <div class="contact-section">
                 <div class="contact-form-container">
-                    <h3>Send us a Message</h3>
-                    <form id="contact-form" action="#">
-                        <p>Note: This is a demo form and does not send emails.</p>
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" name="name" required>
+                    <h3><i class="fas fa-envelope"></i> Send us a Message</h3>
+                    <p class="form-description">Have a question or want to get involved? We'd love to hear from you!</p>
+                    
+                    <form id="contact-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name"><i class="fas fa-user"></i> Full Name</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email"><i class="fas fa-envelope"></i> Email Address</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone"><i class="fas fa-phone"></i> Phone Number (Optional)</label>
+                                <input type="tel" id="phone" name="phone">
+                            </div>
+                            <div class="form-group">
+                                <label for="category"><i class="fas fa-tag"></i> Category</label>
+                                <select id="category" name="category" required>
+                                    <option value="">Select Category</option>
+                                    <option value="general">General Inquiry</option>
+                                    <option value="events">Events & Workshops</option>
+                                    <option value="clubs">Club Information</option>
+                                    <option value="collaboration">Collaboration</option>
+                                    <option value="feedback">Feedback</option>
+                                    <option value="technical">Technical Support</option>
+                                </select>
+                            </div>
                         </div>
+                        
                         <div class="form-group">
-                            <label for="subject">Subject</label>
+                            <label for="subject"><i class="fas fa-text-width"></i> Subject</label>
                             <input type="text" id="subject" name="subject" required>
                         </div>
+                        
                         <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" rows="5" required></textarea>
+                            <label for="message"><i class="fas fa-comment"></i> Message</label>
+                            <textarea id="message" name="message" rows="6" required placeholder="Tell us more about your inquiry..."></textarea>
                         </div>
-                        <button type="submit" class="cta-button">Send Message</button>
+                        
+                        <button type="submit" class="cta-button" id="send-btn">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
+                        
+                        <div id="form-status" class="form-status"></div>
                     </form>
                 </div>
-                <div class="contact-info">
-                    <h3>Contact Information</h3>
-                    <div class="info-item">
-                        <h4>Email</h4>
-                        <p>stc@iisertvm.ac.in</p>
+
+                <!-- Quick Contact Cards -->
+                <div class="quick-contact-grid">
+                    <!-- STC Secretary -->
+                    <div class="contact-card">
+                        <div class="card-icon">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <h4>STC Secretary</h4>
+                        <p class="name">Ishaani R Kamath</p>
+                        <p class="details">BSMS 2021 | Physics</p>
+                        <div class="contact-methods">
+                            <a href="mailto:ishaani21@iisertvm.ac.in" class="contact-link">
+                                <i class="fas fa-envelope"></i> ishaani21@iisertvm.ac.in
+                            </a>
+                            <a href="tel:+919876543210" class="contact-link">
+                                <i class="fas fa-phone"></i> +91 98765 43210
+                            </a>
+                        </div>
                     </div>
-                    <div class="info-item">
-                        <h4>Address</h4>
-                        <p>IISER Thiruvananthapuram, Vithura, Kerala 695551</p>
+
+                    <!-- Official STC Email -->
+                    <div class="contact-card">
+                        <div class="card-icon">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <h4>Official STC Email</h4>
+                        <p class="details">Science & Technology Council</p>
+                        <div class="contact-methods">
+                            <a href="mailto:stc@iisertvm.ac.in" class="contact-link">
+                                <i class="fas fa-envelope"></i> stc@iisertvm.ac.in
+                            </a>
+                        </div>
                     </div>
-                    <div class="info-item">
-                        <h4>Follow Us</h4>
-                        <div class="social-links-contact">
-                            <a href="#">LinkedIn</a>
-                            <a href="#">Instagram</a>
+
+                    <!-- Faculty Advisors -->
+                    <div class="contact-card">
+                        <div class="card-icon">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <h4>Faculty Advisors</h4>
+                        <div class="contact-methods">
+                            <a href="mailto:sanu@iisertvm.ac.in" class="contact-link">
+                                <i class="fas fa-envelope"></i> Dr. Sanu Shameer
+                            </a>
+                            <a href="mailto:krishnendu@iisertvm.ac.in" class="contact-link">
+                                <i class="fas fa-envelope"></i> Dr. Krishnendu Gope
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Emergency Contact -->
+                    <div class="contact-card emergency">
+                        <div class="card-icon">
+                            <i class="fas fa-phone-square-alt"></i>
+                        </div>
+                        <h4>Emergency Contact</h4>
+                        <p class="details">For urgent matters</p>
+                        <div class="contact-methods">
+                            <a href="tel:+914712597550" class="contact-link">
+                                <i class="fas fa-phone"></i> +91 471 2597 550
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
-            <div id="map-container">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3944.305165910222!2d76.99263931478248!3d8.56799199380898!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b05b816f5555555%3A0x6c4fd20a471f2c40!2sIndian%20Institute%20of%20Science%20Education%20and%20Research%20Thiruvananthapuram%20(IISER%20TVM)!5e0!3m2!1sen!2sin!4v1633012345678!5m2!1sen!2sin" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+
+            <!-- Social Media & Address Section -->
+            <div class="info-section">
+                <div class="social-media-section">
+                    <h3><i class="fas fa-share-alt"></i> Follow Us</h3>
+                    <p>Stay connected with our latest updates and events</p>
+                    <div class="social-links-grid">
+                        <a href="https://www.instagram.com/stc_iisertvm/" target="_blank" class="social-link instagram">
+                            <i class="fab fa-instagram"></i>
+                            <span>Instagram</span>
+                            <small>@stc_iisertvm</small>
+                        </a>
+                        <a href="https://www.linkedin.com/company/stc-iiser-tvm/" target="_blank" class="social-link linkedin">
+                            <i class="fab fa-linkedin-in"></i>
+                            <span>LinkedIn</span>
+                            <small>STC IISER TVM</small>
+                        </a>
+                        <a href="https://github.com/Coding-Club-of-IISER-Thiruvananthapuram" target="_blank" class="social-link github">
+                            <i class="fab fa-github"></i>
+                            <span>GitHub</span>
+                            <small>Coding Club</small>
+                        </a>
+                        <a href="https://twitter.com/stc_iisertvm" target="_blank" class="social-link twitter">
+                            <i class="fab fa-twitter"></i>
+                            <span>Twitter</span>
+                            <small>@stc_iisertvm</small>
+                        </a>
+                        <a href="https://www.youtube.com/@stciisertvm" target="_blank" class="social-link youtube">
+                            <i class="fab fa-youtube"></i>
+                            <span>YouTube</span>
+                            <small>STC IISER TVM</small>
+                        </a>
+                        <a href="https://discord.gg/stciisertvm" target="_blank" class="social-link discord">
+                            <i class="fab fa-discord"></i>
+                            <span>Discord</span>
+                            <small>Join our server</small>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="address-section">
+                    <h3><i class="fas fa-map-marker-alt"></i> Visit Us</h3>
+                    <div class="address-card">
+                        <div class="address-content">
+                            <h4>Science and Technology Council</h4>
+                            <p>Indian Institute of Science Education and Research</p>
+                            <p>Thiruvananthapuram (IISER TVM)</p>
+                            <p>Maruthamala P.O., Vithura</p>
+                            <p>Thiruvananthapuram, Kerala - 695551</p>
+                            <p>India</p>
+                        </div>
+                        <div class="address-actions">
+                            <a href="https://maps.google.com/?q=IISER+Thiruvananthapuram" target="_blank" class="address-link">
+                                <i class="fas fa-directions"></i> Get Directions
+                            </a>
+                            <a href="https://www.iisertvm.ac.in" target="_blank" class="address-link">
+                                <i class="fas fa-external-link-alt"></i> Visit Website
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Map Section -->
+            <div class="map-section">
+                <h3><i class="fas fa-globe"></i> Find Us on Map</h3>
+                <div id="map-container">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3944.305165910222!2d76.99263931478248!3d8.56799199380898!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b05b816f5555555%3A0x6c4fd20a471f2c40!2sIndian%20Institute%20of%20Science%20Education%20and%20Research%20Thiruvananthapuram%20(IISER%20TVM)!5e0!3m2!1sen!2sin!4v1633012345678!5m2!1sen!2sin" 
+                        width="100%" 
+                        height="450" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
             </div>
         </section>
     </main>
@@ -76,5 +235,6 @@
     <script src="../js/data.js"></script>
     <script src="../js/script.js"></script>
     <script src="script.js"></script>
+    <script src="contact-enhanced.js"></script>
 </body>
 </html>
