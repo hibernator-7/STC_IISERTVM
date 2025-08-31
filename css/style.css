@@ -2162,6 +2162,12 @@ footer::before {
         height: 100px;
     }
 
+    /* Team member images for past secretaries and former advisors */
+    .team-member .member-image img {
+        width: 100px;
+        height: 100px;
+    }
+
     /* Filter buttons */
     .filter-btn {
         padding: 0.4rem 1rem;
