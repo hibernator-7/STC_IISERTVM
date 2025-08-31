@@ -3,8 +3,7 @@ Welcome to the content hub for your website!
 
 To update the content on your website, you o// --- EVENTS DATA ---
 const upcomingEvents = [
-    {
-        date: "02 FEB",
+   //  },ate: "02 FEB",
         title: "Know Your Faculty",
         description: "Organised by the CCIT, this short video series answers common questions in programming and helps you learn directly from our faculty experts."
     },
