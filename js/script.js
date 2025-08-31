@@ -59,15 +59,39 @@ document.addEventListener("DOMContentLoaded", function() {
         if (pagePath.includes('gallery.html')) {
             const filterButtons = document.querySelectorAll('.filter-btn');
             const galleryItems = document.querySelectorAll('.gallery-item-full');
+            
+            console.log('Gallery filter system initialized');
+            console.log('Filter buttons found:', filterButtons.length);
+            console.log('Gallery items found:', galleryItems.length);
+            
             if (filterButtons.length > 0) {
                 filterButtons.forEach(button => {
                     button.addEventListener('click', () => {
-                        filterButtons.forEach(btn => btn.classList.remove('active'));
-                        button.classList.add('active');
                         const filter = button.dataset.filter;
+                        console.log('Filter clicked:', filter);
+                        
+                        // Remove active class from all buttons
+                        filterButtons.forEach(btn => btn.classList.remove('active'));
+                        // Add active class to clicked button
+                        button.classList.add('active');
+                        
+                        // Filter gallery items
                         galleryItems.forEach(item => {
-                            item.style.display = (filter === 'all' || item.dataset.category.includes(filter)) ? 'block' : 'none';
+                            const category = item.dataset.category;
+                            const shouldShow = filter === 'all' || category === filter;
+                            
+                            if (shouldShow) {
+                                item.style.display = 'block';
+                                item.style.opacity = '1';
+                                item.style.transform = 'scale(1)';
+                            } else {
+                                item.style.display = 'none';
+                                item.style.opacity = '0';
+                                item.style.transform = 'scale(0.8)';
+                            }
                         });
+                        
+                        console.log('Filtering completed for:', filter);
                     });
                 });
             }
