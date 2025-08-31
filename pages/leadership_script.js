@@ -1,0 +1,178 @@
+// Enhanced interactions and animations for the STC Leadership page
+
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // Smooth scroll animation for any internal links
+    const smoothScrollLinks = document.querySelectorAll('a[href^="#"]');
+    smoothScrollLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Intersection Observer for fade-in animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+
+    // Apply fade-in animation to profile cards
+    const profileCards = document.querySelectorAll('.profile-card');
+    profileCards.forEach((card, index) => {
+        // Initial state for animation
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+        card.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+        
+        // Observe for intersection
+        observer.observe(card);
+    });
+
+    // Apply fade-in animation to section titles
+    const sectionTitles = document.querySelectorAll('.section-title');
+    sectionTitles.forEach((title, index) => {
+        title.style.opacity = '0';
+        title.style.transform = 'translateY(20px)';
+        title.style.transition = `opacity 0.6s ease ${index * 0.2}s, transform 0.6s ease ${index * 0.2}s`;
+        
+        observer.observe(title);
+    });
+
+    // Enhanced card interactions
+    profileCards.forEach(card => {
+        // Add ripple effect on click
+        card.addEventListener('click', function(e) {
+            const ripple = document.createElement('div');
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+            
+            ripple.style.cssText = `
+                position: absolute;
+                width: ${size}px;
+                height: ${size}px;
+                left: ${x}px;
+                top: ${y}px;
+                background: rgba(139, 92, 246, 0.1);
+                border-radius: 50%;
+                transform: scale(0);
+                animation: ripple 0.6s ease-out;
+                pointer-events: none;
+                z-index: 1;
+            `;
+            
+            this.style.position = 'relative';
+            this.appendChild(ripple);
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        });
+
+        // Enhanced hover effects for contact items
+        const contactItems = card.querySelectorAll('.contact-item');
+        contactItems.forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.color = '#8B5CF6';
+                this.style.transform = 'translateX(4px)';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.color = '#6B7280';
+                this.style.transform = 'translateX(0)';
+            });
+        });
+    });
+
+    // Parallax effect for hero section
+    window.addEventListener('scroll', function() {
+        const scrolled = window.pageYOffset;
+        const hero = document.querySelector('.hero');
+        const rate = scrolled * -0.5;
+        
+        if (hero) {
+            hero.style.transform = `translateY(${rate}px)`;
+        }
+    });
+
+    // Dynamic gradient animation for hero
+    let gradientAngle = 135;
+    setInterval(() => {
+        gradientAngle += 0.5;
+        const hero = document.querySelector('.hero');
+        if (hero) {
+            hero.style.background = `linear-gradient(${gradientAngle}deg, #8B5CF6 0%, #A78BFA 100%)`;
+        }
+    }, 100);
+
+    // Add loading animation completion
+    setTimeout(() => {
+        document.body.classList.add('loaded');
+    }, 100);
+
+    // Keyboard navigation enhancement
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Tab') {
+            document.body.classList.add('keyboard-navigation');
+        }
+    });
+
+    document.addEventListener('mousedown', function() {
+        document.body.classList.remove('keyboard-navigation');
+    });
+});
+
+// CSS animation keyframes (added via JavaScript)
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes ripple {
+        to {
+            transform: scale(2);
+            opacity: 0;
+        }
+    }
+    
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .keyboard-navigation *:focus {
+        outline: 2px solid #8B5CF6 !important;
+        outline-offset: 2px !important;
+    }
+    
+    .loaded .hero-title {
+        animation: fadeInUp 0.8s ease-out;
+    }
+    
+    .loaded .hero-subtitle {
+        animation: fadeInUp 0.8s ease-out 0.2s both;
+    }
+`;
+document.head.appendChild(style);
