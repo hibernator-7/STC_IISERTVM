@@ -2283,10 +2283,9 @@ footer::before {
 .video-container {
     position: relative;
     width: 100%;
-    max-width: 600px; /* Limit maximum width */
     height: 0;
-    padding-bottom: 33.75%; /* 16:9 aspect ratio but smaller (56.25% reduced to 33.75%) */
-    margin: 0 auto 1rem auto; /* Center the container and reduce bottom margin */
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    margin-bottom: 1rem;
     background: var(--accent-color);
     border-radius: 8px;
     overflow: hidden;
@@ -2301,6 +2300,16 @@ footer::before {
     height: 100%;
     border: none;
     border-radius: 8px;
+}
+
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.video-grid-item h4 {
+    margin-top: 0;
 }
 
 .youtube-channel-link {
@@ -2339,14 +2348,8 @@ footer::before {
 
 /* Mobile responsive for videos */
 @media (max-width: 768px) {
-    .video-container {
-        max-width: 100%; /* Full width on mobile */
-        padding-bottom: 40%; /* Slightly larger on mobile for better visibility */
-        margin-bottom: 0.8rem;
-    }
-    
-    .video-item {
-        margin-bottom: 1.5rem; /* Reduced spacing on mobile */
+    .video-grid {
+        grid-template-columns: 1fr;
     }
     
     .video-item h3 {
