@@ -153,21 +153,21 @@
         .hero-btn-primary {
             display: inline-block;
             padding: 18px 36px;
-            background: white;
-            color: var(--primary-color);
+            background: var(--primary-color);
+            color: white;
             text-decoration: none;
             border-radius: 50px;
             font-weight: 600;
             font-size: 1.1rem;
             transition: all 0.3s ease;
             box-shadow: 0 10px 30px rgba(139, 92, 246, 0.2);
-            border: 2px solid white;
+            border: 2px solid var(--primary-color);
         }
 
         .hero-btn-primary:hover {
             transform: translateY(-3px);
             box-shadow: 0 15px 40px rgba(139, 92, 246, 0.3);
-            background: var(--primary-color);
+            background: var(--primary-dark);
             color: white;
             text-decoration: none;
         }
@@ -496,8 +496,8 @@
         }
 
         .gallery-btn {
-            background: rgba(255, 255, 255, 0.95);
-            color: var(--primary-color);
+            background: var(--primary-color);
+            color: white;
             border: none;
             width: 50px;
             height: 50px;
@@ -513,9 +513,9 @@
         }
 
         .gallery-btn:hover {
-            background: white;
+            background: var(--primary-dark);
             transform: scale(1.1);
-            color: var(--primary-dark);
+            color: white;
         }
 
         .gallery-dots {
@@ -1352,44 +1352,7 @@
         // Fallback function for sample events
         function loadFallbackEvents() {
             const eventsContainer = document.getElementById('upcoming-events-grid');
-            const sampleEvents = [
-                {
-                    date: 'December 15, 2024',
-                    title: 'Quantum Computing Workshop',
-                    description: 'Introduction to quantum algorithms and programming with hands-on coding sessions.',
-                    link: 'pages/events.html#quantum-workshop'
-                },
-                {
-                    date: 'December 20, 2024',
-                    title: 'AI/ML Symposium',
-                    description: 'Latest trends in artificial intelligence and machine learning with industry experts.',
-                    link: 'pages/events.html#ai-symposium'
-                },
-                {
-                    date: 'January 5, 2025',
-                    title: 'Anvesha 2025 Launch',
-                    description: 'Kickoff event for the annual science fest featuring competitions and exhibitions.',
-                    link: 'pages/events.html#anvesha'
-                },
-                {
-                    date: 'January 12, 2025',
-                    title: 'Research Presentation Day',
-                    description: 'Students present their ongoing research projects to faculty and peers.',
-                    link: 'pages/events.html#research-day'
-                },
-                {
-                    date: 'January 18, 2025',
-                    title: 'Innovation Challenge',
-                    description: 'Interdisciplinary competition for developing solutions to real-world problems.',
-                    link: 'pages/events.html#innovation-challenge'
-                },
-                {
-                    date: 'February 2, 2025',
-                    title: 'Guest Lecture Series',
-                    description: 'Renowned scientists and researchers share their insights and experiences.',
-                    link: 'pages/events.html#guest-lectures'
-                }
-            ];
+            const sampleEvents = [ ];
             
             if (eventsContainer && eventsContainer.children.length === 0) {
                 sampleEvents.forEach(event => {
@@ -1420,7 +1383,7 @@
             
             if (updatesContainer && updatesContainer.children.length === 0) {
                 // Load latest updates from data.js
-                latestUpdates.slice(0, 3).forEach(update => {
+                latestUpdates.slice(0, 2).forEach(update => {
                     const updateCard = document.createElement('div');
                     updateCard.className = 'update-card';
                     
@@ -1446,27 +1409,8 @@
         // Fallback function for sample updates
         function loadFallbackUpdates() {
             const updatesContainer = document.getElementById('latest-updates-grid');
-            const sampleUpdates = [
-                {
-                    date: 'Dec 10, 2024',
-                    category: 'CCIT',
-                    title: 'Hackathon Winners Announced',
-                    description: 'Congratulations to Team Alpha for winning the 48-hour coding marathon with their innovative healthcare solution.'
-                },
-                {
-                    date: 'Dec 8, 2024',
-                    category: 'Parsec',
-                    title: 'Meteor Shower Observation',
-                    description: 'Join us for a special night sky observation session to witness the Geminids meteor shower.'
-                },
-                {
-                    date: 'Dec 5, 2024',
-                    category: 'Proteus',
-                    title: 'New Research Publication',
-                    description: 'Our members have published groundbreaking research on CRISPR gene editing in Nature Biotechnology.'
-                }
-            ];
-            
+            const sampleUpdates = [];
+
             if (updatesContainer && updatesContainer.children.length === 0) {
                 sampleUpdates.forEach(update => {
                     const updateCard = document.createElement('div');
