@@ -1313,8 +1313,44 @@
             });
         });
         
-        // Sample data for events and updates (replace with actual data from data.js)
-        function loadSampleEvents() {
+        // Load events from data.js
+        function loadEventsFromData() {
+            const eventsContainer = document.getElementById('upcoming-events-grid');
+            
+            // Check if data.js is loaded and has events
+            if (typeof upcomingEvents === 'undefined') {
+                console.warn('upcomingEvents not found in data.js, using fallback data');
+                loadFallbackEvents();
+                return;
+            }
+            
+            if (eventsContainer && eventsContainer.children.length === 0) {
+                // Load upcoming events from data.js
+                upcomingEvents.slice(0, 6).forEach(event => {
+                    const eventCard = document.createElement('div');
+                    eventCard.className = 'stc-event-card';
+                    
+                    // Format date if needed
+                    const eventDate = event.date || 'TBA';
+                    const eventTitle = event.title || 'Upcoming Event';
+                    const eventDescription = event.description || 'More details coming soon.';
+                    const eventLink = event.link || 'pages/events.html';
+                    
+                    eventCard.innerHTML = `
+                        <div class="stc-event-date">${eventDate}</div>
+                        <h3>${eventTitle}</h3>
+                        <p>${eventDescription}</p>
+                        <a href="${eventLink}" class="stc-event-cta" aria-label="Learn more about ${eventTitle}">
+                            Learn More
+                        </a>
+                    `;
+                    eventsContainer.appendChild(eventCard);
+                });
+            }
+        }
+        
+        // Fallback function for sample events
+        function loadFallbackEvents() {
             const eventsContainer = document.getElementById('upcoming-events-grid');
             const sampleEvents = [
                 {
@@ -1372,7 +1408,43 @@
             }
         }
         
-        function loadSampleUpdates() {
+        function loadUpdatesFromData() {
+            const updatesContainer = document.getElementById('latest-updates-grid');
+            
+            // Check if data.js is loaded and has updates
+            if (typeof latestUpdates === 'undefined') {
+                console.warn('latestUpdates not found in data.js, using fallback data');
+                loadFallbackUpdates();
+                return;
+            }
+            
+            if (updatesContainer && updatesContainer.children.length === 0) {
+                // Load latest updates from data.js
+                latestUpdates.slice(0, 3).forEach(update => {
+                    const updateCard = document.createElement('div');
+                    updateCard.className = 'update-card';
+                    
+                    // Format the data from data.js structure
+                    const updateDate = update.date || 'TBA';
+                    const updateTitle = update.title || 'Latest Update';
+                    const updateDescription = update.excerpt || 'More details coming soon.';
+                    const updateCategory = update.category || 'STC';
+                    
+                    updateCard.innerHTML = `
+                        <div class="update-meta">
+                            <span>${updateDate}</span>
+                            <span>${updateCategory}</span>
+                        </div>
+                        <h3>${updateTitle}</h3>
+                        <p>${updateDescription}</p>
+                    `;
+                    updatesContainer.appendChild(updateCard);
+                });
+            }
+        }
+        
+        // Fallback function for sample updates
+        function loadFallbackUpdates() {
             const updatesContainer = document.getElementById('latest-updates-grid');
             const sampleUpdates = [
                 {
@@ -1414,8 +1486,8 @@
         
         // Load sample data on page load
         document.addEventListener('DOMContentLoaded', () => {
-            loadSampleEvents();
-            loadSampleUpdates();
+            loadEventsFromData();
+            loadUpdatesFromData();
             
             // Preload gallery images for faster loading
             const preloadGalleryImages = () => {
