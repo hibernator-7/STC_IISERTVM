@@ -1,12 +1,12 @@
 // Hero Background Image Rotation
 const heroBackgroundImages = [
-    'images/gallery/Events/Anvesha/Inauguration/_AAR6973 (1).JPG',
-    'images/gallery/Events/Anvesha/Afficionados/_AAR7137.JPG',
-    'images/gallery/Events/Crucible/opticsboard.jpeg',
-    'images/gallery/Events/National Science Day/_AJN4997 (1).JPG',
-    'images/gallery/Events/Panel Discussion/IMG-20250615-PANELISTS.jpg',
-    'images/gallery/Events/Anvesha/BahFest/_OMJ8296 (1).JPG',
-    'images/gallery/Events/Anvesha/Blender Workshop/_ESV4906.JPG'
+    'images/gallery/Events/Anvesha/Inauguration/img1.jpg',
+    'images/gallery/Events/Anvesha/Afficionados/img1.jpg',
+    'images/gallery/Events/Crucible/img6.jpeg',
+    'images/gallery/Events/National Science Day/img2.jpg',
+    'images/gallery/Events/Panel Discussion/img1.jpg',
+    'images/gallery/Events/Anvesha/BahFest/img1.jpg',
+    'images/gallery/Events/Anvesha/Blender Workshop/img1.jpg'
 ];
 
 let currentHeroImageIndex = 0;
@@ -15,8 +15,8 @@ function rotateHeroBackground() {
     const hero = document.getElementById('hero');
     if (hero) {
         currentHeroImageIndex = (currentHeroImageIndex + 1) % heroBackgroundImages.length;
-        // Note: The CSS file is in /css, so image paths in JS should be relative to the HTML file.
-        hero.style.setProperty('--hero-bg-image', `url('images/gallery/Events/Anvesha/Inauguration/_AAR6973 (1).JPG')`);
+        // Use the current image from the array instead of hardcoded path
+        hero.style.setProperty('--hero-bg-image', `url('${heroBackgroundImages[currentHeroImageIndex]}')`);
     }
 }
 
