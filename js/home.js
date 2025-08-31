@@ -1,12 +1,12 @@
 // Hero Background Image Rotation
 const heroBackgroundImages = [
-    'images/gallery/Events/Anvesha/Inauguration/img1.jpg',
-    'images/gallery/Events/Anvesha/Afficionados/img1.jpg',
-    'images/gallery/Events/Crucible/img6.jpeg',
-    'images/gallery/Events/National Science Day/img2.jpg',
-    'images/gallery/Events/Panel Discussion/img1.jpg',
-    'images/gallery/Events/Anvesha/BahFest/img1.jpg',
-    'images/gallery/Events/Anvesha/Blender Workshop/img1.jpg'
+    'images/hero-optimized/inauguration.jpg',
+    'images/hero-optimized/afficionados.jpg',
+    'images/hero-optimized/crucible.jpg',
+    'images/hero-optimized/national-science-day.jpg',
+    'images/hero-optimized/panel-discussion.jpg',
+    'images/hero-optimized/bahfest.jpg',
+    'images/hero-optimized/blender-workshop.jpg'
 ];
 
 let currentHeroImageIndex = 0;
