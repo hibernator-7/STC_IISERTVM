@@ -64,7 +64,7 @@
             overflow: hidden;
             z-index: 1;
             isolation: isolate;
-              --hero-bg-image: url('images/hero-optimized/inauguration.jpg');
+            --hero-bg-image: url('images/hero-optimized/inauguration.jpg');
         }
 
         #hero::before {
@@ -78,9 +78,11 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+            background-attachment: fixed;
             z-index: -2;
-            transition: background-image 2s ease-in-out;
+            transition: background-image 0.5s ease-in-out;
             animation: kenBurns 20s infinite linear;
+            will-change: transform;
         }
 
         @keyframes kenBurns {
@@ -1090,7 +1092,7 @@
     
     <!-- Enhanced JavaScript for new features -->
     <script>
-        // Hero Background Image Rotation
+        // Hero Background Image Rotation with Optimized Images
         const heroBackgroundImages = [
             'images/hero-optimized/inauguration.jpg',
             'images/hero-optimized/afficionados.jpg',
@@ -1101,18 +1103,70 @@
             'images/hero-optimized/blender-workshop.jpg'
         ];
         
+        // Fallback images if optimized versions don't exist
+        const heroBackgroundImagesFallback = [
+            'images/gallery/Events/Anvesha/Inauguration/img1.jpg',
+            'images/gallery/Events/Anvesha/Afficionados/img1.jpg',
+            'images/gallery/Events/Crucible/img6.jpeg',
+            'images/gallery/Events/National Science Day/img2.jpg',
+            'images/gallery/Events/Panel Discussion/img1.jpg',
+            'images/gallery/Events/Anvesha/BahFest/img1.jpg',
+            'images/gallery/Events/Anvesha/Blender Workshop/img1.jpg'
+        ];
+        
         let currentHeroImageIndex = 0;
+        let preloadedImages = [];
+        
+        // Preload hero images for smooth transitions
+        function preloadHeroImages() {
+            heroBackgroundImages.forEach((imageSrc, index) => {
+                const img = new Image();
+                
+                img.onload = () => {
+                    preloadedImages[index] = imageSrc;
+                    console.log(`Hero image ${index + 1} preloaded successfully`);
+                };
+                
+                img.onerror = () => {
+                    // Fallback to original image
+                    const fallbackImg = new Image();
+                    fallbackImg.onload = () => {
+                        preloadedImages[index] = heroBackgroundImagesFallback[index];
+                        console.log(`Hero image ${index + 1} loaded with fallback`);
+                    };
+                    fallbackImg.src = heroBackgroundImagesFallback[index];
+                };
+                
+                img.src = imageSrc;
+            });
+        }
         
         function rotateHeroBackground() {
             const hero = document.getElementById('hero');
-            if (hero) {
-                currentHeroImageIndex = (currentHeroImageIndex + 1) % heroBackgroundImages.length;
-                hero.style.setProperty('--hero-bg-image', `url('${heroBackgroundImages[currentHeroImageIndex]}')`);
+            if (hero && preloadedImages.length > 0) {
+                currentHeroImageIndex = (currentHeroImageIndex + 1) % preloadedImages.length;
+                const nextImage = preloadedImages[currentHeroImageIndex] || heroBackgroundImagesFallback[currentHeroImageIndex];
+                
+                // Add smooth transition
+                hero.style.transition = 'opacity 0.5s ease-in-out';
+                hero.style.opacity = '0.9';
+                
+                setTimeout(() => {
+                    hero.style.setProperty('--hero-bg-image', `url('${nextImage}')`);
+                    hero.style.opacity = '1';
+                }, 250);
             }
         }
         
         // Start hero background rotation
-        setInterval(rotateHeroBackground, 8000); // Change every 8 seconds
+        document.addEventListener('DOMContentLoaded', () => {
+            preloadHeroImages();
+            
+            // Start rotation after images are preloaded
+            setTimeout(() => {
+                setInterval(rotateHeroBackground, 8000); // Change every 8 seconds
+            }, 2000);
+        });
         
         // Gallery Slider Functionality
         const slider = document.getElementById('gallerySlider');

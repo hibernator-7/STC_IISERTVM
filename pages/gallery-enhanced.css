@@ -1,0 +1,310 @@
+/* Enhanced Gallery Optimizations for Better Loading Performance */
+
+/* Critical CSS for immediate loading */
+.gallery-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Enhanced filter buttons with better interactions */
+.filter-buttons {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 1rem;
+}
+
+.filter-btn {
+    background: white;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 0.75rem 2rem;
+    margin: 0.5rem;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: 600;
+    position: relative;
+    overflow: hidden;
+    text-transform: capitalize;
+    font-size: 0.9rem;
+    outline: none;
+    transform: translateZ(0); /* Force hardware acceleration */
+}
+
+.filter-btn:focus {
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.3);
+}
+
+.filter-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: var(--primary-color);
+    transform: translate(-50%, -50%);
+    transition: width 0.4s ease, height 0.4s ease;
+    z-index: -1;
+}
+
+.filter-btn:hover::before,
+.filter-btn.active::before {
+    width: 200px;
+    height: 200px;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    color: var(--secondary-color);
+    transform: translateY(-2px) scale(1.02);
+}
+
+/* Enhanced gallery items with optimized loading */
+.gallery-item-full {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(139, 92, 246, 0.1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    background: #f8f9fa;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gallery-item-full::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, #f0f0f0 25%, transparent 25%),
+                linear-gradient(-45deg, #f0f0f0 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #f0f0f0 75%),
+                linear-gradient(-45deg, transparent 75%, #f0f0f0 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+    opacity: 0.1;
+    z-index: 1;
+}
+
+.gallery-item-full img {
+    width: 100%;
+    height: auto;
+    min-height: 200px;
+    object-fit: cover;
+    display: block;
+    border-radius: 12px;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), filter 0.3s ease;
+    z-index: 2;
+    position: relative;
+    background: #f8f9fa;
+}
+
+/* Loading state */
+.gallery-item-full img[style*="filter: blur"] {
+    filter: blur(5px);
+    transform: scale(1.02);
+}
+
+.gallery-item-full:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(139, 92, 246, 0.2);
+}
+
+.gallery-item-full:hover img {
+    transform: scale(1.05);
+}
+
+/* Enhanced lightbox */
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(5px);
+    animation: fadeIn 0.3s ease;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.lightbox-content {
+    margin: auto;
+    display: block;
+    width: 90%;
+    max-width: 900px;
+    max-height: 90vh;
+    object-fit: contain;
+    animation: zoomIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 8px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    z-index: 2001;
+    line-height: 1;
+    padding: 10px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.5);
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox-close:hover,
+.lightbox-close:focus {
+    color: var(--primary-light);
+    transform: scale(1.1);
+    background: rgba(0, 0, 0, 0.7);
+}
+
+/* Responsive optimizations */
+@media (max-width: 1024px) {
+    .gallery-container {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1rem;
+    }
+    
+    .gallery-item-full img {
+        min-height: 180px;
+    }
+    
+    .lightbox-content {
+        width: 95%;
+        max-height: 85vh;
+    }
+    
+    .lightbox-close {
+        top: 15px;
+        right: 15px;
+        font-size: 30px;
+        width: 50px;
+        height: 50px;
+    }
+}
+
+@media (max-width: 768px) {
+    .gallery-container {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 0.8rem;
+        padding: 0 0.5rem;
+    }
+    
+    .filter-btn {
+        padding: 0.6rem 1.5rem;
+        margin: 0.3rem;
+        font-size: 0.8rem;
+    }
+    
+    .gallery-item-full {
+        min-height: 150px;
+    }
+    
+    .gallery-item-full img {
+        min-height: 150px;
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-container {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+    
+    .filter-buttons {
+        padding: 0.5rem;
+        margin-bottom: 2rem;
+    }
+    
+    .filter-btn {
+        display: inline-block;
+        width: calc(50% - 0.5rem);
+        margin: 0.2rem;
+        padding: 0.5rem 1rem;
+        font-size: 0.75rem;
+    }
+    
+    .lightbox {
+        padding: 10px;
+    }
+    
+    .lightbox-content {
+        width: 100%;
+        max-height: 80vh;
+    }
+    
+    .lightbox-close {
+        top: 10px;
+        right: 10px;
+        font-size: 25px;
+        width: 40px;
+        height: 40px;
+    }
+}
+
+/* Performance optimizations */
+.gallery-item-full,
+.filter-btn {
+    will-change: transform;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+    .gallery-item-full,
+    .filter-btn,
+    .lightbox-content {
+        transition: none;
+        animation: none;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .filter-btn {
+        border-width: 3px;
+    }
+    
+    .gallery-item-full {
+        box-shadow: 0 0 0 2px currentColor;
+    }
+}
