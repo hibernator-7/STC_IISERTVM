@@ -17,42 +17,42 @@ const leadershipData = {
         name: "Professor Jarugu Narasimha Moorthy",
         title: "Director, IISER TVM",
         message: "A message from the director can be placed here.", // Placeholder message
-        imageUrl: "https://home.iitk.ac.in/~moorthy/assets/images/prof-jnm-74-independence-minified.jpg"
+        imageUrl: "images/members/Faculty Advisors/dr_j_n_moorthy.jpg"
     },
     dosa: {
         name: "Prof Rajeev N Kini",
         title: "Dean of Student Affairs",
         message: "A message from the Dean of Student Affairs can be placed here.", // Placeholder message
-        imageUrl: "https://www.iisertvm.ac.in/assets/uploads/faculties/Kini-2022_square1.JPG"
+        imageUrl: "images/members/Faculty Advisors/Prof. Rajeev N Kini.jpg"
     },
     currentAdvisors: [
         {
             name: "Dr. Sanu Shameer",
             title: "Faculty Advisor, STC",
             message: "A message from the faculty advisor can be placed here.",
-            imageUrl: "https://www.iisertvm.ac.in/assets/uploads/faculties/Sanu_Shameer_photo.jpg"
+            imageUrl: "images/members/Faculty Advisors/Dr. Sanu Shameer.jpg"
         },
         {
             name: "Dr. Krishnendu Gope",
             title: "Faculty Advisor, STC",
             message: "A message from the faculty advisor can be placed here.",
-            imageUrl: "https://www.iisertvm.ac.in/assets/uploads/faculties/gope.jpg"
+            imageUrl: "images/members/Faculty Advisors/Dr. Krishnendu Gope.jpg"
         }
     ],
     formerAdvisors: [
         { 
             name: "Prof Utpal Manna", 
-            imageUrl: "https://picsum.photos/seed/utpal/200/200",
+            imageUrl: "images/members/Faculty Advisors/Former/Prof. Utpal Manna.jpg",
             period: "2018-2020"
         },
         { 
             name: "Dr. Jishy Varghese", 
-            imageUrl: "https://picsum.photos/seed/jishy/200/200",
+            imageUrl: "images/members/Faculty Advisors/Former/Dr. Jishy Varghese.jpg",
             period: "2020-2022"
         },
         { 
             name: "Dr. Nisha N Kannan", 
-            imageUrl: "https://picsum.photos/seed/nisha/200/200",
+            imageUrl: "images/members/Faculty Advisors/Former/Dr Nisha_N_Kannan.jpg",
             period: "2022-2023"
         }
     ]
@@ -73,19 +73,19 @@ const pastSecretaries = [
     { 
         year: "BS-MS 20", 
         name: "Devashish Kalmegh",
-        imageUrl: "https://picsum.photos/seed/devashish/200/200",
+        imageUrl: "images/members/Prev Secretaries/_23-_24_Devashish Kalmegh_BSMS _20.jpg",
         period: "2023-2024"
     },
     { 
         year: "BS-MS 19", 
         name: "Ravikiran Hegde",
-        imageUrl: "https://picsum.photos/seed/ravikiran/200/200",
+        imageUrl: "images/members/Prev Secretaries/_22-_23_Ravikiran_Hegde_BSMS _19.jpg",
         period: "2022-2023"
     },
     { 
         year: "BS-MS 18", 
         name: "Sharang Rajesh Iyer",
-        imageUrl: "https://picsum.photos/seed/sharang/200/200",
+        imageUrl: "images/members/Prev Secretaries/_20-_22_Sharang Rajesh Iyer_BSMS _18.jpg",
         period: "2021-2022"
     }
 ];
