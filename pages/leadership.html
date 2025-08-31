@@ -3,60 +3,786 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leadership - STC IISER TVM</title>
+    <title>STC Leadership</title>
+    
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="manifest" href="../site.webmanifest">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS Files -->
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="leadership_style.css">
 </head>
 <body>
-    <header>
-        <!-- Header content is loaded dynamically by js/script.js -->
+    <!-- Header Navigation -->
+    <nav id="main-nav">
+        <div class="logo">
+            <a href="../index.html" data-link="root">STC IISER TVM</a>
+        </div>
+        <button class="hamburger" id="hamburger-button" aria-label="Menu" aria-expanded="false">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+        </button>
+        <ul id="nav-links">
+            <li><a href="../index.html" data-link="root">Home</a></li>
+            <li><a href="about.html" data-link="root">About</a></li>
+            <li><a href="leadership.html" data-link="root">Leadership</a></li>
+            <li><a href="clubs.html" data-link="root">Clubs</a></li>
+            <li><a href="events.html" data-link="root">Events</a></li>
+            <li><a href="gallery.html" data-link="root">Gallery</a></li>
+            <li><a href="updates.html" data-link="root">Updates</a></li>
+            <li><a href="contact.html" data-link="root">Contact</a></li>
+        </ul>
+    </nav>
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="container">
+            <h1 class="hero-title">Leadership</h1>
+            <p class="hero-subtitle">Meet the people who guide and inspire the STC.</p>
+        </div>
     </header>
 
-    <main>
-        <section class="page-header">
-            <div class="container">
-                <h1>Leadership</h1>
-                <p>Meet the people who guide and inspire the STC.</p>
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            
+            <!-- Director's Message Box -->
+            <div class="director-message-box">
+                <div class="director-profile">
+                    <div class="director-image">
+                        <img src="image/dr_j_n_moorthy.jpg" alt="Professor Jarugu Narasimha Moorthy" class="director-photo">
+                    </div>
+                    <div class="director-info">
+                        <h3 class="director-name">Professor Jarugu Narasimha Moorthy</h3>
+                        <p class="director-role">Director, IISER TVM</p>
+                        <p class="director-message">"A message from the director can be placed here."</p>
+                    </div>
+                </div>
             </div>
-        </section>
+            
+            <!-- Administration & Faculty Advisors -->
+            <section class="leadership-section">
+                <h2 class="section-title">Administration & Faculty Advisors</h2>
+                <div class="cards-grid">
+                    <div class="profile-card">
+                        <div class="profile-image">
+                            <img src="image/Prof. Rajeev N Kini.jpg" alt="Prof. Rajeev N Kini" class="profile-photo">
+                        </div>
+                        <div class="profile-info">
+                            <h3 class="profile-name">Prof. Rajeev N Kini</h3>
+                            <p class="profile-role">Faculty Advisor</p>
+                            <p class="profile-bio">Professor of Computer Science with 15+ years of experience in technology leadership and student mentorship.</p>
+                            <div class="contact-info">
+                                <div class="contact-item">
+                                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                        <polyline points="22,6 12,13 2,6"></polyline>
+                                    </svg>
+                                    <span>s.johnson@university.edu</span>
+                                </div>
+                                <div class="contact-item">
+                                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                        <circle cx="12" cy="10" r="3"></circle>
+                                    </svg>
+                                    <span>Building A, Room 205</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-        <section id="director-section" class="container">
-            <!-- Director content will be loaded here by js/script.js -->
-        </section>
+                    <div class="profile-card">
+                        <div class="profile-image">
+                            <img src="image/Dr. Sanu Shameer.jpg" alt="Dr. Sanu Shameer" class="profile-photo">
+                        </div>
+                        <div class="profile-info">
+                            <h3 class="profile-name">Dr. Sanu Shameer</h3>
+                            <p class="profile-role">Assistant Dean</p>
+                            <p class="profile-bio">Oversees academic programs and student organizations with a focus on technology innovation and career development.</p>
+                            <div class="contact-info">
+                                <div class="contact-item">
+                                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                        <polyline points="22,6 12,13 2,6"></polyline>
+                                    </svg>
+                                    <span>m.chen@university.edu</span>
+                                </div>
+                                <div class="contact-item">
+                                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                        <circle cx="12" cy="10" r="3"></circle>
+                                    </svg>
+                                    <span>Admin Building, Suite 320</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-        <section id="fic-dosa" class="container">
-            <h2 class="section-title-sub">Administration & Faculty Advisors</h2>
-            <div id="leadership-grid-container" class="leadership-grid">
-                <!-- Dean and Current Advisors are loaded dynamically by js/script.js -->
-            </div>
-        </section>
+                    <div class="profile-card">
+                        <div class="profile-image">
+                            <img src="image/Dr. Krishnendu Gope.jpg" alt="Dr. Krishnendu Gope" class="profile-photo">
+                        </div>
+                        <div class="profile-info">
+                            <h3 class="profile-name">Dr. Krishnendu Gope</h3>
+                            <p class="profile-role">Department Chair</p>
+                            <p class="profile-bio">Leading researcher in software engineering and advocate for student engagement in professional organizations.</p>
+                            <div class="contact-info">
+                                <div class="contact-item">
+                                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                        <polyline points="22,6 12,13 2,6"></polyline>
+                                    </svg>
+                                    <span>r.williams@university.edu</span>
+                                </div>
+                                <div class="contact-item">
+                                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                        <circle cx="12" cy="10" r="3"></circle>
+                                    </svg>
+                                    <span>Engineering Complex, Room 150</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-        <section id="stc-council" class="container">
-            <h2 class="section-title-sub">STC Council 2024</h2>
-            <div id="council-grid-container" class="team-grid">
-                <!-- Council members are loaded dynamically by js/script.js -->
-            </div>
-        </section>
+            <!-- STC Council 2024 -->
+            <section class="leadership-section">
+                <h2 class="section-title">STC Council 2024</h2>
+                <div class="cards-grid">
+                    <div class="profile-card">
+                        <div class="profile-image">
+                            <img src="image/Secretary_Ishaani_R_Kamath_BSMS _21.jpg" alt="Ishaani R Kamath" class="profile-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <svg class="profile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="display: none;">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </div>
+                        <div class="profile-info">
+                            <h3 class="profile-name">Ishaani R Kamath</h3>
+                            <p class="profile-role">Secretary (BS-MS 21)</p>
+                            <!-- <p class="profile-bio">Dedicated student member contributing to STC's organizational excellence and community building.</p>
+                            <div class="contact-info">
+                                <div class="contact-item">
+                                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                        <polyline points="22,6 12,13 2,6"></polyline>
+                                    </svg>
+                                    <span>ishaani.k@student.edu</span>
+                                </div>
+                                <div class="contact-item">
+                                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                        <circle cx="12" cy="10" r="3"></circle>
+                                    </svg>
+                                    <span>STC Office, Room 101</span>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
 
-        <section id="former-advisors" class="container">
-            <h2 class="section-title-sub">Former Faculty Advisors</h2>
-            <div id="former-advisors-container" class="past-secretaries-list">
-                 <!-- Former advisors are loaded dynamically by js/script.js -->
-            </div>
-        </section>
+                    <div class="profile-card">
+                        <div class="profile-image">
+                            <img src="image/Pearl_23.jpg" alt="Pearl" class="profile-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <svg class="profile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="display: none;">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </div>
+                        <div class="profile-info">
+                            <h3 class="profile-name">Pearl</h3>
+                            <p class="profile-role">Member</p>
+                            <!-- <p class="profile-bio">Active STC member passionate about technology innovation and student engagement.</p>
+                            <div class="contact-info">
+                                <div class="contact-item">
+                                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                        <polyline points="22,6 12,13 2,6"></polyline>
+                                    </svg>
+                                    <span>pearl@student.edu</span>
+                                </div>
+                                <div class="contact-item">
+                                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                        <circle cx="12" cy="10" r="3"></circle>
+                                    </svg>
+                                    <span>STC Office, Room 101</span>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
 
-        <section id="past-secretaries" class="container">
-            <h2 class="section-title-sub">Past Secretaries</h2>
-            <div id="past-secretaries-container" class="past-secretaries-list">
-                <!-- Past secretaries are loaded dynamically by js/script.js -->
-            </div>
-        </section>
+                    <div class="profile-card">
+                        <div class="profile-image">
+                            <img src="image/Arvind Lomrore BSMS 23.jpg" alt="Arvind Lomrore" class="profile-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <svg class="profile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="display: none;">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </div>
+                        <div class="profile-info">
+                            <h3 class="profile-name">Arvind Lomrore</h3>
+                            <p class="profile-role">Member</p>
+                            <!-- <p class="profile-bio">Technology enthusiast and active participant in STC's community initiatives and events.</p>
+                            <div class="contact-info">
+                                <div class="contact-item">
+                                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                        <polyline points="22,6 12,13 2,6"></polyline>
+                                    </svg>
+                                    <span>arvind.l@student.edu</span>
+                                </div>
+                                <div class="contact-item">
+                                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                        <circle cx="12" cy="10" r="3"></circle>
+                                    </svg>
+                                    <span>STC Office, Room 101</span>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+
+                    <div class="profile-card">
+                        <div class="profile-image">
+                            <img src="image/Alan Varghese Jophy_22.jpg" alt="Arvind Lomrore" class="profile-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <svg class="profile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="display: none;">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </div>
+                        <div class="profile-info">
+                            <h3 class="profile-name">Alan Varghese Jophy</h3>
+                            <p class="profile-role">Member</p>
+                            <!-- <p class="profile-bio">Dedicated STC member focused on technology advancement and collaborative learning.</p>
+                            <div class="contact-info">
+                                <div class="contact-item">
+                                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                        <polyline points="22,6 12,13 2,6"></polyline>
+                                    </svg>
+                                    <span>alan.v@student.edu</span>
+                                </div>
+                                <div class="contact-item">
+                                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                        <circle cx="12" cy="10" r="3"></circle>
+                                    </svg>
+                                    <span>STC Office, Room 101</span>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+
+                    <div class="profile-card">
+                        <div class="profile-image">
+                            <img src="image/Adheena Lakshmi_BSMS21.jpg" alt="Adheena Lakshmi" class="profile-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <svg class="profile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="display: none;">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </div>
+                        <div class="profile-info">
+                            <h3 class="profile-name">Adheena Lakshmi</h3>
+                            <p class="profile-role">Member</p>
+                            <!-- <p class="profile-bio">Active STC member contributing to technology initiatives and student community development.</p>
+                            <div class="contact-info">
+                                <div class="contact-item">
+                                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                        <polyline points="22,6 12,13 2,6"></polyline>
+                                    </svg>
+                                    <span>adheena.l@student.edu</span>
+                                </div>
+                                <div class="contact-item">
+                                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                        <circle cx="12" cy="10" r="3"></circle>
+                                    </svg>
+                                    <span>STC Office, Room 101</span>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+
+                    <div class="profile-card">
+                        <div class="profile-image">
+                            <img src="image/Abhiram Mahesh_21.jpg" alt="Abhiram Mahesh" class="profile-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <svg class="profile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="display: none;">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </div>
+                        <div class="profile-info">
+                            <h3 class="profile-name">Abhiram Mahesh</h3>
+                            <p class="profile-role">Member</p>
+                            <!-- <p class="profile-bio">Technology enthusiast and active STC member dedicated to innovation and community building.</p>
+                            <div class="contact-info">
+                                <div class="contact-item">
+                                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                        <polyline points="22,6 12,13 2,6"></polyline>
+                                    </svg>
+                                    <span>abhiram.m@student.edu</span>
+                                </div>
+                                <div class="contact-item">
+                                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                        <circle cx="12" cy="10" r="3"></circle>
+                                    </svg>
+                                    <span>STC Office, Room 101</span>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+
+                    <div class="profile-card">
+                        <div class="profile-image">
+                            <img src="image/Aashlesha_Chavan_BSMS22.jpeg" alt="Aashlesha Chavan" class="profile-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <svg class="profile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="display: none;">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </div>
+                        <div class="profile-info">
+                            <h3 class="profile-name">Aashlesha Chavan</h3>
+                            <p class="profile-role">Member</p>
+                            <!-- <p class="profile-bio">Dedicated STC member passionate about technology advancement and collaborative learning experiences.</p>
+                            <div class="contact-info">
+                                <div class="contact-item">
+                                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                        <polyline points="22,6 12,13 2,6"></polyline>
+                                    </svg>
+                                    <span>aashlesha.c@student.edu</span>
+                                </div>
+                                <div class="contact-item">
+                                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                        <circle cx="12" cy="10" r="3"></circle>
+                                    </svg>
+                                    <span>STC Office, Room 101</span>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+
+                    <div class="profile-card">
+                        <div class="profile-image">
+                            <img src="image/A J Nithin Batch23~2.jpg" alt="A J Nithin" class="profile-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <svg class="profile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="display: none;">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </div>
+                        <div class="profile-info">
+                            <h3 class="profile-name">A J Nithin</h3>
+                            <p class="profile-role">Member</p>
+                            <!-- <p class="profile-bio">Active STC member focused on technology innovation and student community engagement.</p>
+                            <div class="contact-info">
+                                <div class="contact-item">
+                                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                        <polyline points="22,6 12,13 2,6"></polyline>
+                                    </svg>
+                                    <span>nithin.aj@student.edu</span>
+                                </div>
+                                <div class="contact-item">
+                                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                        <circle cx="12" cy="10" r="3"></circle>
+                                    </svg>
+                                    <span>STC Office, Room 101</span>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+
+            <!-- Former Faculty Advisors -->
+            <section class="leadership-section">
+                <h2 class="section-title">Former Faculty Advisors</h2>
+                <div class="cards-grid">
+                    <div class="profile-card">
+                        <div class="profile-image">
+                            <img src="image/Prof. Utpal Manna.jpg" alt="Prof. Utpal Manna" class="profile-photo">
+                        </div>
+                        <div class="profile-info">
+                            <h3 class="profile-name">Prof. Utpal Manna</h3>
+                            <p class="profile-role">Faculty Advisor (2014-2017)</p>
+                            <!-- <p class="profile-bio">Founding faculty advisor who helped establish STC as a premier student technology organization.</p>
+                            <div class="contact-info">
+                                <div class="contact-item">
+                                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                        <polyline points="22,6 12,13 2,6"></polyline>
+                                    </svg>
+                                    <span>j.anderson@emeritus.edu</span>
+                                </div>
+                                <div class="contact-item">
+                                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                        <circle cx="12" cy="10" r="3"></circle>
+                                    </svg>
+                                    <span>Retired</span>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                    <div class="profile-card">
+                        <div class="profile-image">
+                            <img src="image/Dr Nisha_N_Kannan.jpg" alt="Dr. Nisha N Kannan" class="profile-photo">
+                        </div>
+                        <div class="profile-info">
+                            <h3 class="profile-name">Dr. Nisha N Kannan</h3>
+                            <!-- <p class="profile-role">Faculty Advisor (2020-2023)</p> -->
+                            <!-- <p class="profile-bio">Former professor who established many of STC's foundational programs and mentored hundreds of students.</p>
+                            <div class="contact-info">
+                                <div class="contact-item">
+                                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                        <polyline points="22,6 12,13 2,6"></polyline>
+                                    </svg>
+                                    <span>r.thompson@emeritus.edu</span>
+                                </div>
+                                <div class="contact-item">
+                                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                        <circle cx="12" cy="10" r="3"></circle>
+                                    </svg>
+                                    <span>Retired</span>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+
+                    <div class="profile-card">
+                        <div class="profile-image">
+                            <img src="image/jishy" alt="Dr. Jishy Varghese" class="profile-photo">
+                        </div>
+                        <div class="profile-info">
+                            <h3 class="profile-name">Dr. Jishy Varghese</h3>
+                            <!-- <p class="profile-role">Faculty Advisor (2017-2020)</p> -->
+                            <!-- <p class="profile-bio">Computer Science professor who led STC through significant growth and expanded industry partnerships.</p>
+                            <div class="contact-info">
+                                <div class="contact-item">
+                                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                        <polyline points="22,6 12,13 2,6"></polyline>
+                                    </svg>
+                                    <span>l.garcia@university.edu</span>
+                                </div>
+                                <div class="contact-item">
+                                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                        <circle cx="12" cy="10" r="3"></circle>
+                                    </svg>
+                                    <span>Remote Advisor</span>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Past Secretaries -->
+            <section class="leadership-section">
+                <h2 class="section-title">Past Secretaries</h2>
+                <div class="cards-grid">
+                    <div class="profile-card">
+                        <div class="profile-image">
+                            <img src="image/'23-'24_Devashish Kalmegh_BSMS '20.jpg" alt="Devashish Kalmegh" class="profile-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <svg class="profile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="display: none;">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </div>
+                        <div class="profile-info">
+                            <h3 class="profile-name">Devashish Kalmegh </h3>
+                            <p class="profile-role">BS-MS 20</p>
+                            <!-- <p class="profile-bio">Computer Science graduate now working at Microsoft, known for exceptional organizational skills and meeting documentation.</p>
+                            <div class="contact-info">
+                                <div class="contact-item">
+                                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                        <polyline points="22,6 12,13 2,6"></polyline>
+                                    </svg>
+                                    <span>jessica.liu@microsoft.com</span>
+                                </div>
+                                <div class="contact-item">
+                                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                        <circle cx="12" cy="10" r="3"></circle>
+                                    </svg>
+                                    <span>Seattle, WA</span>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+
+                    <div class="profile-card">
+                        <div class="profile-image">
+                            <img src="image/'20-'22_Sharang Rajesh Iyer_BSMS '18.jpg" alt="Sharang Rajesh Iyer" class="profile-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <svg class="profile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="display: none;">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </div>
+                        <div class="profile-info">
+                            <h3 class="profile-name">Sharang Rajesh Iyer</h3>
+                            <p class="profile-role">BS-MS 18</p>
+                            <!-- <p class="profile-bio">Information Systems graduate currently at Google, contributed to modernizing STC's documentation systems.</p>
+                            <div class="contact-info">
+                                <div class="contact-item">
+                                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                        <polyline points="22,6 12,13 2,6"></polyline>
+                                    </svg>
+                                    <span>d.brown@google.com</span>
+                                </div>
+                                <div class="contact-item">
+                                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                        <circle cx="12" cy="10" r="3"></circle>
+                                    </svg>
+                                    <span>Mountain View, CA</span>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+
+                    <div class="profile-card">
+                        <div class="profile-image">
+                            <img src="image/'22-'23_Ravikiran_Hegde_BSMS '19.jpg" alt="Ravikiran Hegde" class="profile-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <svg class="profile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="display: none;">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </div>
+                        <div class="profile-info">
+                            <h3 class="profile-name">Ravikiran Hegde</h3>
+                            <p class="profile-role">BS-MS 19</p>
+                            <!-- <p class="profile-bio">Software Engineering graduate at Apple, instrumental in establishing digital record-keeping processes.</p>
+                            <div class="contact-info">
+                                <div class="contact-item">
+                                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                        <polyline points="22,6 12,13 2,6"></polyline>
+                                    </svg>
+                                    <span>n.vasquez@apple.com</span>
+                                </div>
+                                <div class="contact-item">
+                                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                        <circle cx="12" cy="10" r="3"></circle>
+                                    </svg>
+                                    <span>Cupertino, CA</span>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+
+                    <!-- <div class="profile-card">
+                        <div class="profile-image">
+                            <svg class="profile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </div>
+                        <div class="profile-info">
+                            <h3 class="profile-name">Chris Wilson</h3>
+                            <p class="profile-role">Secretary (2020)</p>
+                            <p class="profile-bio">Computer Science graduate at Amazon, helped transition STC operations to remote-friendly formats.</p>
+                            <div class="contact-info">
+                                <div class="contact-item">
+                                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                        <polyline points="22,6 12,13 2,6"></polyline>
+                                    </svg>
+                                    <span>c.wilson@amazon.com</span>
+                                </div>
+                                <div class="contact-item">
+                                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                        <circle cx="12" cy="10" r="3"></circle>
+                                    </svg>
+                                    <span>Austin, TX</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+
+                    <!-- <div class="profile-card">
+                        <div class="profile-image">
+                            <svg class="profile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </div>
+                        <div class="profile-info">
+                            <h3 class="profile-name">Amanda Foster</h3>
+                            <p class="profile-role">Secretary (2019)</p>
+                            <p class="profile-bio">IT graduate working at IBM, known for creating comprehensive meeting archives and procedural documentation.</p>
+                            <div class="contact-info">
+                                <div class="contact-item">
+                                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                        <polyline points="22,6 12,13 2,6"></polyline>
+                                    </svg>
+                                    <span>a.foster@ibm.com</span>
+                                </div>
+                                <div class="contact-item">
+                                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                        <circle cx="12" cy="10" r="3"></circle>
+                                    </svg>
+                                    <span>New York, NY</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+
+                    <!-- <div class="profile-card">
+                        <div class="profile-image">
+                            <svg class="profile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </div>
+                        <div class="profile-info">
+                            <h3 class="profile-name">Kevin Lee</h3>
+                            <p class="profile-role">Secretary (2018)</p>
+                            <p class="profile-bio">Computer Engineering graduate at Tesla, established many of the documentation standards still used today.</p>
+                            <div class="contact-info">
+                                <div class="contact-item">
+                                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                        <polyline points="22,6 12,13 2,6"></polyline>
+                                    </svg>
+                                    <span>k.lee@tesla.com</span>
+                                </div>
+                                <div class="contact-item">
+                                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                        <circle cx="12" cy="10" r="3"></circle>
+                                    </svg>
+                                    <span>Fremont, CA</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </section>
+
+        </div>
     </main>
 
-    <footer>
-        <!-- Footer content is loaded dynamically by js/script.js -->
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3 class="footer-heading">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="../index.html" class="footer-link">Home</a></li>
+                        <li><a href="clubs.html" class="footer-link">Clubs</a></li>
+                        <li><a href="events.html" class="footer-link">Events</a></li>
+                        <li><a href="gallery.html" class="footer-link">Gallery</a></li>
+                        <li><a href="leadership.html" class="footer-link">Leadership</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3 class="footer-heading">Contact Us</h3>
+                    <div class="contact-info">
+                        <p class="contact-item">Email: stc@iisertvm.ac.in</p>
+                        <p class="contact-item">IISER Thiruvananthapuram</p>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3 class="footer-heading">Follow Us</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-link">LinkedIn</a>
+                        <a href="#" class="social-link">Instagram</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3 class="footer-heading">Designed by Harsh Suthar</h3>
+                    <div class="social-links">
+                        <a href="https://instagram.com/_hrstr_" target="_blank" rel="noopener noreferrer" class="social-link">Instagram</a>
+                        <a href="https://www.linkedin.com/in/harsh-suthar-5270a3317/" target="_blank" rel="noopener noreferrer" class="social-link">LinkedIn</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-divider"></div>
+            
+            <div class="footer-bottom">
+                <p class="copyright">© 2024 Science and Technology Council, IISER TVM. All Rights Reserved.</p>
+            </div>
+        </div>
     </footer>
 
-    <script src="../js/data.js"></script>
-    <script src="../js/script.js"></script>
+    <script src="leadership_script.js"></script>
+    
+    <!-- Navigation Script -->
+    <script>
+        // Fix horizontal scrolling globally
+        const setNoHorizontalScroll = () => {
+            document.documentElement.style.overflowX = 'hidden';
+            document.body.style.overflowX = 'hidden';
+        };
+        setNoHorizontalScroll();
+        window.addEventListener('resize', setNoHorizontalScroll);
+
+        // Navigation functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.getElementById('hamburger-button');
+            const navLinks = document.getElementById('nav-links');
+            
+            if (hamburger && navLinks) {
+                hamburger.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    navLinks.classList.toggle('active');
+                    hamburger.setAttribute('aria-expanded', navLinks.classList.contains('active'));
+                });
+                
+                document.addEventListener('click', function(e) {
+                    if (window.innerWidth <= 992 && navLinks.classList.contains('active')) {
+                        if (!navLinks.contains(e.target) && !hamburger.contains(e.target)) {
+                            navLinks.classList.remove('active');
+                            hamburger.setAttribute('aria-expanded', 'false');
+                        }
+                    }
+                });
+            }
+            
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 992) {
+                    navLinks.classList.remove('active');
+                    if (hamburger) {
+                        hamburger.setAttribute('aria-expanded', 'false');
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 </html>
