@@ -40,9 +40,21 @@ const leadershipData = {
         }
     ],
     formerAdvisors: [
-        { name: "Prof Utpal Manna" },
-        { name: "Dr. Jishy Varghese" },
-        { name: "Dr. Nisha N Kannan" }
+        { 
+            name: "Prof Utpal Manna", 
+            imageUrl: "https://picsum.photos/seed/utpal/200/200",
+            period: "2018-2020"
+        },
+        { 
+            name: "Dr. Jishy Varghese", 
+            imageUrl: "https://picsum.photos/seed/jishy/200/200",
+            period: "2020-2022"
+        },
+        { 
+            name: "Dr. Nisha N Kannan", 
+            imageUrl: "https://picsum.photos/seed/nisha/200/200",
+            period: "2022-2023"
+        }
     ]
 };
 
@@ -58,9 +70,24 @@ const councilMembers = [
 ];
 
 const pastSecretaries = [
-    { year: "BS-MS 20", name: "Devashish Kalmegh" },
-    { year: "BS-MS 19", name: "Ravikiran Hegde" },
-    { year: "BS-MS 18", name: "Sharang Rajesh Iyer" }
+    { 
+        year: "BS-MS 20", 
+        name: "Devashish Kalmegh",
+        imageUrl: "https://picsum.photos/seed/devashish/200/200",
+        period: "2023-2024"
+    },
+    { 
+        year: "BS-MS 19", 
+        name: "Ravikiran Hegde",
+        imageUrl: "https://picsum.photos/seed/ravikiran/200/200",
+        period: "2022-2023"
+    },
+    { 
+        year: "BS-MS 18", 
+        name: "Sharang Rajesh Iyer",
+        imageUrl: "https://picsum.photos/seed/sharang/200/200",
+        period: "2021-2022"
+    }
 ];
 
 

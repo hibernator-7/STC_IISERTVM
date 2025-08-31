@@ -1,0 +1,342 @@
+/* Mobile-specific styles for club pages */
+
+/* Base mobile styles */
+@media (max-width: 768px) {
+    /* Club page content */
+    .club-page-content {
+        padding: 1rem 0.8rem;
+    }
+    
+    .club-page-content p {
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin-bottom: 1.2rem;
+    }
+    
+    /* About page styles */
+    .about-section {
+        margin-bottom: 2rem;
+        padding: 1rem;
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    
+    /* FAQ styles */
+    .faq-accordion {
+        margin: 1rem 0;
+    }
+    
+    .faq-item {
+        margin-bottom: 1rem;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+    }
+    
+    .faq-question {
+        width: 100%;
+        padding: 1rem;
+        text-align: left;
+        background-color: #f1f1f1;
+        border: none;
+        outline: none;
+        transition: 0.4s;
+        font-weight: 600;
+        color: #333;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .faq-question:after {
+        content: '+';
+        font-size: 1.2rem;
+        color: var(--primary-color);
+    }
+    
+    .faq-question.active:after {
+        content: '-';
+    }
+    
+    .faq-answer {
+        padding: 0 1rem;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        background-color: white;
+    }
+    
+    .faq-answer p {
+        padding: 1rem 0;
+    }
+    
+    .faq-item.active .faq-answer {
+        max-height: 200px;
+    }
+    
+    .credits-section {
+        text-align: center;
+    }
+    
+    .credits-cta {
+        margin-top: 1.5rem;
+    }
+    
+    .cta-button {
+        display: inline-block;
+        padding: 0.8rem 1.5rem;
+        background-color: var(--primary-color);
+        color: white;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: background-color 0.3s ease;
+    }
+    
+    .cta-button:hover {
+        background-color: #004494;
+    }
+
+    /* Page header */
+    .page-header {
+        padding: 2rem 1rem;
+    }
+
+    .page-header h1 {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .page-header p {
+        font-size: 1rem;
+    }
+
+    .club-logo-header {
+        width: 100px;
+        height: 100px;
+        border-width: 3px;
+    }
+
+    /* Section titles */
+    .section-title-sub {
+        font-size: 1.5rem;
+        margin: 1.5rem 0;
+        text-align: center;
+        color: var(--primary-color);
+        position: relative;
+        padding-bottom: 10px;
+    }
+    
+    .section-title-sub::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 3px;
+        background-color: var(--primary-color);
+        border-radius: 3px;
+    }
+
+    /* Team grid */
+    .team-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        padding: 0 0.5rem;
+        margin: 0 auto 2rem;
+    }
+
+    .team-member {
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .team-member:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    }
+
+    .member-image {
+        position: relative;
+        overflow: hidden;
+        padding-top: 100%; /* 1:1 Aspect Ratio */
+    }
+
+    .member-image img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .team-member:hover .member-image img {
+        transform: scale(1.05);
+    }
+
+    .member-info {
+        padding: 12px;
+        text-align: center;
+    }
+
+    .member-info h3 {
+        font-size: 1rem;
+        margin: 0 0 5px;
+        color: #333;
+    }
+
+    .member-info p {
+        font-size: 0.85rem;
+        margin: 2px 0;
+        color: #666;
+    }
+
+    .member-role {
+        font-weight: 600;
+        color: var(--primary-color);
+    }
+
+    .member-period {
+        font-style: italic;
+    }
+    
+    .team-member-card {
+        padding: 1rem;
+        background-color: rgba(255, 255, 255, 0.7);
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .team-member-card img {
+        width: 100px;
+        height: 100px;
+        margin: 0 auto 0.8rem;
+        border: 2px solid var(--primary-color);
+    }
+
+    .team-member-card h4 {
+        font-size: 1rem;
+        margin-bottom: 0.3rem;
+    }
+
+    .team-member-card p {
+        font-size: 0.8rem;
+        line-height: 1.3;
+        margin: 0;
+    }
+
+    /* Event list */
+    .event-list li {
+        padding: 1rem 1.2rem;
+        font-size: 0.95rem;
+        margin-bottom: 1rem;
+        border-radius: 8px;
+        background-color: #f9f9f9;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    
+    .event-list li:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.12);
+    }
+
+    /* Gallery grid */
+    .gallery-grid-small {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.8rem;
+        padding: 0 0.5rem;
+    }
+    
+    .gallery-grid-small img {
+        border-radius: 6px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        aspect-ratio: 1/1;
+        object-fit: cover;
+    }
+
+    /* Social links */
+    .social-links .social-link {
+        display: block;
+        margin-right: 0;
+        margin-bottom: 0.8rem;
+        text-align: center;
+    }
+}
+
+/* Small mobile styles */
+@media (max-width: 480px) {
+    /* Team grid */
+    .team-grid {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 1.5rem;
+    }
+
+    /* Gallery grid */
+    .gallery-grid-small {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Event list */
+    .event-list li {
+        padding: 0.7rem 0.8rem;
+        font-size: 0.9rem;
+    }
+    
+    /* Section titles */
+    .section-title-sub {
+        font-size: 1.3rem;
+    }
+
+    /* Club page content */
+    .club-page-content section {
+        margin-bottom: 2rem;
+    }
+
+    /* Page header */
+    .page-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .page-header p {
+        font-size: 0.9rem;
+    }
+}
+
+/* Touch-friendly interactions */
+@media (hover: none) {
+    .team-member-card,
+    .club-logo-header,
+    .gallery-grid-small img,
+    .event-list li,
+    .filter-button,
+    .dropbtn,
+    .nav-links a {
+        cursor: pointer;
+        transition: none;
+    }
+
+    .event-list li:hover {
+        transform: none;
+    }
+
+    .social-links .social-link {
+        padding: 0.8rem 1rem;
+    }
+    
+    /* Touch active state for mobile interactions */
+    .touch-active {
+        opacity: 0.8;
+        transform: scale(0.98);
+        transition: all 0.2s ease;
+    }
+}

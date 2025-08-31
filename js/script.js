@@ -113,9 +113,20 @@ document.addEventListener("DOMContentLoaded", function() {
                     leadershipContainer.innerHTML = leadershipHtml;
                 }
                 if (formerAdvisorsContainer && leadershipData.formerAdvisors) {
-                    let listHtml = '<ul>';
-                    leadershipData.formerAdvisors.forEach(adv => listHtml += `<li>${adv.name}</li>`);
-                    formerAdvisorsContainer.innerHTML = listHtml + '</ul>';
+                    let advisorsHtml = '';
+                    leadershipData.formerAdvisors.forEach(advisor => {
+                        advisorsHtml += `<div class="team-member">
+                            <div class="member-image">
+                                <img src="${advisor.imageUrl}" alt="${advisor.name}">
+                            </div>
+                            <div class="member-info">
+                                <h3>${advisor.name}</h3>
+                                <p class="member-role">Faculty Advisor</p>
+                                <p class="member-period">${advisor.period || ''}</p>
+                            </div>
+                        </div>`;
+                    });
+                    formerAdvisorsContainer.innerHTML = advisorsHtml;
                 }
             }
             if (councilContainer && typeof councilMembers !== 'undefined') {
@@ -124,9 +135,20 @@ document.addEventListener("DOMContentLoaded", function() {
                 });
             }
             if (pastSecretariesContainer && typeof pastSecretaries !== 'undefined') {
-                let listHtml = '<ul>';
-                pastSecretaries.forEach(sec => listHtml += `<li><strong>${sec.year}:</strong> ${sec.name}</li>`);
-                pastSecretariesContainer.innerHTML = listHtml + '</ul>';
+                let secretariesHtml = '';
+                pastSecretaries.forEach(secretary => {
+                    secretariesHtml += `<div class="team-member">
+                        <div class="member-image">
+                            <img src="${secretary.imageUrl}" alt="${secretary.name}">
+                        </div>
+                        <div class="member-info">
+                            <h3>${secretary.name}</h3>
+                            <p class="member-role">${secretary.year}</p>
+                            <p class="member-period">${secretary.period || ''}</p>
+                        </div>
+                    </div>`;
+                });
+                pastSecretariesContainer.innerHTML = secretariesHtml;
             }
         }
 
