@@ -140,7 +140,7 @@ const latestUpdates = [
         title: "Club Registrations are Opening soon",
         excerpt: "Excited to join our clubs? Registrations for all affiliated clubs will be opening soon. Stay tuned!",
         link: "#",
-        imageUrl: "https://www.freepik.com/premium-vector/megaphone-with-join-now-speech-bubble-banner-loudspeaker_417662419.htm#fromView=keyword&page=1&position=5&uuid=12b14a4e-e7f0-4a5d-ad41-61ef670e9b80&query=Join?log-in=google"
+        imageUrl: "https://images.pexels.com/photos/17484975/pexels-photo-17484975.png?_gl=1*ehav9k*_ga*MTAwNDM5MDMzNi4xNzU2NjYyNjk0*_ga_8JE65Q40S6*czE3NTY2NjI2OTQkbzEkZzEkdDE3NTY2NjI5MTAkajU5JGwwJGgw"
     }
 ];
 
