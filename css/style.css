@@ -2255,3 +2255,110 @@ footer::before {
         text-decoration: underline;
     }
 }
+
+/* Video Section Styles */
+.video-section {
+    margin: 2rem 0;
+}
+
+.video-item {
+    margin-bottom: 2rem; /* Reduced from 3rem */
+}
+
+.video-item h3 {
+    color: var(--primary-color);
+    font-size: 1.3rem; /* Slightly smaller */
+    margin-bottom: 0.8rem; /* Reduced margin */
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 0.3rem; /* Reduced padding */
+}
+
+.video-item h4 {
+    color: var(--text-color);
+    font-size: 1rem; /* Slightly smaller */
+    margin: 1rem 0 0.3rem 0; /* Reduced margins */
+    font-weight: 600;
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    max-width: 600px; /* Limit maximum width */
+    height: 0;
+    padding-bottom: 33.75%; /* 16:9 aspect ratio but smaller (56.25% reduced to 33.75%) */
+    margin: 0 auto 1rem auto; /* Center the container and reduce bottom margin */
+    background: var(--accent-color);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 8px;
+}
+
+.youtube-channel-link {
+    text-align: center;
+    margin: 2rem 0;
+    padding: 2rem 0;
+    border-top: 1px solid var(--border-color);
+}
+
+.channel-btn {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: linear-gradient(45deg, #FF0000, #CC0000);
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: var(--transition-base);
+    box-shadow: var(--shadow-md);
+    border: none;
+    cursor: pointer;
+}
+
+.channel-btn:hover {
+    background: linear-gradient(45deg, #CC0000, #990000);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    color: white;
+    text-decoration: none;
+}
+
+.channel-btn:active {
+    transform: translateY(0);
+}
+
+/* Mobile responsive for videos */
+@media (max-width: 768px) {
+    .video-container {
+        max-width: 100%; /* Full width on mobile */
+        padding-bottom: 40%; /* Slightly larger on mobile for better visibility */
+        margin-bottom: 0.8rem;
+    }
+    
+    .video-item {
+        margin-bottom: 1.5rem; /* Reduced spacing on mobile */
+    }
+    
+    .video-item h3 {
+        font-size: 1.2rem;
+    }
+    
+    .video-item h4 {
+        font-size: 0.95rem;
+    }
+    
+    .channel-btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+    }
+}
