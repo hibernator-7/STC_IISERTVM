@@ -14,45 +14,45 @@ Instructions:
 // --- LEADERSHIP DATA ---
 const leadershipData = {
     director: {
-        name: "Professor Jarugu Narasimha Moorthy",
+        name: "Prof Jarugu Narasimha Moorthy",
         title: "Director, IISER TVM",
         message: "A message from the director can be placed here.", // Placeholder message
-        imageUrl: "images/members/Faculty Advisors/dr_j_n_moorthy.jpg"
+        imageUrl: "https://home.iitk.ac.in/~moorthy/assets/images/prof-jnm-74-independence-minified.jpg"
     },
     dosa: {
         name: "Prof Rajeev N Kini",
         title: "Dean of Student Affairs",
         message: "A message from the Dean of Student Affairs can be placed here.", // Placeholder message
-        imageUrl: "images/members/Faculty Advisors/Prof. Rajeev N Kini.jpg"
+        imageUrl: "https://www.iisertvm.ac.in/assets/uploads/faculties/Kini-2022_square1.JPG"
     },
     currentAdvisors: [
         {
             name: "Dr. Sanu Shameer",
             title: "Faculty Advisor, STC",
             message: "A message from the faculty advisor can be placed here.",
-            imageUrl: "images/members/Faculty Advisors/Dr. Sanu Shameer.jpg"
+            imageUrl: "https://www.iisertvm.ac.in/assets/uploads/faculties/Sanu_Shameer_photo.jpg"
         },
         {
             name: "Dr. Krishnendu Gope",
             title: "Faculty Advisor, STC",
             message: "A message from the faculty advisor can be placed here.",
-            imageUrl: "images/members/Faculty Advisors/Dr. Krishnendu Gope.jpg"
+            imageUrl: "https://www.iisertvm.ac.in/assets/uploads/faculties/gope.jpg"
         }
     ],
     formerAdvisors: [
         { 
             name: "Prof Utpal Manna", 
-            imageUrl: "images/members/Faculty Advisors/Former/Prof. Utpal Manna.jpg",
+            imageUrl: "https://www.iisertvm.ac.in/assets/uploads/faculties/ad9e83d050fa3aab5d1e7e2cbcb6a090.jpg",
             period: "2018-2020"
         },
         { 
             name: "Dr. Jishy Varghese", 
-            imageUrl: "images/members/Faculty Advisors/Former/Dr. Jishy Varghese.jpg",
+            imageUrl: "https://www.iisertvm.ac.in/assets/uploads/faculties/3af1a85fa07f89910478075a0b52c755.jpg",
             period: "2020-2022"
         },
         { 
             name: "Dr. Nisha N Kannan", 
-            imageUrl: "images/members/Faculty Advisors/Former/Dr Nisha_N_Kannan.jpg",
+            imageUrl: "https://www.iisertvm.ac.in/assets/uploads/faculties/Nisha_N_Kannan_IISER_copy_2.JPG",
             period: "2022-2023"
         }
     ]
@@ -73,19 +73,19 @@ const pastSecretaries = [
     { 
         year: "BS-MS 20", 
         name: "Devashish Kalmegh",
-        imageUrl: "images/members/Prev Secretaries/_23-_24_Devashish Kalmegh_BSMS _20.jpg",
+        imageUrl: "https://github.com/Coding-Club-of-IISER-Thiruvananthapuram/STC_IISERTVM/blob/main/images/members/Prev%20Secretaries/_23-_24_Devashish%20Kalmegh_BSMS%20_20.jpg?raw=true",
         period: "2023-2024"
     },
     { 
         year: "BS-MS 19", 
         name: "Ravikiran Hegde",
-        imageUrl: "images/members/Prev Secretaries/_22-_23_Ravikiran_Hegde_BSMS _19.jpg",
+        imageUrl: "https://raw.githubusercontent.com/Coding-Club-of-IISER-Thiruvananthapuram/STC_IISERTVM/refs/heads/main/images/members/Prev%20Secretaries/_22-_23_Ravikiran_Hegde_BSMS%20_19.jpg",
         period: "2022-2023"
     },
     { 
         year: "BS-MS 18", 
         name: "Sharang Rajesh Iyer",
-        imageUrl: "images/members/Prev Secretaries/_20-_22_Sharang Rajesh Iyer_BSMS _18.jpg",
+        imageUrl: "https://raw.githubusercontent.com/Coding-Club-of-IISER-Thiruvananthapuram/STC_IISERTVM/refs/heads/main/images/members/Prev%20Secretaries/_20-_22_Sharang%20Rajesh%20Iyer_BSMS%20_18.jpg",
         period: "2021-2022"
     }
 ];
@@ -95,52 +95,52 @@ const pastSecretaries = [
 const upcomingEvents = [
     {
         date: "15 JAN",
-        title: "Workshop on Quantum Computing",
-        description: "Hosted by Parsec Club. A deep dive into the future of computing."
+        title: "Anvesha",
+        description: "Anvesha ’25 is almost here! IISER Thiruvananthapuram’s annual science fest kicks off on October 17."
     },
     {
         date: "02 FEB",
-        title: "Web Dev Bootcamp Kick-off",
-        description: "Hosted by CCIT Club. The start of our 4-week intensive bootcamp."
+        title: "Know Your Faculty",
+        description: "Organised by the CCIT, this short video series answers common questions in programming and helps you learn directly from our faculty experts."
     }
 ];
 
 const pastEvents = [
     {
         date: "20 DEC",
-        title: "Introduction to Astrophotography",
-        description: "Hosted by Parsec Club. A session on capturing the cosmos."
+        title: "WaveFronts",
+        description: "Hosted by PSIT. A session on capturing the world of physics."
     },
     {
-        date: "05 NOV",
-        title: "Bio-inspired Robotics Seminar",
-        description: "Hosted by Proteus Club. Exploring robotics inspired by nature."
+        date: "15 June",
+        title: "Beyond Syntax",
+        description: "Hosted by the CCIT Club, this webinar series features IISER Thiruvananthapuram alumni sharing their experiences with internships, programming careers, and publishing research in top conference venues."
     }
 ];
 
 
 // --- UPDATES DATA ---
 const latestUpdates = [
+   //  {
+       //  date: "Jan 10, 2024",
+       //  title: "New STC Council Elected",
+     //    excerpt: "The results for the student council elections are out. We are excited to welcome the new team who will be leading the STC for the next academic year. Read on to meet the new secretaries and learn about their vision for the council.",
+      //   link: "#",
+     //    imageUrl: "https://picsum.photos/seed/update1/400/250"
+   //  },
     {
-        date: "Jan 10, 2024",
-        title: "New STC Council Elected",
-        excerpt: "The results for the student council elections are out. We are excited to welcome the new team who will be leading the STC for the next academic year. Read on to meet the new secretaries and learn about their vision for the council.",
+        date: "Oct 17, 2025",
+        title: "Anvesha '25",
+        excerpt: "Anvesha ’25 is just around the corner, happening on October 17. Get ready with your projects that aim to reshape the world of research, innovation, and science and technology. We encourage enthusiastic participation from all candidates.",
         link: "#",
-        imageUrl: "https://picsum.photos/seed/update1/400/250"
+        imageUrl: "https://raw.githubusercontent.com/Coding-Club-of-IISER-Thiruvananthapuram/STC_IISERTVM/refs/heads/main/images/gallery/Events/Anvesha/img1.jpg"
     },
     {
-        date: "Dec 28, 2023",
-        title: "Anvesha '24 Post-Event Report",
-        excerpt: "Anvesha '24 was a massive success, with over 1000 participants from across the country...",
+        date: "Sep, 2025",
+        title: "Club Registrations are Opening soon",
+        excerpt: "Excited to join our clubs? Registrations for all affiliated clubs will be opening soon. Stay tuned!",
         link: "#",
-        imageUrl: "https://picsum.photos/seed/update2/400/250"
-    },
-    {
-        date: "Nov 15, 2023",
-        title: "Club Registrations for Spring Semester are Open",
-        excerpt: "Want to be a part of the STC family? Registrations for all our affiliated clubs are now open...",
-        link: "#",
-        imageUrl: "https://picsum.photos/seed/update3/400/250"
+        imageUrl: "https://www.freepik.com/premium-vector/megaphone-with-join-now-speech-bubble-banner-loudspeaker_417662419.htm#fromView=keyword&page=1&position=5&uuid=12b14a4e-e7f0-4a5d-ad41-61ef670e9b80&query=Join?log-in=google"
     }
 ];
 
