@@ -94,6 +94,15 @@ nav .logo a {
     font-weight: bold;
     color: var(--text-color);
     transition: transform var(--transition-base);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+nav .logo a img {
+    height: 35px;
+    width: auto;
+    transition: transform var(--transition-base);
 }
 
 nav .logo a:hover {
