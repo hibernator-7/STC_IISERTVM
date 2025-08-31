@@ -132,13 +132,6 @@ const pastEvents = [
 
 // --- UPDATES DATA ---
 const latestUpdates = [
-   //  {
-       //  date: "Jan 10, 2024",
-       //  title: "New STC Council Elected",
-     //    excerpt: "The results for the student council elections are out. We are excited to welcome the new team who will be leading the STC for the next academic year. Read on to meet the new secretaries and learn about their vision for the council.",
-      //   link: "#",
-     //    imageUrl: "https://picsum.photos/seed/update1/400/250"
-   //  },
     {
         date: "Oct 17, 2025",
         title: "Anvesha '25",

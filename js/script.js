@@ -31,6 +31,14 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
 
+        // Fix image paths
+        document.querySelectorAll('img').forEach(img => {
+            const originalSrc = img.getAttribute('src');
+            if (isPagesDirectory && !originalSrc.startsWith('http') && !originalSrc.startsWith('../')) {
+                img.setAttribute('src', `../${originalSrc}`);
+            }
+        });
+
         // Hamburger Menu
         const hamburgerButton = document.getElementById('hamburger-button');
         const mainNav = document.getElementById('main-nav');
@@ -121,7 +129,7 @@ document.addEventListener("DOMContentLoaded", function() {
             if (typeof leadershipData !== 'undefined') {
                 if (directorContainer && leadershipData.director) {
                     const { director } = leadershipData;
-                    directorContainer.innerHTML = `<div class="director-card"><img src="${director.imageUrl}" alt="${director.name}"><div class="leadership-details"><h3>${director.name}</h3><h4>${director.title}</h4><p>"${director.message}"</p></div></div>`;
+                    directorContainer.innerHTML = `<div class="director-card"><img src="${director.imageUrl}" alt="${director.name}"><div class="director-details"><h3>${director.name}</h3><h4>${director.title}</h4><p>"${director.message}"</p></div></div>`;
                 }
                 if (leadershipContainer) {
                     let leadershipHtml = '';
@@ -139,15 +147,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 if (formerAdvisorsContainer && leadershipData.formerAdvisors) {
                     let advisorsHtml = '';
                     leadershipData.formerAdvisors.forEach(advisor => {
-                        advisorsHtml += `<div class="team-member">
-                            <div class="member-image">
-                                <img src="${advisor.imageUrl}" alt="${advisor.name}">
-                            </div>
-                            <div class="member-info">
-                                <h3>${advisor.name}</h3>
-                                <p class="member-role">Faculty Advisor</p>
-                                <p class="member-period">${advisor.period || ''}</p>
-                            </div>
+                        advisorsHtml += `<div class="team-member-card">
+                            <img src="${advisor.imageUrl}" alt="${advisor.name}">
+                            <h4>${advisor.name}</h4>
+                            <p>Faculty Advisor (${advisor.period || ''})</p>
                         </div>`;
                     });
                     formerAdvisorsContainer.innerHTML = advisorsHtml;
@@ -161,15 +164,10 @@ document.addEventListener("DOMContentLoaded", function() {
             if (pastSecretariesContainer && typeof pastSecretaries !== 'undefined') {
                 let secretariesHtml = '';
                 pastSecretaries.forEach(secretary => {
-                    secretariesHtml += `<div class="team-member">
-                        <div class="member-image">
-                            <img src="${secretary.imageUrl}" alt="${secretary.name}">
-                        </div>
-                        <div class="member-info">
-                            <h3>${secretary.name}</h3>
-                            <p class="member-role">${secretary.year}</p>
-                            <p class="member-period">${secretary.period || ''}</p>
-                        </div>
+                    secretariesHtml += `<div class="team-member-card">
+                        <img src="${secretary.imageUrl}" alt="${secretary.name}">
+                        <h4>${secretary.name}</h4>
+                        <p>Secretary (${secretary.period || secretary.year})</p>
                     </div>`;
                 });
                 pastSecretariesContainer.innerHTML = secretariesHtml;
