@@ -1,0 +1,547 @@
+/* CSS Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    line-height: 1.6;
+    color: #374151;
+    background-color: #ffffff;
+}
+
+/* Container and Layout */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, #8B5CF6 0%, #A78BFA 100%);
+    color: white;
+    padding: 80px 0;
+    text-align: center;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    letter-spacing: -0.025em;
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.5;
+}
+
+/* Main Content */
+.main-content {
+    padding: 80px 0;
+}
+
+/* Leadership Sections */
+.leadership-section {
+    margin-bottom: 80px;
+}
+
+.leadership-section:last-child {
+    margin-bottom: 0;
+}
+
+/* Director's Message Box */
+.director-message-box {
+    background: white;
+    border-radius: 16px;
+    padding: 40px;
+    margin-bottom: 48px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border: 1px solid #F3F4F6;
+    position: relative;
+    overflow: hidden;
+}
+
+.director-message-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #8B5CF6, #A78BFA);
+}
+
+.director-profile {
+    display: flex;
+    align-items: flex-start;
+    gap: 32px;
+}
+
+.director-image {
+    flex-shrink: 0;
+}
+
+.director-photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #8B5CF6;
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2);
+}
+
+.director-info {
+    flex: 1;
+}
+
+.director-name {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: #1F2937;
+    margin-bottom: 8px;
+    line-height: 1.3;
+}
+
+.director-role {
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: #8B5CF6;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.director-message {
+    font-size: 1.125rem;
+    color: #6B7280;
+    font-style: italic;
+    line-height: 1.6;
+    background: #F9FAFB;
+    padding: 20px;
+    border-radius: 12px;
+    border-left: 4px solid #8B5CF6;
+    margin: 0;
+}
+
+.section-title {
+    font-size: 2.25rem;
+    font-weight: 600;
+    color: #8B5CF6;
+    margin-bottom: 48px;
+    text-align: center;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, #8B5CF6, #A78BFA);
+    border-radius: 2px;
+}
+
+/* Cards Grid */
+.cards-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+}
+
+/* Profile Cards */
+.profile-card {
+    background: white;
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+    border: 1px solid #F3F4F6;
+    position: relative;
+    overflow: hidden;
+}
+
+.profile-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #8B5CF6, #A78BFA);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.profile-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.profile-card:hover::before {
+    transform: scaleX(1);
+}
+
+/* Profile Image */
+.profile-image {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #8B5CF6, #A78BFA);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    transition: transform 0.3s ease;
+    overflow: hidden;
+    position: relative;
+}
+
+.profile-card:hover .profile-image {
+    transform: scale(1.1);
+}
+
+.profile-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+.profile-card:hover .profile-photo {
+    transform: scale(1.05);
+}
+
+.profile-icon {
+    width: 40px;
+    height: 40px;
+    color: white;
+    stroke-width: 2;
+}
+
+/* Profile Info */
+.profile-info {
+    flex: 1;
+}
+
+.profile-name {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1F2937;
+    margin-bottom: 8px;
+}
+
+.profile-role {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #8B5CF6;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.profile-bio {
+    font-size: 1rem;
+    color: #6B7280;
+    margin-bottom: 24px;
+    line-height: 1.6;
+}
+
+/* Contact Info */
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.875rem;
+    color: #6B7280;
+}
+
+.contact-icon {
+    width: 16px;
+    height: 16px;
+    color: #8B5CF6;
+    stroke-width: 2;
+    flex-shrink: 0;
+}
+
+/* Footer */
+.footer {
+    background-color: #374151;
+    padding: 60px 0 20px;
+    color: white;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-column {
+    text-align: center;
+}
+
+.footer-heading {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.footer-column:last-child .footer-heading {
+    font-size: 1rem;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li {
+    margin-bottom: 12px;
+}
+
+.footer-link {
+    color: #D1D5DB;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+    color: #8B5CF6;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.contact-item {
+    color: #D1D5DB;
+    font-size: 1rem;
+    margin: 0;
+}
+
+.social-links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.social-link {
+    color: #D1D5DB;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.social-link:hover {
+    color: #8B5CF6;
+}
+
+.footer-divider {
+    height: 1px;
+    background-color: #4B5563;
+    margin: 40px 0 20px;
+}
+
+.footer-bottom {
+    text-align: center;
+}
+
+.copyright {
+    color: #9CA3AF;
+    font-size: 0.875rem;
+    margin: 0;
+}
+
+/* Responsive Design */
+
+/* Mobile */
+@media (max-width: 767px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    .director-profile {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 24px;
+    }
+    
+    .director-photo {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .director-name {
+        font-size: 1.5rem;
+    }
+    
+    .director-role {
+        font-size: 1rem;
+    }
+    
+    .director-message {
+        font-size: 1rem;
+        padding: 16px;
+    }
+    
+    .director-message-box {
+        padding: 32px 24px;
+    }
+    
+    .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+    }
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+    .container {
+        padding: 0 32px;
+    }
+    
+    .hero {
+        padding: 120px 0;
+    }
+    
+    .hero-title {
+        font-size: 4rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.5rem;
+    }
+    
+    .cards-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 40px;
+    }
+    
+    .profile-card {
+        padding: 40px;
+    }
+    
+    .contact-info {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 24px;
+    }
+    
+    .director-message-box {
+        padding: 48px;
+    }
+    
+    .director-photo {
+        width: 140px;
+        height: 140px;
+    }
+    
+    .director-name {
+        font-size: 2rem;
+    }
+    
+    .director-role {
+        font-size: 1.25rem;
+    }
+    
+    .director-message {
+        font-size: 1.25rem;
+    }
+    
+    .footer-content {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 40px;
+    }
+    
+    .footer-column {
+        text-align: left;
+    }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+    .container {
+        padding: 0 48px;
+    }
+    
+    .hero {
+        padding: 140px 0;
+    }
+    
+    .hero-title {
+        font-size: 4.5rem;
+    }
+    
+    .cards-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 48px;
+    }
+    
+    .main-content {
+        padding: 100px 0;
+    }
+    
+    .leadership-section {
+        margin-bottom: 100px;
+    }
+}
+
+/* Large Desktop */
+@media (min-width: 1280px) {
+    .cards-grid {
+        grid-template-columns: repeat(0, 1fr);
+    }
+}
+
+/* Accessibility and Focus States */
+.profile-card:focus-within {
+    outline: 2px solid #8B5CF6;
+    outline-offset: 2px;
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+
+
+/* Print styles */
+@media print {
+    .hero {
+        background: #8B5CF6 !important;
+        -webkit-print-color-adjust: exact;
+        color-adjust: exact;
+    }
+    
+    .profile-card {
+        break-inside: avoid;
+        margin-bottom: 24px;
+    }
+}
