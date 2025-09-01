@@ -418,6 +418,40 @@ body {
         grid-template-columns: repeat(2, 1fr);
         gap: 30px;
     }
+    
+    /* Fix profile images to be circular on mobile */
+    .profile-card .profile-image {
+        width: 80px !important;
+        height: 80px !important;
+        border-radius: 50% !important;
+        object-fit: cover !important;
+        aspect-ratio: 1 / 1 !important;
+    }
+    
+    .profile-card {
+        padding: 1.5rem !important;
+        text-align: center;
+    }
+    
+    .profile-name {
+        font-size: 1.1rem !important;
+        margin-top: 1rem;
+    }
+    
+    .profile-role {
+        font-size: 0.9rem !important;
+    }
+    
+    /* Grid adjustments for mobile */
+    .team-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 1rem !important;
+    }
+    
+    .leadership-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+    }
 }
 
 /* Tablet */
