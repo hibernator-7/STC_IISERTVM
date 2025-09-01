@@ -14,14 +14,14 @@ function updateAnveshaInfo() {
             update.title && update.title.toLowerCase().includes('anvesha')
         );
         
-     //   if (anveshaUpdate) {
+        if (anveshaUpdate) {
             // Update date if available
           //  const dateElements = document.querySelectorAll('#anvesha-date, #reg-date');
             //if (anveshaUpdate.date) {
               //  dateElements.forEach(el => {
                // ''    if (el) el.textContent = anveshaUpdate.date;
                // });
-        }
+}
             
             // Update description in hero section
             const heroDescription = document.querySelector('.hero-description');
@@ -38,11 +38,11 @@ function updateAnveshaInfo() {
         );
         
         if (anveshaEvent) {
-            const dateElements = document.querySelectorAll('#anvesha-date, #reg-date');
-            if (anveshaEvent.date) {
-                dateElements.forEach(el => {
-                    if (el) el.textContent = anveshaEvent.date;
-                });
+           // const dateElements = document.querySelectorAll('#anvesha-date, #reg-date');
+           // if (anveshaEvent.date) {
+             //   dateElements.forEach(el => {
+           //         if (el) el.textContent = anveshaEvent.date;
+            //    });
             }
         }
     }
