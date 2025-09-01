@@ -19,16 +19,25 @@ document.addEventListener("DOMContentLoaded", function() {
     ]).then(() => {
         // --- AFTER HEADER/FOOTER ARE LOADED ---
 
-        // Fix links
-        document.querySelectorAll('[data-link="root"]').forEach(link => {
-            const originalHref = link.getAttribute('href');
-            if (isPagesDirectory) {
-                if (originalHref.startsWith('pages/')) {
-                    link.setAttribute('href', originalHref.replace('pages/', ''));
-                } else {
-                    link.setAttribute('href', `../${originalHref}`);
-                }
+        // Fix footer links based on current page location
+        const footerHomeLinks = document.querySelectorAll('.footer-link-home');
+        const footerPageLinks = document.querySelectorAll('.footer-link-pages');
+        
+        footerHomeLinks.forEach(link => {
+            if (!isPagesDirectory) {
+                // If we're on the home page, change ../index.html to index.html
+                link.setAttribute('href', 'index.html');
             }
+            // If we're in pages directory, keep ../index.html
+        });
+        
+        footerPageLinks.forEach(link => {
+            if (!isPagesDirectory) {
+                // If we're on the home page, add pages/ prefix
+                const href = link.getAttribute('href');
+                link.setAttribute('href', `pages/${href}`);
+            }
+            // If we're in pages directory, keep the relative paths as is
         });
 
         // Fix image paths
