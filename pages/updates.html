@@ -8,8 +8,17 @@
     <link rel="stylesheet" href="navbar.css">
 </head>
 <body>
-    <!-- navbar-->
-    <nav id="main-nav">
+    
+<div id="header"></div>
+
+<script>
+  fetch("../header.html")
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById("header").innerHTML = data;
+    });
+</script>
+
     <main>
         <section class="page-header">
             <div class="container">
