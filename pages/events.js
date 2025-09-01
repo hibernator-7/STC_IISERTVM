@@ -155,8 +155,8 @@ function addToCalendar(title, date, description) {
     alert(`Calendar event would be created:\nTitle: ${title}\nDate: ${date}\nDescription: ${description}\n\nThis feature can be enhanced to integrate with actual calendar applications.`);
     
     // Uncomment below for Google Calendar integration
-    // const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${eventTitle}&details=${eventDescription}&dates=${eventDate}`;
-    // window.open(googleCalendarUrl, '_blank');
+    const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${eventTitle}&details=${eventDescription}&dates=${eventDate}`;
+    window.open(googleCalendarUrl, '_blank');
 }
 
 // Filter events functionality (for future enhancement)

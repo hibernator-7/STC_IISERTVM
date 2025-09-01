@@ -105,12 +105,12 @@ const pastSecretaries = [
 // --- EVENTS DATA ---
 const upcomingEvents = [
     {
-        date: "15 JAN",
+        date: "OCT",
         title: "Anvesha",
         description: "Anvesha ’25 is almost here! IISER Thiruvananthapuram’s annual science fest kicks off on October 17."
     },
     {
-        date: "02 FEB",
+        date: "SEP",
         title: "Know Your Faculty",
         description: "Organised by the CCIT, this short video series answers common questions in programming and helps you learn directly from our faculty experts."
     }
@@ -118,12 +118,12 @@ const upcomingEvents = [
 
 const pastEvents = [
     {
-        date: "20 DEC",
+        date: "DEC",
         title: "WaveFronts",
         description: "Hosted by PSIT. A session on capturing the world of physics."
     },
     {
-        date: "15 June",
+        date: "June",
         title: "Beyond Syntax",
         description: "Hosted by the CCIT Club, this webinar series features IISER Thiruvananthapuram alumni sharing their experiences with internships, programming careers, and publishing research in top conference venues."
     }
