@@ -90,17 +90,18 @@ nav {
 }
 
 nav .logo a {
-    font-size: 1.5rem;
-    font-weight: bold;
+    font-size: 1.4rem;
+    font-weight: lighter;
     color: var(--text-color);
     transition: transform var(--transition-base);
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    line-height: 30px;
 }
 
 nav .logo a img {
-    height: 35px;
+    height: 80px;
     width: auto;
     transition: transform var(--transition-base);
 }
