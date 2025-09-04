@@ -60,12 +60,13 @@
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     z-index: 1;
     border-radius: 12px;
-    margin-top: 10px;
+    margin-top: 0px; /* Small visual gap, less likely to cause hover issues */
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08); /* Soft shadow for separation */
     border: 1px solid #D2D2D7;
     overflow: hidden;
     opacity: 0;
     transform: translateY(10px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition: opacity 0.5s ease, transform 0.5s ease;
 }
 .dropdown-content a {
     color: #1D1D1F;
@@ -83,6 +84,7 @@
     display: block;
     opacity: 1;
     transform: translateY(0);
+    pointer-events: auto;
 }
 .dropbtn .fa-chevron-down {
     font-size: 0.75em;
