@@ -236,8 +236,12 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         // Events Content
-        // Only run event rendering code if NOT on events.html
-        if (!pagePath.includes('events.html')) {
+        // Only run event rendering code if NOT on events.html or events (extensionless)
+        if (
+            !pagePath.includes('events.html') &&
+            !pagePath.endsWith('/events') &&
+            !pagePath.endsWith('/events/')
+        ) {
             const upcomingEventsTimeline = document.getElementById('upcoming-events-timeline');
             if (upcomingEventsTimeline && typeof upcomingEvents !== 'undefined') {
                 upcomingEvents.slice(0, 2).forEach(event => {
