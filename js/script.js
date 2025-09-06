@@ -236,26 +236,29 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         // Events Content
-        const upcomingEventsTimeline = document.getElementById('upcoming-events-timeline');
-        if (upcomingEventsTimeline && typeof upcomingEvents !== 'undefined') {
-            upcomingEvents.slice(0, 2).forEach(event => {
-                const [day, month] = event.date.split(' ');
-                upcomingEventsTimeline.innerHTML += `<div class="event"><div class="event-date"><span>${day}</span><span>${month}</span></div><div class="event-details"><h3>${event.title}</h3><p>${event.description}</p><a href="pages/events.html" class="learn-more">Learn More</a></div></div>`;
-            });
-        }
-        const upcomingEventsContainer = document.getElementById('upcoming-events-container');
-        if (upcomingEventsContainer && typeof upcomingEvents !== 'undefined') {
-            upcomingEvents.forEach(event => {
-                const [day, month] = event.date.split(' ');
-                upcomingEventsContainer.innerHTML += `<div class="event-item"><div class="event-item-date"><span>${day}</span><span>${month}</span></div><div class="event-item-details"><h3>${event.title}</h3><p>${event.description}</p></div></div>`;
-            });
-        }
-        const pastEventsContainer = document.getElementById('past-events-container');
-        if (pastEventsContainer && typeof pastEvents !== 'undefined') {
-            pastEvents.forEach(event => {
-                const [day, month] = event.date.split(' ');
-                pastEventsContainer.innerHTML += `<div class="event-item past"><div class="event-item-date"><span>${day}</span><span>${month}</span></div><div class="event-item-details"><h3>${event.title}</h3><p>${event.description}</p></div></div>`;
-            });
+        // Only run event rendering code if NOT on events.html
+        if (!pagePath.includes('events.html')) {
+            const upcomingEventsTimeline = document.getElementById('upcoming-events-timeline');
+            if (upcomingEventsTimeline && typeof upcomingEvents !== 'undefined') {
+                upcomingEvents.slice(0, 2).forEach(event => {
+                    const [day, month] = event.date.split(' ');
+                    upcomingEventsTimeline.innerHTML += `<div class="event"><div class="event-date"><span>${day}</span><span>${month}</span></div><div class="event-details"><h3>${event.title}</h3><p>${event.description}</p><a href="pages/events.html" class="learn-more">Learn More</a></div></div>`;
+                });
+            }
+            const upcomingEventsContainer = document.getElementById('upcoming-events-container');
+            if (upcomingEventsContainer && typeof upcomingEvents !== 'undefined') {
+                upcomingEvents.forEach(event => {
+                    const [day, month] = event.date.split(' ');
+                    upcomingEventsContainer.innerHTML += `<div class="event-item"><div class="event-item-date"><span>${day}</span><span>${month}</span></div><div class="event-item-details"><h3>${event.title}</h3><p>${event.description}</p></div></div>`;
+                });
+            }
+            const pastEventsContainer = document.getElementById('past-events-container');
+            if (pastEventsContainer && typeof pastEvents !== 'undefined') {
+                pastEvents.forEach(event => {
+                    const [day, month] = event.date.split(' ');
+                    pastEventsContainer.innerHTML += `<div class="event-item past"><div class="event-item-date"><span>${day}</span><span>${month}</span></div><div class="event-item-details"><h3>${event.title}</h3><p>${event.description}</p></div></div>`;
+                });
+            }
         }
 
         // Updates Content
