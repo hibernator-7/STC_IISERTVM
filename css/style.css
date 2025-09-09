@@ -1094,7 +1094,8 @@ footer::before {
     margin-bottom: 1rem;
     border: 4px solid var(--secondary-color);
     box-shadow: var(--shadow-md);
-    object-fit: cover;
+    object-fit: contain;
+    object-position: center;
     transition: transform var(--transition-base);
 }
 
