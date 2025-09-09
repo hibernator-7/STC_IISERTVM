@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline - STC IISER TVM</title>
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .offline-container {
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .offline-icon {
+            font-size: 80px;
+            margin-bottom: 30px;
+            opacity: 0.8;
+        }
+
+        .offline-title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 15px;
+        }
+
+        .offline-message {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .offline-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .offline-btn {
+            padding: 12px 24px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .offline-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .connection-status {
+            margin-top: 40px;
+            padding: 15px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .status-dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 8px;
+            background: #ff6b6b;
+            animation: pulse 2s infinite;
+        }
+
+        .status-dot.online {
+            background: #4ecdc4;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .cached-pages {
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        .cached-pages h3 {
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .cached-pages ul {
+            list-style: none;
+            display: grid;
+            gap: 10px;
+        }
+
+        .cached-pages li {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 15px;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
+
+        .cached-pages a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .cached-pages a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .offline-title {
+                font-size: 2rem;
+            }
+
+            .offline-message {
+                font-size: 1rem;
+            }
+
+            .offline-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .offline-btn {
+                width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="offline-container">
+        <div class="offline-icon">📱</div>
+        
+        <h1 class="offline-title">You're Offline</h1>
+        
+        <p class="offline-message">
+            No internet connection detected. Don't worry, you can still browse some content that's been saved for offline viewing.
+        </p>
+
+        <div class="offline-actions">
+            <a href="/" class="offline-btn">Go to Homepage</a>
+            <button onclick="window.location.reload()" class="offline-btn">Try Again</button>
+        </div>
+
+        <div class="connection-status">
+            <span class="status-dot" id="statusDot"></span>
+            <span id="connectionStatus">Checking connection...</span>
+            <div id="lastSyncTime"></div>
+        </div>
+
+        <div class="cached-pages">
+            <h3>Available Offline</h3>
+            <ul>
+                <li><a href="/">🏠 Homepage</a></li>
+                <li><a href="/pages/about.html">ℹ️ About Us</a></li>
+                <li><a href="/pages/clubs.html">🏛️ Our Clubs</a></li>
+                <li><a href="/pages/events.html">📅 Events</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        class OfflinePageManager {
+            constructor() {
+                this.isOnline = navigator.onLine;
+                this.syncInProgress = false;
+                this.lastSyncTime = localStorage.getItem('lastSyncTime') || 0;
+                this.syncInterval = 30000; // 30 seconds
+                this.retryInterval = 5000;  // 5 seconds
+                
+                this.init();
+            }
+            
+            init() {
+                this.updateConnectionStatus();
+                this.setupEventListeners();
+                this.startPeriodicSync();
+                
+                // Show last sync time if available
+                this.displayLastSyncTime();
+            }
+            
+            setupEventListeners() {
+                // Listen for online/offline events
+                window.addEventListener('online', () => {
+                    this.isOnline = true;
+                    this.onConnectionRestored();
+                });
+                
+                window.addEventListener('offline', () => {
+                    this.isOnline = false;
+                    this.updateConnectionStatus();
+                });
+                
+                // Listen for visibility change to sync when user returns to tab
+                document.addEventListener('visibilitychange', () => {
+                    if (!document.hidden && this.isOnline) {
+                        this.syncWithLiveContent();
+                    }
+                });
+                
+                // Listen for focus events
+                window.addEventListener('focus', () => {
+                    if (this.isOnline) {
+                        this.syncWithLiveContent();
+                    }
+                });
+            }
+            
+            updateConnectionStatus() {
+                const statusDot = document.getElementById('statusDot');
+                const connectionStatus = document.getElementById('connectionStatus');
+                
+                if (this.isOnline) {
+                    statusDot.className = 'status-dot online';
+                    connectionStatus.innerHTML = `
+                        <span>Connected! Syncing content...</span>
+                        <div class="sync-progress" id="syncProgress" style="display: none;">
+                            <div class="sync-bar"></div>
+                        </div>
+                    `;
+                } else {
+                    statusDot.className = 'status-dot';
+                    connectionStatus.textContent = 'No internet connection';
+                }
+            }
+            
+            async onConnectionRestored() {
+                this.updateConnectionStatus();
+                
+                // Show sync progress
+                this.showSyncProgress();
+                
+                // Start background sync
+                await this.syncWithLiveContent();
+                
+                // Update cached content
+                await this.updateServiceWorkerCache();
+                
+                // Redirect to live content after successful sync
+                setTimeout(() => {
+                    window.location.href = this.getIntendedDestination();
+                }, 2000);
+            }
+            
+            showSyncProgress() {
+                const progressElement = document.getElementById('syncProgress');
+                if (progressElement) {
+                    progressElement.style.display = 'block';
+                }
+            }
+            
+            hideSyncProgress() {
+                const progressElement = document.getElementById('syncProgress');
+                if (progressElement) {
+                    progressElement.style.display = 'none';
+                }
+            }
+            
+            async syncWithLiveContent() {
+                if (this.syncInProgress || !this.isOnline) return;
+                
+                this.syncInProgress = true;
+                
+                try {
+                    // Test actual connectivity with a lightweight request
+                    await this.testConnectivity();
+                    
+                    // Update critical pages
+                    await this.syncCriticalPages();
+                    
+                    // Update cached resources
+                    await this.syncResources();
+                    
+                    // Update last sync time
+                    this.updateLastSyncTime();
+                    
+                    console.log('[Offline Page] Sync completed successfully');
+                    
+                } catch (error) {
+                    console.error('[Offline Page] Sync failed:', error);
+                    this.handleSyncError();
+                } finally {
+                    this.syncInProgress = false;
+                    this.hideSyncProgress();
+                }
+            }
+            
+            async testConnectivity() {
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 5000);
+                
+                try {
+                    const response = await fetch('/favicon-16x16.png', {
+                        cache: 'no-cache',
+                        signal: controller.signal
+                    });
+                    clearTimeout(timeoutId);
+                    
+                    if (!response.ok) {
+                        throw new Error('Network response not ok');
+                    }
+                    
+                    return true;
+                } catch (error) {
+                    clearTimeout(timeoutId);
+                    throw error;
+                }
+            }
+            
+            async syncCriticalPages() {
+                const criticalPages = [
+                    '/',
+                    '/index.html',
+                    '/pages/about.html',
+                    '/pages/clubs.html',
+                    '/pages/events.html',
+                    '/pages/gallery.html'
+                ];
+                
+                const syncPromises = criticalPages.map(async (page) => {
+                    try {
+                        const response = await fetch(page, { cache: 'no-cache' });
+                        if (response.ok) {
+                            // Cache the updated content
+                            const cache = await caches.open('stc-dynamic-v1');
+                            await cache.put(page, response);
+                            console.log(`[Offline Page] Synced: ${page}`);
+                        }
+                    } catch (error) {
+                        console.warn(`[Offline Page] Failed to sync ${page}:`, error);
+                    }
+                });
+                
+                await Promise.allSettled(syncPromises);
+            }
+            
+            async syncResources() {
+                const criticalResources = [
+                    '/css/style.css',
+                    '/js/script.js',
+                    '/js/pwa-installer.js',
+                    '/site.webmanifest'
+                ];
+                
+                const syncPromises = criticalResources.map(async (resource) => {
+                    try {
+                        const response = await fetch(resource, { cache: 'no-cache' });
+                        if (response.ok) {
+                            const cache = await caches.open('stc-static-v1');
+                            await cache.put(resource, response);
+                            console.log(`[Offline Page] Synced resource: ${resource}`);
+                        }
+                    } catch (error) {
+                        console.warn(`[Offline Page] Failed to sync resource ${resource}:`, error);
+                    }
+                });
+                
+                await Promise.allSettled(syncPromises);
+            }
+            
+            async updateServiceWorkerCache() {
+                if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
+                    // Send message to service worker to update caches
+                    navigator.serviceWorker.controller.postMessage({
+                        type: 'SYNC_CACHE',
+                        timestamp: Date.now()
+                    });
+                }
+            }
+            
+            updateLastSyncTime() {
+                const now = Date.now();
+                localStorage.setItem('lastSyncTime', now);
+                this.lastSyncTime = now;
+                this.displayLastSyncTime();
+            }
+            
+            displayLastSyncTime() {
+                const lastSyncElement = document.getElementById('lastSyncTime');
+                if (lastSyncElement && this.lastSyncTime) {
+                    const syncDate = new Date(parseInt(this.lastSyncTime));
+                    const timeAgo = this.getTimeAgo(syncDate);
+                    lastSyncElement.textContent = `Last synced: ${timeAgo}`;
+                    lastSyncElement.style.display = 'block';
+                }
+            }
+            
+            getTimeAgo(date) {
+                const now = new Date();
+                const diffInMs = now - date;
+                const diffInMinutes = Math.floor(diffInMs / (1000 * 60));
+                const diffInHours = Math.floor(diffInMinutes / 60);
+                const diffInDays = Math.floor(diffInHours / 24);
+                
+                if (diffInMinutes < 1) return 'just now';
+                if (diffInMinutes < 60) return `${diffInMinutes}m ago`;
+                if (diffInHours < 24) return `${diffInHours}h ago`;
+                return `${diffInDays}d ago`;
+            }
+            
+            startPeriodicSync() {
+                // Periodic sync when online
+                setInterval(() => {
+                    if (this.isOnline && !this.syncInProgress) {
+                        this.testConnectivity()
+                            .then(() => {
+                                if (!navigator.onLine) {
+                                    window.dispatchEvent(new Event('online'));
+                                }
+                                this.syncWithLiveContent();
+                            })
+                            .catch(() => {
+                                if (navigator.onLine) {
+                                    window.dispatchEvent(new Event('offline'));
+                                }
+                            });
+                    }
+                }, this.syncInterval);
+                
+                // Retry connectivity check when offline
+                setInterval(() => {
+                    if (!this.isOnline) {
+                        this.testConnectivity()
+                            .then(() => {
+                                window.dispatchEvent(new Event('online'));
+                            })
+                            .catch(() => {
+                                // Still offline
+                            });
+                    }
+                }, this.retryInterval);
+            }
+            
+            handleSyncError() {
+                const connectionStatus = document.getElementById('connectionStatus');
+                if (connectionStatus) {
+                    connectionStatus.innerHTML = `
+                        <span>Sync failed. Retrying...</span>
+                        <button onclick="offlineManager.syncWithLiveContent()" style="
+                            margin-left: 10px; 
+                            padding: 4px 8px; 
+                            background: rgba(255,255,255,0.2); 
+                            border: none; 
+                            color: white; 
+                            border-radius: 4px; 
+                            cursor: pointer;
+                        ">Retry Now</button>
+                    `;
+                }
+            }
+            
+            getIntendedDestination() {
+                // Try to get the page user was trying to access
+                const urlParams = new URLSearchParams(window.location.search);
+                const returnUrl = urlParams.get('return') || '/';
+                return returnUrl;
+            }
+        }
+        
+        // Initialize offline page manager
+        const offlineManager = new OfflinePageManager();
+        
+        // Export for global access
+        window.offlineManager = offlineManager;
+    </script>
+    
+    <!-- Additional CSS for sync progress -->
+    <style>
+        .sync-progress {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+        
+        .sync-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #4ecdc4, #44a08d);
+            width: 0%;
+            border-radius: 2px;
+            animation: syncProgress 2s ease-in-out infinite;
+        }
+        
+        @keyframes syncProgress {
+            0% { width: 0%; transform: translateX(-100%); }
+            50% { width: 100%; transform: translateX(0%); }
+            100% { width: 100%; transform: translateX(100%); }
+        }
+        
+        #lastSyncTime {
+            display: none;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+    </style>
+</body>
+</html>
