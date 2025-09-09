@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="anvesha.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
     <!-- Meta tags for SEO -->
     <meta name="description" content="Anvesha 2025 - The Annual Science Fest of IISER Thiruvananthapuram. Join us for competitions, workshops, exhibitions, and innovation challenges.">
@@ -27,23 +28,15 @@
 
     <!-- Hero Section -->
     <section class="anvesha-hero">
-        <div class="hero-background">
-            <div class="animated-bg"></div>
+        <div class="threejs-container">
+            <div class="slider"></div>
         </div>
-        <div class="hero-content">
-            <div class="hero-logo">
-                <h1 class="anvesha-title">ANVESHA</h1>
-                <span class="anvesha-year">2025</span>
-            </div>
-            <p class="hero-subtitle">The Annual Science & Technology Fest</p>
-          <!---  <p class="hero-description">Anvesha'25 :  Get ready with your projects that aim to reshape the world of research, innovation, and science and technology.</p>-->
-            <div class="hero-date">
-                <span class="date-label">Save the Date</span>
-                <span class="date-value" id="anvesha-date">October 17, 2025</span>
-            </div>
-            <div class="hero-actions">
-             <!---   <a href="#anvesha-gallery" class="btn-primary">Explore Gallery</a>-->
-                <a href="#contact-links" class="btn-secondary">Contact Us</a>
+        <div class="hero-overlay">
+            <div class="hero-content">
+                <h1 class="hero-title">Anvesha 2025</h1>
+                <p class="hero-subtitle">The Annual Science Festival of IISER Thiruvananthapuram</p>
+                <p class="hero-description">A vibrant three-day celebration of science and innovation</p>
+                <p class="hero-instruction">Drag the slider to explore the world of science</p>
             </div>
         </div>
         <div class="scroll-indicator">
@@ -58,8 +51,8 @@
             <div class="about-content">
                 <div class="about-text">
                     <h2>About Anvesha</h2>
-                    <p class="lead">Anvesha ,IISER Thiruvananthapuram, is a vibrant three-day celebration of science and innovation, held during the Varsha Semester under the esteemed guidance of Honourable Director Prof. J. N. Moorthy.The festival is organized by the dynamic student-run Science and Technology Council (STC), with support from the various science clubs functioning under STC.</p>
-                    <p>Anvesha is committed to promoting scientific curiosity and awareness among students and the general public. The festival features a diverse range of outreach activities, engaging exhibitions, hands-on workshops, and interactive sessions that bridge the gap between scientific research and society. </p>
+                    <p class="lead">Anvesha, the annual science festival of the Indian Institute of Science Education and Research (IISER) Thiruvananthapuram, is a vibrant three-day celebration of science and innovation. Held during the Varsha Semester under the esteemed guidance of Honourable Director Prof. J. N. Moorthy, the festival is organized by the dynamic student-run Science and Technology Council (STC), with support from the various science clubs functioning under STC.</p>
+                    <p>Anvesha is committed to promoting scientific curiosity and awareness among students and the general public. The festival features a diverse range of outreach activities, engaging exhibitions, hands-on workshops, and interactive sessions that bridge the gap between scientific research and society. Through a combination of pre-festival and post-festival events, Anvesha provides a holistic platform that encourages the development of essential skills such as communication, teamwork, and scientific reasoning. It serves as a catalyst for inspiration, learning, and the spirit of scientific research.</p>
                     <div class="stats-grid">
                         <div class="stat-item">
                             <span class="stat-number">500+</span>
@@ -89,83 +82,116 @@
         </div>
     </section>
 
-    <!-- Events Preview Section -->
-<!---    <section class="anvesha-events" id="events">
+    <!-- Events Section -->
+    <section class="anvesha-events" id="events">
         <div class="container">
-            <h2 class="section-title">Event Categories</h2>
+            <h2 class="section-title">Festival Events</h2>
             <div class="events-grid">
-                <div class="event-category">
-                    <div class="category-icon">🏆</div>
-                    <h3>Competitions</h3>
-                    <p>Challenge yourself in coding contests, robotics competitions, quiz shows, and research presentations.</p>
-                    <ul>
-                        <li>Coding Competition</li>
-                        <li>Robotics Challenge</li>
-                        <li>Science Quiz</li>
-                        <li>Research Poster Session</li>
-                    </ul>
+                <div class="event-card">
+                    <div class="event-icon">🧩</div>
+                    <h3>Potpourri</h3>
+                    <p>An engaging and entertaining event where participants, either solo or in teams, solve a diverse set of puzzles including rebus, anagrams, and crosswords. Designed to stimulate critical thinking and enhance problem-solving skills, this event offers a dynamic and enjoyable approach to lateral reasoning and logical deduction.</p>
                 </div>
-                <div class="event-category">
-                    <div class="category-icon">🔬</div>
-                    <h3>Workshops</h3>
-                    <p>Learn from experts through hands-on workshops covering cutting-edge technologies and methodologies.</p>
-                    <ul>
-                        <li>AI/ML Workshop</li>
-                        <li>Quantum Computing</li>
-                        <li>Biotechnology Lab</li>
-                        <li>Data Science Bootcamp</li>
-                    </ul>
+                
+                <div class="event-card">
+                    <div class="event-icon">🔍</div>
+                    <h3>Crime Scene Investigation</h3>
+                    <p>A thrilling, hands-on event that places participants in the role of detectives tasked with solving a simulated criminal case. Using scientific reasoning, observational skills, and team collaboration, participants analyze clues and evidence to unravel the mystery of the given case, simulating real-world investigation.</p>
                 </div>
-                <div class="event-category">
-                    <div class="category-icon">🚀</div>
-                    <h3>Exhibitions</h3>
-                    <p>Discover innovative projects and groundbreaking research from students and faculty.</p>
-                    <ul>
-                        <li>Student Project Showcase</li>
-                        <li>Research Exhibition</li>
-                        <li>Innovation Gallery</li>
-                        <li>Technology Demos</li>
-                    </ul>
+                
+                <div class="event-card">
+                    <div class="event-icon">🗺️</div>
+                    <h3>Treasure Hunt</h3>
+                    <p>An adventurous and intellectually stimulating event where teams compete by solving puzzles and decoding clues hidden across the campus. This event is a test of both physical and mental agility, as participants race against time and rival teams to uncover the final treasure.</p>
                 </div>
-                <div class="event-category">
-                    <div class="category-icon">💡</div>
-                    <h3>Talks & Seminars</h3>
-                    <p>Get inspired by renowned scientists, researchers, and industry leaders sharing their insights.</p>
-                    <ul>
-                        <li>Keynote Speeches</li>
-                        <li>Panel Discussions</li>
-                        <li>Career Guidance</li>
-                        <li>Industry Insights</li>
-                    </ul>
+                
+                <div class="event-card">
+                    <div class="event-icon">🧠</div>
+                    <h3>Jigyasa</h3>
+                    <p>An open quiz that goes beyond trivia and rote memorization, encouraging participants to develop a deeper understanding of the world around them. Conducted by renowned quizmaster Major Chandrakant Nair, this event is an intellectually rewarding experience filled with unexpected twists, challenges, and opportunities to engage with some of the sharpest minds—culminating in the chance to win grand prizes.</p>
+                </div>
+                
+                <div class="event-card">
+                    <div class="event-icon">🎭</div>
+                    <h3>BAHFEST</h3>
+                    <p>BAHFEST (Bad Ad Hoc Hypotheses Festival) is a unique and entertaining event where participants present imaginative, fictional hypotheses with a scientific twist. The challenge lies in convincingly defending these wild ideas through witty logic, creativity, and presentation. This event is a celebration of humor, innovation, and scientific imagination.</p>
+                </div>
+                
+                <div class="event-card">
+                    <div class="event-icon">∫</div>
+                    <h3>Integration Bee</h3>
+                    <p>Presented by the Mathematics Club of IISER Thiruvananthapuram, the Integration Bee is a mathematics challenge dedicated to the art of integration. The event invites math enthusiasts to compete in teams across two specialized tracks: Real Integrals and Complex Integrals. It is designed to test speed, accuracy, and conceptual understanding in an exciting competitive format.</p>
+                </div>
+                
+                <div class="event-card">
+                    <div class="event-icon">⚫</div>
+                    <h3>Black Box</h3>
+                    <p>A challenging event where participants are required to deduce the internal configuration of a mysterious electrical circuit. By manipulating inputs and observing changes in current and voltage, participants develop and test hypotheses regarding the components hidden inside the "black box." This event combines elements of accuracy, speed, and scientific deduction.</p>
+                </div>
+                
+                <div class="event-card">
+                    <div class="event-icon">�</div>
+                    <h3>Inquisitio</h3>
+                    <p>An inter-college online treasure hunt conducted in two stages: Prelims and Finals. Participants solve clues and mystery questions embedded in each stage, testing their logical reasoning, general knowledge, and analytical thinking. With every solved clue, the intensity builds toward a thrilling final round where only the most perceptive minds prevail.</p>
+                </div>
+                
+                <div class="event-card">
+                    <div class="event-icon">🏆</div>
+                    <h3>Nobel Talk Series</h3>
+                    <p>An inspiring and intellectually enriching event that ignites curiosity and innovation among students. This platform allows young minds to engage with the work and life journeys of distinguished Nobel Laureates from the subject experts. Covering a wide array of disciplines—from economics to fundamental sciences—the series blends elements of science, society, and storytelling to offer deep insights into transformative ideas shaping the future.</p>
                 </div>
             </div>
         </div>
-    </section>-->
+    </section>
 
     <!-- Timeline Section -->
    <section class="anvesha-timeline">
         <div class="container">
-            <h2 class="section-title">Festival Timeline</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-date">Day 1</div>
-                    <div class="timeline-content">
-                        <h3>Opening Ceremony & Competitions</h3>
-                        <p>Grand opening with inaugural speech, followed by coding competitions and quiz rounds.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-date">Day 2</div>
-                    <div class="timeline-content">
-                        <h3>Workshops & Exhibitions</h3>
-                        <p>Hands-on workshops, project exhibitions, and interactive technology demonstrations.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-date">Day 3</div>
-                    <div class="timeline-content">
-                        <h3>Finals & Closing Ceremony</h3>
-                        <p>Competition finals, award ceremony, and cultural programs to conclude the fest.</p>
+            <div class="row">
+                <div class="col">
+                    <div class="main-timeline">
+                        <div class="timeline">
+                            <a href="#" class="timeline-content">
+                                <span class="timeline-year">Day 1</span>
+                                <div class="timeline-icon">
+                                    <i class="fa fa-rocket" aria-hidden="true"></i>
+                                </div>
+                                <div class="content">
+                                    <h3 class="title">Opening Ceremony & Competitions</h3>
+                                    <p class="description">
+                                        Grand opening with inaugural speech by distinguished guests, followed by exciting coding competitions, science quiz rounds, and innovative project presentations to kick off the festival.
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="timeline">
+                            <a href="#" class="timeline-content">
+                                <span class="timeline-year">Day 2</span>
+                                <div class="timeline-icon">
+                                    <i class="fa fa-cog" aria-hidden="true"></i>
+                                </div>
+                                <div class="content">
+                                    <h3 class="title">Workshops & Exhibitions</h3>
+                                    <p class="description">
+                                        Hands-on workshops covering AI/ML, quantum computing, and biotechnology. Interactive project exhibitions, technology demonstrations, and research poster sessions by students and faculty.
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="timeline">
+                            <a href="#" class="timeline-content">
+                                <span class="timeline-year">Day 3</span>
+                                <div class="timeline-icon">
+                                    <i class="fa fa-trophy" aria-hidden="true"></i>
+                                </div>
+                                <div class="content">
+                                    <h3 class="title">Finals & Closing Ceremony</h3>
+                                    <p class="description">
+                                        Competition finals, award ceremony recognizing outstanding participants, cultural programs, and inspiring keynote speeches to conclude the three-day science celebration.
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -292,9 +318,257 @@
     </footer>
 
     <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../js/data.js"></script>
     <script src="../js/script.js"></script>
     <script src="script.js"></script>
     <script src="anvesha.js"></script>
+    
+    <!-- Three.js Demo Script -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.158.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.158.0/examples/jsm/"
+            }
+        }
+    </script>
+
+    <script type="module">
+        import * as THREE from 'three';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+        let container, camera, renderer, controls;
+        let sceneL, sceneR;
+        let sliderPos = window.innerWidth / 2;
+
+        init();
+
+        function init() {
+            container = document.querySelector('.threejs-container');
+
+            sceneL = new THREE.Scene();
+            sceneL.background = new THREE.Color(0x1a1a2e);
+
+            sceneR = new THREE.Scene();
+            sceneR.background = new THREE.Color(0x16213e);
+
+            camera = new THREE.PerspectiveCamera(35, container.offsetWidth / container.offsetHeight, 0.1, 100);
+            camera.position.z = 6;
+
+            controls = new OrbitControls(camera, container);
+
+            const light = new THREE.HemisphereLight(0xffffff, 0x444444, 3);
+            light.position.set(-2, 2, 2);
+            sceneL.add(light.clone());
+            sceneR.add(light.clone());
+
+            initMeshes();
+            initSlider();
+
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setSize(container.offsetWidth, container.offsetHeight);
+            renderer.setScissorTest(true);
+            renderer.setAnimationLoop(animate);
+            container.appendChild(renderer.domElement);
+
+            window.addEventListener('resize', onWindowResize);
+        }
+
+        function initMeshes() {
+            const geometry = new THREE.IcosahedronGeometry(1, 3);
+
+            const meshL = new THREE.Mesh(geometry, new THREE.MeshStandardMaterial({
+                color: 0x64ffda,
+                metalness: 0.3,
+                roughness: 0.4
+            }));
+            sceneL.add(meshL);
+
+            const meshR = new THREE.Mesh(geometry, new THREE.MeshStandardMaterial({
+                color: 0xff6b9d,
+                wireframe: true
+            }));
+            sceneR.add(meshR);
+        }
+
+        function initSlider() {
+            const slider = document.querySelector('.slider');
+
+            function onPointerDown(event) {
+                if (event.isPrimary === false) return;
+                controls.enabled = false;
+                window.addEventListener('pointermove', onPointerMove);
+                window.addEventListener('pointerup', onPointerUp);
+            }
+
+            function onPointerUp() {
+                controls.enabled = true;
+                window.removeEventListener('pointermove', onPointerMove);
+                window.removeEventListener('pointerup', onPointerUp);
+            }
+
+            function onPointerMove(e) {
+                if (e.isPrimary === false) return;
+                const containerRect = container.getBoundingClientRect();
+                sliderPos = Math.max(0, Math.min(containerRect.width, e.pageX - containerRect.left));
+                slider.style.left = sliderPos - (slider.offsetWidth / 2) + 'px';
+            }
+
+            slider.style.touchAction = 'none';
+            slider.addEventListener('pointerdown', onPointerDown);
+        }
+
+        function onWindowResize() {
+            if (!container || !camera || !renderer) return;
+            
+            const containerRect = container.getBoundingClientRect();
+            camera.aspect = containerRect.width / containerRect.height;
+            camera.updateProjectionMatrix();
+            renderer.setSize(containerRect.width, containerRect.height);
+            
+            // Reset slider position
+            sliderPos = containerRect.width / 2;
+            const slider = document.querySelector('.slider');
+            if (slider) {
+                slider.style.left = sliderPos - (slider.offsetWidth / 2) + 'px';
+            }
+        }
+
+        function animate() {
+            if (!renderer || !camera) return;
+            
+            const containerRect = container.getBoundingClientRect();
+            
+            // Render left scene
+            renderer.setScissor(0, 0, sliderPos, containerRect.height);
+            renderer.render(sceneL, camera);
+
+            // Render right scene
+            renderer.setScissor(sliderPos, 0, containerRect.width, containerRect.height);
+            renderer.render(sceneR, camera);
+        }
+    </script>
+    
+    <!-- Timeline Interactive Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const timelineItems = document.querySelectorAll('.timeline');
+            
+            // Add intersection observer for scroll animations
+            const observerOptions = {
+                threshold: 0.3,
+                rootMargin: '0px 0px -100px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.classList.add('animate-in');
+                        }, index * 200);
+                    }
+                });
+            }, observerOptions);
+            
+            timelineItems.forEach(item => {
+                observer.observe(item);
+            });
+            
+            // Add click interactions
+            timelineItems.forEach((item, index) => {
+                const content = item.querySelector('.timeline-content');
+                const timelineIcon = item.querySelector('.timeline-icon');
+                
+                content.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove active class from all items
+                    timelineItems.forEach(otherItem => {
+                        otherItem.classList.remove('active');
+                    });
+                    
+                    // Add active class to clicked item
+                    item.classList.add('active');
+                    
+                    // Create ripple effect
+                    createRipple(item, e);
+                });
+                
+                // Hover effects
+                content.addEventListener('mouseenter', function() {
+                    if (!item.classList.contains('active')) {
+                        item.classList.add('hover');
+                    }
+                });
+                
+                content.addEventListener('mouseleave', function() {
+                    item.classList.remove('hover');
+                });
+            });
+            
+            function createRipple(element, event) {
+                const ripple = document.createElement('div');
+                const rect = element.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = event.clientX - rect.left - size / 2;
+                const y = event.clientY - rect.top - size / 2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    width: ${size}px;
+                    height: ${size}px;
+                    left: ${x}px;
+                    top: ${y}px;
+                    background: rgba(255, 255, 255, 0.3);
+                    border-radius: 50%;
+                    transform: scale(0);
+                    animation: rippleEffect 0.6s ease-out;
+                    pointer-events: none;
+                    z-index: 1000;
+                `;
+                
+                element.style.position = 'relative';
+                element.style.overflow = 'hidden';
+                element.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            }
+        });
+    </script>
+    
+    <style>
+        @keyframes rippleEffect {
+            to {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    </style>
 </body>
 </html>

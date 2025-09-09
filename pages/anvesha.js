@@ -4,7 +4,320 @@ document.addEventListener('DOMContentLoaded', function() {
     loadAnveshaGallery();
     setupFormHandlers();
     initAnimations();
+    initAlphabetSoup();
 });
+
+// Initialize Alphabet Soup Animation
+function initAlphabetSoup() {
+    const loader = document.getElementById('loader');
+    const soupContainer = document.getElementById('soup-container');
+    
+    loader.classList.add('show');
+    soupContainer.classList.add('loading');
+
+    // Anvesha content for alphabet soup
+    const content = [{
+        title: "ANVESHA 2025",
+        desc: "The Annual Science & Technology Fest of IISER Thiruvananthapuram"
+    }, {
+        title: "Innovation & Discovery",
+        desc: "Join us for three days of groundbreaking competitions, workshops, exhibitions, and research presentations."
+    }, {
+        title: "Save the Date",
+        desc: "October 17-19, 2025 at IISER Thiruvananthapuram."
+    }, {
+        title: "Get Ready to Explore",
+        desc: "Experience cutting-edge research, participate in exciting competitions, and witness the future of science unfold."
+    }];
+
+    let currentPage = 0;
+
+    // Generate content structure
+    setTimeout(() => {
+        for (let i = 0; i < content.length; i++) {
+            // Split content letters to array
+            for (let obj in content[i]) {
+                if (typeof content[i][obj] === "string") {
+                    content[i][obj] = content[i][obj].split("");
+                } else if (typeof content[i][obj] === "object") {
+                    let toPush = [];
+                    for (let j = 0; j < content[i][obj].length; j++) {
+                        for (let k = 0; k < content[i][obj][j].length; k++) {
+                            toPush.push(content[i][obj][j][k]);
+                        }
+                    }
+                    content[i][obj] = toPush;
+                }
+            }
+
+            // Create mutable segments
+            const segments = document.getElementById('segments');
+            const mutableWrap = document.createElement('div');
+            mutableWrap.className = 'letters-wrap mutable';
+            mutableWrap.innerHTML = '<div class="soup-title"></div><div class="soup-desc"></div>';
+            segments.appendChild(mutableWrap);
+            setText(i, content, 'mutable');
+
+            // Create position data segments
+            const positionWrap = document.createElement('div');
+            positionWrap.className = 'letters-wrap position-data';
+            positionWrap.innerHTML = '<div class="soup-title"></div><div class="soup-desc"></div>';
+            segments.appendChild(positionWrap);
+            setText(i, content, 'position-data');
+        }
+
+        // Hide loader and start animation
+        loader.classList.remove('show');
+        soupContainer.classList.remove('loading');
+        soupContainer.classList.add('loaded');
+        
+        setTimeout(() => {
+            arrangeCurrentPage();
+            scrambleOthers();
+            addLetterHoverEffects();
+            setupNavigation();
+        }, 500);
+
+    }, 1500);
+
+    function setText(index, contentData, type) {
+        const wraps = document.querySelectorAll(`.letters-wrap.${type}`);
+        const currentWrap = wraps[index];
+        if (!currentWrap) return;
+        
+        const titleEl = currentWrap.querySelector('.soup-title');
+        const descEl = currentWrap.querySelector('.soup-desc');
+
+        // Add title letters with proper spacing
+        for (let j = 0; j < contentData[index].title.length; j++) {
+            const span = document.createElement('span');
+            span.className = 'letter';
+            const char = contentData[index].title[j];
+            
+            if (char === ' ') {
+                span.innerHTML = '&nbsp;'; // Use non-breaking space
+                span.style.minWidth = '12px'; // Ensure minimum width for spaces
+                span.style.display = 'inline-block';
+            } else {
+                span.textContent = char;
+            }
+            
+            titleEl.appendChild(span);
+        }
+
+        // Add description letters with proper spacing
+        for (let j = 0; j < contentData[index].desc.length; j++) {
+            const span = document.createElement('span');
+            span.className = 'letter';
+            const char = contentData[index].desc[j];
+            
+            if (char === ' ') {
+                span.innerHTML = '&nbsp;'; // Use non-breaking space
+                span.style.minWidth = '6px'; // Ensure minimum width for spaces
+                span.style.display = 'inline-block';
+            } else {
+                span.textContent = char;
+            }
+            
+            descEl.appendChild(span);
+        }
+    }
+
+    function addLetterHoverEffects() {
+        const allLetters = document.querySelectorAll('.letter');
+        allLetters.forEach(letter => {
+            letter.addEventListener('mouseenter', () => {
+                if (letter.classList.contains('active')) {
+                    letter.style.color = '#ffd700';
+                    letter.style.textShadow = '0 0 20px rgba(255, 215, 0, 0.9), 0 4px 15px rgba(0,0,0,0.8)';
+                    letter.style.transform = 'scale(1.08)';
+                }
+            });
+            
+            letter.addEventListener('mouseleave', () => {
+                if (letter.classList.contains('active')) {
+                    letter.style.color = '#ffffff';
+                    letter.style.textShadow = '';
+                    letter.style.transform = '';
+                }
+            });
+        });
+    }
+
+    function setupNavigation() {
+        const prevBtn = document.getElementById('soup-prev');
+        const nextBtn = document.getElementById('soup-next');
+
+        if (!prevBtn || !nextBtn) return;
+
+        prevBtn.style.display = 'none';
+        
+        prevBtn.addEventListener('click', function() {
+            nextBtn.style.display = 'inline';
+            currentPage--;
+            if (currentPage === 0) {
+                prevBtn.style.display = 'none';
+            }
+            animateTransition();
+            pauseAutoAdvance();
+        });
+
+        nextBtn.addEventListener('click', function() {
+            prevBtn.style.display = 'inline';
+            currentPage++;
+            if (currentPage === content.length - 1) {
+                nextBtn.style.display = 'none';
+            }
+            animateTransition();
+            pauseAutoAdvance();
+        });
+
+        // Start auto-advance
+        startAutoAdvance();
+    }
+
+    // Event handlers
+    window.addEventListener('resize', debounce(function() {
+        setTimeout(() => {
+            arrangeCurrentPage();
+            scrambleOthers();
+        }, 100);
+    }, 250));
+
+    function animateTransition() {
+        // Add transition effect
+        const allLetters = document.querySelectorAll('.letters-wrap.mutable .letter');
+        allLetters.forEach(letter => {
+            letter.classList.remove('active');
+        });
+
+        setTimeout(() => {
+            arrangeCurrentPage();
+            scrambleOthers();
+        }, 200);
+    }
+
+    function arrangeCurrentPage() {
+        const mutableWraps = document.querySelectorAll('.letters-wrap.mutable');
+        const positionWraps = document.querySelectorAll('.letters-wrap.position-data');
+        
+        if (!mutableWraps[currentPage] || !positionWraps[currentPage]) return;
+
+        const currentMutable = mutableWraps[currentPage];
+        const currentPosition = positionWraps[currentPage];
+
+        // Arrange title letters
+        const titleLetters = currentMutable.querySelectorAll('.soup-title .letter');
+        const titlePositions = currentPosition.querySelectorAll('.soup-title .letter');
+        
+        for (let i = 0; i < titleLetters.length; i++) {
+            if (titlePositions[i]) {
+                const rect = titlePositions[i].getBoundingClientRect();
+                titleLetters[i].style.left = rect.left + 'px';
+                titleLetters[i].style.top = rect.top + 'px';
+                titleLetters[i].style.color = '#fff';
+                titleLetters[i].style.zIndex = '9001';
+                titleLetters[i].classList.add('active');
+            }
+        }
+
+        // Arrange description letters
+        const descLetters = currentMutable.querySelectorAll('.soup-desc .letter');
+        const descPositions = currentPosition.querySelectorAll('.soup-desc .letter');
+        
+        for (let i = 0; i < descLetters.length; i++) {
+            if (descPositions[i]) {
+                const rect = descPositions[i].getBoundingClientRect();
+                descLetters[i].style.left = rect.left + 'px';
+                descLetters[i].style.top = rect.top + 'px';
+                descLetters[i].style.color = '#fff';
+                descLetters[i].style.zIndex = '9001';
+                descLetters[i].classList.add('active');
+            }
+        }
+    }
+
+    function scrambleOthers() {
+        const mutableWraps = document.querySelectorAll('.letters-wrap.mutable');
+        
+        for (let i = 0; i < content.length; i++) {
+            if (currentPage === i) continue;
+
+            const currentWrap = mutableWraps[i];
+            if (!currentWrap) continue;
+
+            const parts = [
+                ['title', '.soup-title'],
+                ['desc', '.soup-desc']
+            ];
+
+            for (let j = 0; j < parts.length; j++) {
+                const letters = currentWrap.querySelectorAll(`${parts[j][1]} .letter`);
+                
+                for (let k = 0; k < letters.length; k++) {
+                    // Reduce chaos by limiting the random positioning to specific zones
+                    const zones = [
+                        { x: 0.1, y: 0.1, w: 0.2, h: 0.2 },
+                        { x: 0.7, y: 0.1, w: 0.2, h: 0.2 },
+                        { x: 0.1, y: 0.7, w: 0.2, h: 0.2 },
+                        { x: 0.7, y: 0.7, w: 0.2, h: 0.2 },
+                        { x: 0.4, y: 0.05, w: 0.2, h: 0.1 },
+                        { x: 0.4, y: 0.85, w: 0.2, h: 0.1 }
+                    ];
+                    
+                    const zone = zones[Math.floor(Math.random() * zones.length)];
+                    const randLeft = Math.floor((zone.x + Math.random() * zone.w) * window.innerWidth);
+                    const randTop = Math.floor((zone.y + Math.random() * zone.h) * window.innerHeight);
+                    
+                    letters[k].style.left = randLeft + 'px';
+                    letters[k].style.top = randTop + 'px';
+                    letters[k].style.color = 'rgba(170, 170, 170, 0.2)';
+                    letters[k].style.zIndex = 'initial';
+                    letters[k].classList.remove('active');
+                }
+            }
+        }
+    }
+
+    let autoAdvanceInterval;
+
+    function startAutoAdvance() {
+        autoAdvanceInterval = setInterval(() => {
+            const nextBtn = document.getElementById('soup-next');
+            if (currentPage < content.length - 1) {
+                nextBtn.click();
+            } else {
+                // Reset to first slide
+                const prevBtn = document.getElementById('soup-prev');
+                currentPage = -1;
+                prevBtn.style.display = 'none';
+                nextBtn.style.display = 'inline';
+                nextBtn.click();
+            }
+        }, 12000);
+    }
+
+    function pauseAutoAdvance() {
+        clearInterval(autoAdvanceInterval);
+        // Restart after 20 seconds of inactivity
+        setTimeout(() => {
+            startAutoAdvance();
+        }, 20000);
+    }
+
+    // Debounce utility function
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+}
 
 // Update Anvesha information from data.js
 function updateAnveshaInfo() {
