@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Meta tags for SEO -->
     <meta name="description" content="Anvesha 2025 - The Annual Science Fest of IISER Thiruvananthapuram. Join us for competitions, workshops, exhibitions, and innovation challenges.">
@@ -46,7 +46,7 @@
     </section>
 
     <!-- About Section -->
-    <section class="anvesha-about">
+    <section class="anvesha-about" id="about-section">
         <div class="container">
             <div class="about-content">
                 <div class="about-text">
@@ -342,10 +342,17 @@
         let sceneL, sceneR;
         let sliderPos = window.innerWidth / 2;
 
+        console.log('Three.js script loading...');
         init();
 
         function init() {
             container = document.querySelector('.threejs-container');
+            if (!container) {
+                console.error('Three.js container not found');
+                return;
+            }
+
+            console.log('Initializing Three.js scenes...');
 
             sceneL = new THREE.Scene();
             sceneL.background = new THREE.Color(0x1a1a2e);
@@ -453,6 +460,32 @@
     
     <!-- Timeline Interactive Script -->
     <script>
+        // Scroll indicator functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const scrollIndicator = document.querySelector('.scroll-indicator');
+            if (scrollIndicator) {
+                scrollIndicator.addEventListener('click', function() {
+                    const aboutSection = document.getElementById('about-section');
+                    if (aboutSection) {
+                        aboutSection.scrollIntoView({ 
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+                
+                // Hide scroll indicator when user starts scrolling
+                let scrollTimeout;
+                window.addEventListener('scroll', function() {
+                    if (window.scrollY > 100) {
+                        scrollIndicator.style.opacity = '0';
+                    } else {
+                        scrollIndicator.style.opacity = '0.8';
+                    }
+                });
+            }
+        });
+        
         document.addEventListener('DOMContentLoaded', function() {
             const timelineItems = document.querySelectorAll('.timeline');
             
