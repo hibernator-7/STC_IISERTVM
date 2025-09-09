@@ -1,7 +1,33 @@
 /*
 Welcome to the content hub for your website!
 
-To update the content on your website, you only need to edit this file.
+To update the content on your website, you onconst upcomingEvents = [
+    {
+        const latestUpdates = [
+    {
+        date: "Varsha Semester 2025",
+        title: "Anvesha 2025 - The Annual Science Festival",
+        excerpt: "Anvesha, the annual science festival of IISER Thiruvananthapuram, is a vibrant three-day celebration of science and innovation held during the Varsha Semester under the guidance of Honourable Director Prof. J. N. Moorthy. Join us for diverse outreach activities, engaging exhibitions, hands-on workshops, and interactive sessions that bridge the gap between scientific research and society.",
+        link: "#",
+        imageUrl: "https://raw.githubusercontent.com/Coding-Club-of-IISER-Thiruvananthapuram/STC_IISERTVM/refs/heads/main/images/gallery/Events/Anvesha/img1.jpg"
+    },
+    {
+        date: "Sep, 2025",
+        title: "Club Registrations are Opening soon",
+        excerpt: "Excited to join our clubs? Registrations for all affiliated clubs will be opening soon. Stay tuned!",
+        link: "#",
+        imageUrl: "https://images.pexels.com/photos/17484975/pexels-photo-17484975.png?_gl=1*ehav9k*_ga*MTAwNDM5MDMzNi4xNzU2NjYyNjk0*_ga_8JE65Q40S6*czE3NTY2NjI2OTQkbzEkZzEkdDE3NTY2NjI5MTAkajU5JGwwJGgw"
+    }
+];mester",
+        title: "Anvesha 2025",
+        description: "Anvesha, the annual science festival of IISER Thiruvananthapuram, is a vibrant three-day celebration of science and innovation featuring diverse outreach activities, engaging exhibitions, hands-on workshops, and interactive sessions."
+    },
+    {
+        date: "SEP",
+        title: "Know Your Faculty",
+        description: "Organised by the CCIT, this short video series answers common questions in programming and helps you learn directly from our faculty experts."
+    }
+];dit this file.
 This approach keeps all your data in one place, making it easy to manage without having to edit any HTML files directly.
 
 Instructions:
@@ -124,7 +150,7 @@ const latestUpdates = [
     {
         date: "Oct 17, 2025",
         title: "Anvesha '25",
-        excerpt: "Anvesha ’25 is just around the corner, happening on October 17. Get ready with your projects that aim to reshape the world of research, innovation, and science and technology. We encourage enthusiastic participation from all candidates.",
+        excerpt: "Anvesha ’25 is just around the corner, starting from October 17. Get ready with your projects that aim to reshape the world of research, innovation, and science and technology. We encourage enthusiastic participation from all candidates.",
         link: "#",
         imageUrl: "https://raw.githubusercontent.com/Coding-Club-of-IISER-Thiruvananthapuram/STC_IISERTVM/refs/heads/main/images/gallery/Events/Anvesha/img1.jpg"
     },
