@@ -60,7 +60,6 @@ a {
 
 a:hover {
     text-decoration: underline;
-    color: var(--primary-dark);
 }
 
 /* Enhanced Header with backdrop blur */
