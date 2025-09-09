@@ -3,9 +3,10 @@ class PWAInstaller {
     constructor() {
         this.deferredPrompt = null;
         this.isInstallable = false;
+        this.hasEngaged = false;
+        this.userInteractions = 0;
         this.isInstalled = false;
-        this.installButton = null;
-        
+        this.showOpenInAppOption = false;
         this.init();
     }
     
@@ -15,6 +16,9 @@ class PWAInstaller {
         
         // Initialize welcome banner
         this.initWelcomeBanner();
+        
+        // Add debugging info
+        this.debugPWAReadiness();
         
         // Listen for beforeinstallprompt event
         window.addEventListener('beforeinstallprompt', (e) => {
@@ -29,6 +33,7 @@ class PWAInstaller {
         // Listen for app installed event
         window.addEventListener('appinstalled', () => {
             console.log('[PWA] App installed successfully');
+            localStorage.setItem('pwa-installed', 'true');
             this.isInstalled = true;
             this.hideInstallButton();
             this.hideWelcomeBanner();
@@ -40,13 +45,82 @@ class PWAInstaller {
         
         // Register service worker
         this.registerServiceWorker();
+        
+        // Force show install button for testing (remove in production)
+        setTimeout(() => {
+            if (!this.isInstallable && !this.isInstalled) {
+                console.warn('[PWA] Install prompt not triggered - showing manual install button');
+                this.showInstallButton();
+            }
+        }, 3000);
+        
+        // Simulate user engagement for install prompt
+        this.simulateUserEngagement();
+    }
+    
+    trackUserEngagement() {
+        // Track various user engagement activities
+        const events = ['click', 'scroll', 'keydown', 'touchstart'];
+        
+        events.forEach(event => {
+            document.addEventListener(event, () => {
+                this.userInteractions++;
+                this.hasEngaged = true;
+                console.log(`User engagement detected: ${event} (${this.userInteractions} total interactions)`);
+                
+                // Try to trigger install prompt after sufficient engagement
+                if (this.userInteractions >= 3 && this.deferredPrompt) {
+                    setTimeout(() => this.showInstallButton(), 1000);
+                }
+            }, { passive: true });
+        });
+
+        // Track time spent on site
+        setTimeout(() => {
+            this.hasEngaged = true;
+            console.log('User has spent sufficient time on site');
+        }, 30000); // 30 seconds
     }
     
     checkInstallStatus() {
         // Check if running in standalone mode (installed)
-        if (window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches) {
+        const isStandalone = window.navigator.standalone || 
+                           window.matchMedia('(display-mode: standalone)').matches ||
+                           window.matchMedia('(display-mode: minimal-ui)').matches;
+        
+        // Check if app was installed via beforeinstallprompt
+        const wasInstalled = localStorage.getItem('pwa-installed') === 'true';
+        
+        // Check if we're in a PWA context
+        const isPWAContext = isStandalone || wasInstalled;
+        
+        if (isPWAContext) {
             this.isInstalled = true;
-            console.log('[PWA] App is running as installed PWA');
+            console.log('[PWA] App is detected as installed');
+            
+            // If we're not in standalone mode but app is installed, user is browsing in regular browser
+            if (!isStandalone && wasInstalled) {
+                this.showOpenInAppOption = true;
+                console.log('[PWA] App is installed but user is browsing in regular browser');
+            }
+        }
+        
+        // Also check if the app is available for installation
+        this.checkInstallAvailability();
+    }
+
+    checkInstallAvailability() {
+        // Check if app can be installed via getInstalledRelatedApps API
+        if ('getInstalledRelatedApps' in navigator) {
+            navigator.getInstalledRelatedApps().then(apps => {
+                if (apps.length > 0) {
+                    this.isInstalled = true;
+                    this.showOpenInAppOption = true;
+                    console.log('[PWA] App detected via getInstalledRelatedApps:', apps);
+                }
+            }).catch(err => {
+                console.log('[PWA] getInstalledRelatedApps not available or failed:', err);
+            });
         }
     }
     
@@ -76,6 +150,95 @@ class PWAInstaller {
             }
         `;
         document.head.appendChild(style);
+    }
+    
+    debugPWAReadiness() {
+        console.group('🔧 PWA Installation Debug');
+        
+        // Browser detection
+        const isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+        const isEdge = /Edg/.test(navigator.userAgent);
+        const isFirefox = /Firefox/.test(navigator.userAgent);
+        const isSafari = /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
+        
+        console.log('🌐 Browser Info:', {
+            userAgent: navigator.userAgent,
+            isChrome, isEdge, isFirefox, isSafari,
+            platform: navigator.platform,
+            standalone: window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches
+        });
+        
+        // PWA Requirements Check
+        console.log('📋 PWA Requirements:');
+        console.log('  Service Worker:', 'serviceWorker' in navigator ? '✅' : '❌');
+        console.log('  Manifest:', document.querySelector('link[rel="manifest"]') ? '✅' : '❌');
+        console.log('  HTTPS:', (location.protocol === 'https:' || location.hostname === 'localhost') ? '✅' : '❌');
+        console.log('  Install prompt:', this.deferredPrompt ? '✅' : '❌');
+        console.log('  User engagement:', this.hasEngaged ? '✅' : '❌');
+        console.log('  Interactions count:', this.userInteractions);
+        console.log('  App installed:', this.isInstalled ? '✅' : '❌');
+        console.log('  Show open in app option:', this.showOpenInAppOption ? '✅' : '❌');
+        console.log('  localStorage pwa-installed:', localStorage.getItem('pwa-installed'));
+        
+        // Chrome-specific checks
+        if (isChrome) {
+            console.log('🎯 Chrome-specific checks:');
+            console.log('  beforeinstallprompt fired:', this.deferredPrompt ? '✅' : '❌');
+            console.log('  Site engagement sufficient:', this.hasEngaged ? '✅' : '❌');
+            
+            // Check if already installed
+            if (window.matchMedia('(display-mode: standalone)').matches) {
+                console.log('  App status: Already installed ✅');
+            } else {
+                console.log('  App status: Not installed');
+            }
+        }
+        
+        // Manual installation guidance
+        if (!this.deferredPrompt && isChrome) {
+            console.log('💡 Chrome manual install options:');
+            console.log('  1. Look for install icon (+) in address bar');
+            console.log('  2. Chrome menu → "Install STC IISER TVM..."');
+            console.log('  3. Right-click page → "Install STC IISER TVM..."');
+        }
+        
+        console.groupEnd();
+    }
+    
+    async validateManifest(manifestUrl) {
+        try {
+            const response = await fetch(manifestUrl);
+            const manifest = await response.json();
+            
+            console.log('[PWA Debug] Manifest content:', manifest);
+            
+            // Check required fields
+            const required = ['name', 'start_url', 'display', 'icons'];
+            const missing = required.filter(field => !manifest[field]);
+            
+            if (missing.length === 0) {
+                console.log('✅ Manifest has all required fields');
+            } else {
+                console.warn('❌ Manifest missing fields:', missing);
+            }
+            
+            // Check icons
+            if (manifest.icons && manifest.icons.length > 0) {
+                const hasLargeIcon = manifest.icons.some(icon => {
+                    const sizes = icon.sizes.split('x');
+                    return parseInt(sizes[0]) >= 192;
+                });
+                
+                if (hasLargeIcon) {
+                    console.log('✅ Manifest has required icon sizes');
+                } else {
+                    console.warn('❌ Manifest missing large icons (>=192px)');
+                }
+            }
+            
+        } catch (error) {
+            console.error('[PWA Debug] Failed to validate manifest:', error);
+        }
     }
     
     initWelcomeBanner() {
@@ -296,26 +459,207 @@ class PWAInstaller {
             document.head.appendChild(style);
         }
         
-        button.addEventListener('click', () => this.showInstallModal());
+        button.addEventListener('click', () => {
+            const isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+            
+            if (this.deferredPrompt) {
+                this.install();
+            } else if (isChrome) {
+                this.showChromeInstallGuide();
+            } else {
+                this.showInstallModal();
+            }
+        });
         
         this.installButton = button;
         return button;
     }
-    
-    showInstallButton() {
-        if (this.isInstalled || !this.isInstallable) return;
+
+    createOpenInAppButton() {
+        if (this.openAppButton) return this.openAppButton;
         
-        // Don't show on mobile if it's likely to be prompted automatically
-        if (this.isMobile() && !this.hasShownMobilePrompt) {
-            this.hasShownMobilePrompt = true;
-            setTimeout(() => this.showInstallButton(), 3000); // Show after 3 seconds
-            return;
+        const button = document.createElement('button');
+        button.id = 'pwa-open-app-button';
+        button.innerHTML = `
+            <i class="fas fa-external-link-alt"></i>
+            <span>Open in App</span>
+        `;
+        button.className = 'pwa-open-app-btn';
+        
+        // Add styles for open app button
+        const style = document.createElement('style');
+        style.textContent = `
+            .pwa-open-app-btn {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: linear-gradient(135deg, #10b981, #059669);
+                color: white;
+                border: none;
+                padding: 12px 20px;
+                border-radius: 25px;
+                cursor: pointer;
+                font-family: 'Poppins', sans-serif;
+                font-weight: 500;
+                font-size: 14px;
+                box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+                transition: all 0.3s ease;
+                z-index: 1000;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                animation: slideInFromRight 0.5s ease-out;
+            }
+            
+            .pwa-open-app-btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+                background: linear-gradient(135deg, #059669, #047857);
+            }
+            
+            .pwa-open-app-btn:active {
+                transform: translateY(0);
+            }
+            
+            .pwa-open-app-btn i {
+                font-size: 16px;
+            }
+            
+            @media (max-width: 768px) {
+                .pwa-open-app-btn {
+                    top: 10px;
+                    right: 10px;
+                    padding: 10px 16px;
+                    font-size: 13px;
+                }
+            }
+        `;
+        
+        if (!document.getElementById('pwa-open-app-styles')) {
+            style.id = 'pwa-open-app-styles';
+            document.head.appendChild(style);
         }
         
-        const button = this.createInstallButton();
+        button.addEventListener('click', () => this.openInApp());
+        
+        this.openAppButton = button;
+        return button;
+    }
+
+    openInApp() {
+        console.log('[PWA] Attempting to open in app...');
+        
+        // Try to redirect to app scheme first
+        const appUrl = window.location.href;
+        
+        // For mobile devices, try app scheme
+        if (this.isMobile()) {
+            // Create a hidden link that attempts to open the app
+            const appLink = document.createElement('a');
+            appLink.href = `intent://${window.location.host}${window.location.pathname}#Intent;scheme=https;package=com.chrome.beta;action=android.intent.action.VIEW;end`;
+            appLink.style.display = 'none';
+            document.body.appendChild(appLink);
+            appLink.click();
+            document.body.removeChild(appLink);
+            
+            // Fallback: Show instructions after a delay
+            setTimeout(() => {
+                this.showOpenAppInstructions();
+            }, 3000);
+        } else {
+            // For desktop, show instructions
+            this.showOpenAppInstructions();
+        }
+    }
+
+    showOpenAppInstructions() {
+        const modal = document.createElement('div');
+        modal.className = 'pwa-install-modal';
+        
+        const isAndroid = /Android/.test(navigator.userAgent);
+        const isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent);
+        const isDesktop = !this.isMobile();
+        
+        let instructions = '';
+        
+        if (isDesktop) {
+            instructions = `
+                <p><strong>Desktop:</strong></p>
+                <p>• Look for the STC IISER TVM app in your applications/programs</p>
+                <p>• Or search for "STC IISER TVM" in your system search</p>
+                <p>• You can also bookmark this page for quick access</p>
+            `;
+        } else if (isAndroid) {
+            instructions = `
+                <p><strong>Android:</strong></p>
+                <p>• Look for the STC IISER TVM app on your home screen</p>
+                <p>• Or check your app drawer</p>
+                <p>• If not found, you may need to reinstall the app</p>
+            `;
+        } else if (isIOS) {
+            instructions = `
+                <p><strong>iOS:</strong></p>
+                <p>• Look for the STC IISER TVM app on your home screen</p>
+                <p>• Swipe down and search for "STC IISER TVM"</p>
+                <p>• If not found, you may need to re-add it to home screen</p>
+            `;
+        }
+        
+        modal.innerHTML = `
+            <div class="pwa-modal-content">
+                <div class="pwa-modal-icon" style="background: linear-gradient(135deg, #10b981, #059669);">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3>Open in Installed App</h3>
+                <div style="text-align: left; margin: 20px 0;">
+                    ${instructions}
+                </div>
+                <div class="pwa-modal-buttons">
+                    <button class="pwa-modal-btn secondary" onclick="this.closest('.pwa-install-modal').remove()">Got it</button>
+                    <button class="pwa-modal-btn primary" onclick="window.pwaInstaller.reinstallApp(); this.closest('.pwa-install-modal').remove();">Reinstall App</button>
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(modal);
+        setTimeout(() => modal.classList.add('show'), 10);
+        
+        // Close on outside click
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('show');
+                setTimeout(() => modal.remove(), 300);
+            }
+        });
+    }
+
+    reinstallApp() {
+        // Clear the installed flag and show install options
+        localStorage.removeItem('pwa-installed');
+        this.isInstalled = false;
+        this.showOpenInAppOption = false;
+        
+        // Hide current button and show install button
+        const openAppBtn = document.getElementById('pwa-open-app-button');
+        if (openAppBtn) {
+            openAppBtn.remove();
+        }
+        
+        // Show install options
+        this.showInstallButton();
+        
+        console.log('[PWA] App marked for reinstallation');
+    }
+    
+    showInstallButton() {
+        // If app is installed and user is in standalone mode, don't show any button
+        if (this.isInstalled && !this.showOpenInAppOption) return;
+        
+        // Create appropriate button based on install status
+        const button = this.showOpenInAppOption ? this.createOpenInAppButton() : this.createInstallButton();
         
         // Remove existing button
-        const existingButton = document.getElementById('pwa-install-button');
+        const existingButton = document.getElementById('pwa-install-button') || document.getElementById('pwa-open-app-button');
         if (existingButton) {
             existingButton.remove();
         }
@@ -377,7 +721,10 @@ class PWAInstaller {
     }
     
     async install() {
+        console.log('[PWA] Install attempt - deferredPrompt available:', !!this.deferredPrompt);
+        
         if (!this.deferredPrompt) {
+            console.log('[PWA] No deferred prompt - showing manual instructions');
             this.showManualInstallInstructions();
             return;
         }
@@ -393,6 +740,13 @@ class PWAInstaller {
             
             if (outcome === 'accepted') {
                 this.hideInstallButton();
+                // Mark app as installed
+                localStorage.setItem('pwa-installed', 'true');
+                this.isInstalled = true;
+                console.log('[PWA] App installed successfully and marked in localStorage');
+                
+                // Show success notification
+                this.showNotification('App installed successfully! 🎉', 'success');
             }
             
             // Clean up
@@ -412,13 +766,16 @@ class PWAInstaller {
     showManualInstallInstructions() {
         const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
         const isAndroid = /Android/.test(navigator.userAgent);
+        const isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+        const isEdge = /Edg/.test(navigator.userAgent);
+        const isFirefox = /Firefox/.test(navigator.userAgent);
         
         let instructions = '';
         
         if (isIOS) {
             instructions = `
                 <div style="text-align: left;">
-                    <p><strong>To install on iOS:</strong></p>
+                    <p><strong>To install on iOS Safari:</strong></p>
                     <ol style="margin: 10px 0; padding-left: 20px;">
                         <li>Tap the Share button <i class="fas fa-share"></i></li>
                         <li>Scroll down and tap "Add to Home Screen"</li>
@@ -429,7 +786,7 @@ class PWAInstaller {
         } else if (isAndroid) {
             instructions = `
                 <div style="text-align: left;">
-                    <p><strong>To install on Android:</strong></p>
+                    <p><strong>To install on Android Chrome:</strong></p>
                     <ol style="margin: 10px 0; padding-left: 20px;">
                         <li>Tap the menu button (⋮) in your browser</li>
                         <li>Tap "Add to Home screen" or "Install app"</li>
@@ -437,14 +794,51 @@ class PWAInstaller {
                     </ol>
                 </div>
             `;
+        } else if (isChrome) {
+            instructions = `
+                <div style="text-align: left;">
+                    <p><strong>To install on Chrome Desktop:</strong></p>
+                    <ol style="margin: 10px 0; padding-left: 20px;">
+                        <li>Look for the install icon <i class="fas fa-plus"></i> in the address bar (right side)</li>
+                        <li>Or click the three-dot menu → "Install STC IISER TVM..."</li>
+                        <li>Click "Install" in the popup</li>
+                        <li>The app will appear in your applications/Start menu</li>
+                    </ol>
+                    <p style="margin-top: 15px; font-size: 14px; color: #666;">
+                        <strong>Note:</strong> If you don't see the install option, try refreshing the page or visiting the site more frequently.
+                    </p>
+                </div>
+            `;
+        } else if (isEdge) {
+            instructions = `
+                <div style="text-align: left;">
+                    <p><strong>To install on Microsoft Edge:</strong></p>
+                    <ol style="margin: 10px 0; padding-left: 20px;">
+                        <li>Click the three-dot menu (⋯) → "Apps" → "Install this site as an app"</li>
+                        <li>Or look for the install icon in the address bar</li>
+                        <li>Click "Install" to confirm</li>
+                    </ol>
+                </div>
+            `;
+        } else if (isFirefox) {
+            instructions = `
+                <div style="text-align: left;">
+                    <p><strong>Firefox doesn't support PWA installation yet.</strong></p>
+                    <p style="margin: 10px 0;">You can:</p>
+                    <ol style="margin: 10px 0; padding-left: 20px;">
+                        <li>Bookmark this page for quick access</li>
+                        <li>Use Chrome or Edge for full PWA experience</li>
+                    </ol>
+                </div>
+            `;
         } else {
             instructions = `
                 <div style="text-align: left;">
-                    <p><strong>To install on Desktop:</strong></p>
+                    <p><strong>To install as an app:</strong></p>
                     <ol style="margin: 10px 0; padding-left: 20px;">
-                        <li>Look for the install icon in your browser's address bar</li>
-                        <li>Or use the browser menu and select "Install STC IISER TVM"</li>
-                        <li>Click "Install" to confirm</li>
+                        <li>Look for an install option in your browser menu</li>
+                        <li>Or bookmark this page for quick access</li>
+                        <li>For best experience, use Chrome or Edge</li>
                     </ol>
                 </div>
             `;
@@ -510,8 +904,29 @@ class PWAInstaller {
     async registerServiceWorker() {
         if ('serviceWorker' in navigator) {
             try {
-                const registration = await navigator.serviceWorker.register('/sw.js');
-                console.log('[PWA] Service Worker registered:', registration);
+                // Unregister any existing service workers that might be causing issues
+                const registrations = await navigator.serviceWorker.getRegistrations();
+                const existingRegistration = registrations.find(reg => 
+                    reg.scope === window.location.origin + '/' || 
+                    reg.scope === window.location.origin
+                );
+                
+                if (existingRegistration) {
+                    console.log('[PWA] Found existing service worker, updating...');
+                    await existingRegistration.update();
+                } else {
+                    console.log('[PWA] Registering new service worker...');
+                }
+                
+                // Use PWA config to get correct paths for GitHub Pages compatibility
+                const swPath = window.pwaConfig ? window.pwaConfig.getServiceWorkerPath() : './sw.js';
+                const scope = window.pwaConfig ? window.pwaConfig.getScope() : '/';
+                
+                const registration = await navigator.serviceWorker.register(swPath, {
+                    scope: scope
+                });
+                
+                console.log('[PWA] Service Worker registered successfully:', registration);
                 
                 // Listen for messages from service worker
                 navigator.serviceWorker.addEventListener('message', (event) => {
@@ -529,6 +944,8 @@ class PWAInstaller {
                             if (newWorker.state === 'installed') {
                                 if (navigator.serviceWorker.controller) {
                                     this.showUpdateNotification();
+                                } else {
+                                    console.log('[PWA] Service worker installed for the first time');
                                 }
                             }
                         });
@@ -538,10 +955,54 @@ class PWAInstaller {
                 // Periodic cache update when online
                 this.startPeriodicCacheUpdate(registration);
                 
+                // Force update check
+                if (registration.waiting) {
+                    console.log('[PWA] Service worker waiting, activating...');
+                    registration.waiting.postMessage({ type: 'SKIP_WAITING' });
+                }
+                
             } catch (error) {
                 console.error('[PWA] Service Worker registration failed:', error);
+                // Don't block the app if service worker fails
+                this.handleServiceWorkerError(error);
             }
+        } else {
+            console.warn('[PWA] Service Worker not supported in this browser');
         }
+    }
+    
+    handleServiceWorkerError(error) {
+        // Show a non-intrusive notification about SW issues
+        const notification = document.createElement('div');
+        notification.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: #f59e0b;
+            color: white;
+            padding: 12px 16px;
+            border-radius: 8px;
+            z-index: 10000;
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            max-width: 300px;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+        `;
+        notification.innerHTML = `
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <i class="fas fa-exclamation-triangle"></i>
+                <span>Offline features unavailable. App will work normally.</span>
+            </div>
+        `;
+        
+        document.body.appendChild(notification);
+        
+        // Auto-hide after 5 seconds
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.remove();
+            }
+        }, 5000);
     }
     
     startPeriodicCacheUpdate(registration) {
@@ -654,6 +1115,101 @@ class PWAInstaller {
                 notification.remove();
             }
         }, 10000);
+    }
+
+    showChromeInstallGuide() {
+        const modal = document.createElement('div');
+        modal.className = 'pwa-install-modal';
+        modal.innerHTML = `
+            <div class="pwa-modal-content">
+                <div class="pwa-modal-icon">
+                    <i class="fab fa-chrome"></i>
+                </div>
+                <h3>Install on Chrome Desktop</h3>
+                <div style="text-align: left; margin: 20px 0;">
+                    <p><strong>Option 1:</strong> Look for the install icon (+) in the address bar</p>
+                    <p><strong>Option 2:</strong> Chrome menu (⋮) → "Install STC IISER TVM..."</p>
+                    <p><strong>Option 3:</strong> Right-click this page → "Install STC IISER TVM..."</p>
+                </div>
+                <p style="font-size: 14px; color: #666; margin-top: 15px;">
+                    If you don't see install options, try refreshing the page or visiting more pages on this site.
+                </p>
+                <div class="pwa-modal-buttons">
+                    <button class="pwa-modal-btn secondary" onclick="this.closest('.pwa-install-modal').remove()">Got it</button>
+                    <button class="pwa-modal-btn primary" onclick="this.closest('.pwa-install-modal').remove(); window.open('https://support.google.com/chrome/answer/9658361', '_blank')">Learn More</button>
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(modal);
+        setTimeout(() => modal.classList.add('show'), 10);
+        
+        // Close on outside click
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('show');
+                setTimeout(() => modal.remove(), 300);
+            }
+        });
+    }
+
+    showManualInstallGuide() {
+        const modal = document.createElement('div');
+        modal.className = 'pwa-install-modal';
+        
+        const userAgent = navigator.userAgent;
+        let instructions = '';
+        
+        if (/Firefox/.test(userAgent)) {
+            instructions = `
+                <p><strong>Firefox:</strong></p>
+                <p>• Look for "Install" option in address bar</p>
+                <p>• Or use page menu for install options</p>
+            `;
+        } else if (/Safari/.test(userAgent) && !/Chrome/.test(userAgent)) {
+            instructions = `
+                <p><strong>Safari:</strong></p>
+                <p>• Tap Share button</p>
+                <p>• Select "Add to Home Screen"</p>
+            `;
+        } else if (/Edge/.test(userAgent)) {
+            instructions = `
+                <p><strong>Microsoft Edge:</strong></p>
+                <p>• Look for app install icon in address bar</p>
+                <p>• Or use Edge menu → "Apps" → "Install this site as an app"</p>
+            `;
+        } else {
+            instructions = `
+                <p>Look for install options in your browser's menu or address bar.</p>
+                <p>Most modern browsers support installing web apps.</p>
+            `;
+        }
+        
+        modal.innerHTML = `
+            <div class="pwa-modal-content">
+                <div class="pwa-modal-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3>Install as App</h3>
+                <div style="text-align: left; margin: 20px 0;">
+                    ${instructions}
+                </div>
+                <div class="pwa-modal-buttons">
+                    <button class="pwa-modal-btn primary" onclick="this.closest('.pwa-install-modal').remove()">OK</button>
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(modal);
+        setTimeout(() => modal.classList.add('show'), 10);
+        
+        // Close on outside click
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('show');
+                setTimeout(() => modal.remove(), 300);
+            }
+        });
     }
 }
 

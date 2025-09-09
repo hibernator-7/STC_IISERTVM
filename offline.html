@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Offline - STC IISER TVM</title>
-    <link rel="manifest" href="/site.webmanifest">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="manifest" href="./site.webmanifest">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
     <style>
         * {
             margin: 0;
@@ -168,7 +168,7 @@
         </p>
 
         <div class="offline-actions">
-            <a href="/" class="offline-btn">Go to Homepage</a>
+            <a href="./" class="offline-btn">Go to Homepage</a>
             <button onclick="window.location.reload()" class="offline-btn">Try Again</button>
         </div>
 
@@ -181,10 +181,10 @@
         <div class="cached-pages">
             <h3>Available Offline</h3>
             <ul>
-                <li><a href="/">🏠 Homepage</a></li>
-                <li><a href="/pages/about.html">ℹ️ About Us</a></li>
-                <li><a href="/pages/clubs.html">🏛️ Our Clubs</a></li>
-                <li><a href="/pages/events.html">📅 Events</a></li>
+                <li><a href="./">🏠 Homepage</a></li>
+                <li><a href="./pages/about.html">ℹ️ About Us</a></li>
+                <li><a href="./pages/clubs.html">🏛️ Our Clubs</a></li>
+                <li><a href="./pages/events.html">📅 Events</a></li>
             </ul>
         </div>
     </div>
@@ -321,19 +321,32 @@
                 const timeoutId = setTimeout(() => controller.abort(), 5000);
                 
                 try {
-                    const response = await fetch('/favicon-16x16.png', {
-                        cache: 'no-cache',
-                        signal: controller.signal
-                    });
+                    // Try multiple connectivity tests
+                    const tests = [
+                        fetch('/favicon-16x16.png', {
+                            cache: 'no-cache',
+                            signal: controller.signal,
+                            mode: 'no-cors'
+                        }),
+                        fetch('/', {
+                            method: 'HEAD',
+                            cache: 'no-cache',
+                            signal: controller.signal
+                        }),
+                        fetch('/site.webmanifest', {
+                            cache: 'no-cache',
+                            signal: controller.signal
+                        })
+                    ];
+                    
+                    // If any test succeeds, we're online
+                    await Promise.any(tests);
                     clearTimeout(timeoutId);
-                    
-                    if (!response.ok) {
-                        throw new Error('Network response not ok');
-                    }
-                    
                     return true;
+                    
                 } catch (error) {
                     clearTimeout(timeoutId);
+                    console.warn('[Offline Page] All connectivity tests failed:', error);
                     throw error;
                 }
             }
@@ -350,12 +363,19 @@
                 
                 const syncPromises = criticalPages.map(async (page) => {
                     try {
-                        const response = await fetch(page, { cache: 'no-cache' });
+                        const response = await fetch(page, { 
+                            cache: 'no-cache',
+                            headers: { 'Cache-Control': 'no-cache' }
+                        });
                         if (response.ok) {
                             // Cache the updated content
-                            const cache = await caches.open('stc-dynamic-v1');
-                            await cache.put(page, response);
-                            console.log(`[Offline Page] Synced: ${page}`);
+                            if ('caches' in window) {
+                                const cache = await caches.open('stc-dynamic-v1');
+                                await cache.put(page, response);
+                                console.log(`[Offline Page] Synced: ${page}`);
+                            }
+                        } else {
+                            console.warn(`[Offline Page] Failed to sync ${page}: ${response.status}`);
                         }
                     } catch (error) {
                         console.warn(`[Offline Page] Failed to sync ${page}:`, error);

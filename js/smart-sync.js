@@ -183,15 +183,36 @@ class SmartSyncManager {
     
     async verifyConnectivity() {
         const controller = new AbortController();
-        setTimeout(() => controller.abort(), 3000);
+        const timeoutId = setTimeout(() => controller.abort(), 3000);
         
-        const response = await fetch('/favicon-16x16.png', {
-            cache: 'no-cache',
-            signal: controller.signal
-        });
-        
-        if (!response.ok) {
-            throw new Error('Network verification failed');
+        try {
+            // Use relative path for GitHub Pages compatibility
+            const faviconPath = window.pwaConfig ? window.pwaConfig.getPath('favicon-16x16.png') : './favicon-16x16.png';
+            const response = await fetch(faviconPath, {
+                cache: 'no-cache',
+                signal: controller.signal,
+                mode: 'no-cors' // Allow checking even if CORS fails
+            });
+            clearTimeout(timeoutId);
+            
+            // For no-cors mode, we can't check response.ok, so just check if we got a response
+            return true;
+        } catch (error) {
+            clearTimeout(timeoutId);
+            
+            // Try a different approach - check if we can reach the same origin
+            try {
+                const rootPath = window.pwaConfig ? window.pwaConfig.getPath('') : './';
+                const simpleCheck = await fetch(rootPath, {
+                    method: 'HEAD',
+                    cache: 'no-cache',
+                    signal: controller.signal
+                });
+                return simpleCheck.ok;
+            } catch (secondError) {
+                console.warn('[SmartSync] Connectivity check failed:', error);
+                throw error;
+            }
         }
     }
     
@@ -223,14 +244,22 @@ class SmartSyncManager {
     }
     
     async syncPage(page) {
-        const response = await fetch(page, { 
-            cache: 'no-cache',
-            headers: { 'Cache-Control': 'no-cache' }
-        });
-        
-        if (response.ok && 'caches' in window) {
-            const cache = await caches.open('stc-dynamic-v1');
-            await cache.put(page, response);
+        try {
+            const response = await fetch(page, { 
+                cache: 'no-cache',
+                headers: { 'Cache-Control': 'no-cache' }
+            });
+            
+            if (response.ok && 'caches' in window) {
+                const cache = await caches.open('stc-dynamic-v1');
+                await cache.put(page, response);
+                console.log(`[SmartSync] Successfully synced: ${page}`);
+            } else {
+                console.warn(`[SmartSync] Failed to sync ${page}: ${response.status}`);
+            }
+        } catch (error) {
+            console.warn(`[SmartSync] Error syncing ${page}:`, error);
+            // Don't throw error, just log and continue
         }
     }
     
@@ -247,9 +276,11 @@ class SmartSyncManager {
                 if (response.ok && 'caches' in window) {
                     const cache = await caches.open('stc-static-v1');
                     await cache.put(resource, response);
+                    console.log(`[SmartSync] Successfully synced resource: ${resource}`);
                 }
             } catch (error) {
                 console.warn(`[SmartSync] Failed to sync resource ${resource}:`, error);
+                // Continue with other resources even if one fails
             }
         }
     }

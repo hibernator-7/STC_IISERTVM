@@ -32,6 +32,13 @@ This document describes the Progressive Web App (PWA) features implemented for t
 - Theme color integration
 - Safe area support for modern devices
 
+### 5. **Intelligent Install Management**
+- **Smart Detection**: Automatically detects if app is already installed
+- **Open in App Option**: Shows "Open in App" button for users who have the app installed but are browsing in a regular browser
+- **Reinstall Support**: Provides options to reinstall if the app installation is corrupted
+- **Cross-browser Compatibility**: Handles different installation states across various browsers
+- **localStorage Tracking**: Remembers installation status across sessions
+
 ##  Installation Instructions
 
 ### For Users
@@ -47,6 +54,44 @@ This document describes the Progressive Web App (PWA) features implemented for t
 2. Tap the Share button (square with arrow up)
 3. Scroll down and tap "Add to Home Screen"
 4. Tap "Add" to confirm
+
+### 🔧 Troubleshooting Chrome Installation
+
+If you don't see the install option in Chrome:
+
+#### Requirements Check
+- **HTTPS**: Site must be served over HTTPS (localhost is OK for testing)
+- **Service Worker**: Must be registered successfully
+- **Web App Manifest**: Must be valid and linked properly
+- **User Engagement**: Chrome requires user interaction with the site
+
+#### Common Solutions
+
+1. **Refresh the Page**
+   - Press F5 or Ctrl+R to reload
+   - Sometimes the install prompt appears after a refresh
+
+2. **Increase Site Engagement**
+   - Click around the website for 30+ seconds
+   - Visit multiple pages
+   - Chrome tracks user engagement before showing install prompt
+
+3. **Check Developer Tools**
+   - Press F12 to open DevTools
+   - Go to Application tab → Manifest
+   - Look for any manifest errors
+   - Check Service Workers tab for registration issues
+
+4. **Clear Browser Cache**
+   - Go to Chrome Settings → Privacy & Security → Clear browsing data
+   - Select "Cached images and files" and clear
+
+5. **Manual Installation (Fallback)**
+   - Use the install button on our website
+   - Follow the Chrome-specific instructions in the popup
+
+#### Debug Information
+Visit `/pwa-debug.html` for detailed PWA status and troubleshooting information.
 
 #### **Mobile (Android Chrome)**
 1. Open the website in Chrome
