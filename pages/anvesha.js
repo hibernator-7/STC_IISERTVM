@@ -56,35 +56,35 @@ function loadAnveshaGallery() {
     // Gallery images from Anvesha events
     const galleryImages = [
         {
-            src: 'https://raw.githubusercontent.com/Coding-Club-of-IISER-Thiruvananthapuram/STC_IISERTVM/refs/heads/main/images/gallery/Events/Anvesha/img1.webp',
+            src: '../images/gallery/Events/Anvesha/img1.webp',
             alt: 'Anvesha Main Event'
         },
         {
-            src: 'https://raw.githubusercontent.com/Coding-Club-of-IISER-Thiruvananthapuram/STC_IISERTVM/refs/heads/main/images/gallery/Events/Anvesha/Inauguration/img1.webp',
+            src: '../images/gallery/Events/Anvesha/Inauguration/img1.webp',
             alt: 'Anvesha Inauguration'
         },
         {
-            src: 'https://github.com/Coding-Club-of-IISER-Thiruvananthapuram/STC_IISERTVM/blob/main/images/gallery/Events/Anvesha/Afficionados/img1.webp?raw=true',
+            src: '../images/gallery/Events/Anvesha/Afficionados/img1.webp',
             alt: 'Competition Event'
         },
         {
-            src: 'https://github.com/Coding-Club-of-IISER-Thiruvananthapuram/STC_IISERTVM/blob/main/images/gallery/Events/Anvesha/BahFest/img1.webp?raw=true',
+            src: '../images/gallery/Events/Anvesha/BahFest/img1.webp',
             alt: 'BAHFest'
         },
         {
-            src: 'https://github.com/Coding-Club-of-IISER-Thiruvananthapuram/STC_IISERTVM/blob/main/images/gallery/Events/Anvesha/Blackbox/img1.webp?raw=true',
+            src: '../images/gallery/Events/Anvesha/Blackbox/img1.webp',
             alt: 'Black BOX'
         },
         {
-            src: 'https://github.com/Coding-Club-of-IISER-Thiruvananthapuram/STC_IISERTVM/blob/main/images/gallery/Events/Anvesha/Blender%20Workshop/img1.webp?raw=true',
+            src: '../images/gallery/Events/Anvesha/Blender%20Workshop/img1.webp',
             alt: 'Workshop'
         },
          {
-            src: 'https://github.com/Coding-Club-of-IISER-Thiruvananthapuram/STC_IISERTVM/blob/main/images/gallery/Events/Anvesha/Jigyasa/img1.webp?raw=true',
+            src: '../images/gallery/Events/Anvesha/Jigyasa/img1.webp',
             alt: 'Jigyasa'
         },
         {
-            src: 'https://github.com/Coding-Club-of-IISER-Thiruvananthapuram/STC_IISERTVM/blob/main/images/gallery/Events/Anvesha/Entanglement/img3.webp?raw=true',
+            src: '../images/gallery/Events/Anvesha/Entanglement/img3.webp',
             alt: 'contrapt'
         }
 
