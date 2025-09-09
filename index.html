@@ -2,10 +2,30 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Science and Technology Council - IISER Thiruvananthapuram</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="description" content="Official website of Science and Technology Council, IISER Thiruvananthapuram. Explore our clubs, events, and scientific activities.">
+    <meta name="keywords" content="IISER, Thiruvananthapuram, Science, Technology, Council, Research, Education">
+    <meta name="author" content="Science and Technology Council - IISER TVM">
+    
+    <!-- PWA Theme Colors -->
+    <meta name="theme-color" content="#5f1dd1">
+    <meta name="msapplication-TileColor" content="#5f1dd1">
+    <meta name="msapplication-navbutton-color" content="#5f1dd1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <!-- PWA Display Mode -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="STC IISER TVM">
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="css/style.css" as="style">
+    <link rel="preload" href="js/pwa-installer.js" as="script">
 
-<!--     favicon -->
+<!--     favicon and PWA icons -->
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
@@ -994,6 +1014,134 @@
                 height: 250px;
             }
         }
+
+        /* PWA Welcome Banner Styles */
+        .pwa-banner {
+            background: linear-gradient(135deg, var(--primary-dark), #7c3aed);
+            color: white;
+            padding: 12px 20px;
+            position: relative;
+            z-index: 100;
+            animation: slideDown 0.5s ease-out;
+        }
+
+        .pwa-banner-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .pwa-banner-icon {
+            font-size: 24px;
+            color: #fff;
+            opacity: 0.9;
+        }
+
+        .pwa-banner-text {
+            flex: 1;
+        }
+
+        .pwa-banner-text h3 {
+            margin: 0 0 4px 0;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .pwa-banner-text p {
+            margin: 0;
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        .pwa-banner-actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .pwa-banner-btn {
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .pwa-banner-btn.primary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            backdrop-filter: blur(10px);
+        }
+
+        .pwa-banner-btn.primary:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-1px);
+        }
+
+        .pwa-banner-btn.secondary {
+            background: transparent;
+            color: white;
+            padding: 8px;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            justify-content: center;
+        }
+
+        .pwa-banner-btn.secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .pwa-banner {
+                padding: 10px 15px;
+            }
+
+            .pwa-banner-content {
+                gap: 10px;
+            }
+
+            .pwa-banner-icon {
+                font-size: 20px;
+            }
+
+            .pwa-banner-text h3 {
+                font-size: 14px;
+            }
+
+            .pwa-banner-text p {
+                font-size: 12px;
+            }
+
+            .pwa-banner-btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+
+            .pwa-banner-btn.secondary {
+                width: 28px;
+                height: 28px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1049,6 +1197,28 @@
     </header>
 
     <main>
+        <!-- PWA Install Banner -->
+        <div id="pwa-welcome-banner" class="pwa-banner" style="display: none;">
+            <div class="pwa-banner-content">
+                <div class="pwa-banner-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <div class="pwa-banner-text">
+                    <h3>Get the STC App</h3>
+                    <p>Install our app for quick access and offline browsing</p>
+                </div>
+                <div class="pwa-banner-actions">
+                    <button id="pwa-banner-install" class="pwa-banner-btn primary">
+                        <i class="fas fa-download"></i>
+                        Install
+                    </button>
+                    <button id="pwa-banner-close" class="pwa-banner-btn secondary">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
         <!-- Hero Section -->
         <section id="hero">
             <div class="hero-content">
@@ -1297,12 +1467,18 @@
     </main>
 
     <footer>
-        <!-- Footer content preserved as per requirement -->
+    <!-- Footer content preserved as per requirement -->
     </footer>
 
     <!-- Original JS files preserved -->
     <script src="js/data.js"></script>
     <script src="js/script.js"></script>
+    
+    <!-- PWA Installation Manager -->
+    <script src="js/pwa-installer.js"></script>
+    
+    <!-- Smart Content Sync Manager -->
+    <script src="js/smart-sync.js"></script>
     
     <!-- Enhanced JavaScript for new features -->
     <script>
