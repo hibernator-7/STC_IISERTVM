@@ -14,7 +14,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const navbarContainer = document.getElementById('navbar');
     if (navbarContainer) {
         fetch('navbar.html')
-            .then(response => response.text())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.text();
+            })
             .then(html => {
                 navbarContainer.innerHTML = html;
                 // Re-run navbar interactivity after injection
@@ -56,6 +61,10 @@ document.addEventListener('DOMContentLoaded', function() {
                         dropdowns.forEach(d => d.classList.remove('active'));
                     }
                 });
+            })
+            .catch(error => {
+                console.error('Error loading navbar:', error);
+                navbarContainer.innerHTML = '<div style="padding: 1rem; background: #f8f9fa; text-align: center;">Navigation loading error</div>';
             });
     }
     // Dropdown functionality for mobile hamburger menu
