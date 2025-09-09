@@ -4,44 +4,66 @@ const STATIC_CACHE_NAME = 'stc-static-v1';
 const DYNAMIC_CACHE_NAME = 'stc-dynamic-v1';
 const IMAGE_CACHE_NAME = 'stc-images-v1';
 
-// Core assets to cache immediately
+// Detect base path for GitHub Pages compatibility
+function getBasePath() {
+    // This will be different in service worker context
+    // We'll use a simpler detection method
+    const currentUrl = self.location.href;
+    const baseUrl = new URL('./', currentUrl);
+    return baseUrl.pathname;
+}
+
+// Get path with base path
+function getPath(relativePath) {
+    const basePath = getBasePath();
+    const cleanPath = relativePath.startsWith('/') ? relativePath.slice(1) : relativePath;
+    
+    if (basePath === '/') {
+        return `/${cleanPath}`;
+    }
+    
+    return `${basePath}${cleanPath}`;
+}
+
+// Core assets to cache immediately (now using relative paths)
 const CORE_ASSETS = [
-    '/',
-    '/index.html',
-    '/offline.html',
-    '/css/style.css',
-    '/css/home.css',
-    '/css/main.css',
-    '/css/mobile.css',
-    '/pages/navbar.css',
-    '/js/script.js',
-    '/js/home.js',
-    '/js/main.js',
-    '/js/mobile-enhancements.js',
-    '/js/pwa-installer.js',
-    '/js/smart-sync.js',
-    '/pages/navbar.html',
-    '/header.html',
-    '/footer.html',
-    '/android-chrome-192x192.png',
-    '/android-chrome-512x512.png',
-    '/apple-touch-icon.png',
-    '/favicon-32x32.png',
-    '/favicon-16x16.png',
-    '/site.webmanifest'
+    getPath(''),
+    getPath('index.html'),
+    getPath('offline.html'),
+    getPath('css/style.css'),
+    getPath('css/home.css'),
+    getPath('css/main.css'),
+    getPath('css/mobile.css'),
+    getPath('pages/navbar.css'),
+    getPath('js/script.js'),
+    getPath('js/home.js'),
+    getPath('js/main.js'),
+    getPath('js/mobile-enhancements.js'),
+    getPath('js/pwa-installer.js'),
+    getPath('js/pwa-config.js'),
+    getPath('js/smart-sync.js'),
+    getPath('pages/navbar.html'),
+    getPath('header.html'),
+    getPath('footer.html'),
+    getPath('android-chrome-192x192.png'),
+    getPath('android-chrome-512x512.png'),
+    getPath('apple-touch-icon.png'),
+    getPath('favicon-32x32.png'),
+    getPath('favicon-16x16.png'),
+    getPath('site.webmanifest')
 ];
 
 // Assets to cache on demand
 const PAGES_TO_CACHE = [
-    '/pages/about.html',
-    '/pages/clubs.html',
-    '/pages/events.html',
-    '/pages/gallery.html',
-    '/pages/contact.html',
-    '/pages/leadership.html',
-    '/pages/credits.html',
-    '/pages/faq.html',
-    '/pages/anvesha.html'
+    getPath('pages/about.html'),
+    getPath('pages/clubs.html'),
+    getPath('pages/events.html'),
+    getPath('pages/gallery.html'),
+    getPath('pages/contact.html'),
+    getPath('pages/leadership.html'),
+    getPath('pages/credits.html'),
+    getPath('pages/faq.html'),
+    getPath('pages/anvesha.html')
 ];
 
 // Install event - cache core assets
@@ -50,17 +72,40 @@ self.addEventListener('install', event => {
     
     event.waitUntil(
         Promise.all([
-            // Cache core assets
+            // Cache core assets with error handling
             caches.open(STATIC_CACHE_NAME)
                 .then(cache => {
                     console.log('[SW] Caching core assets');
-                    return cache.addAll(CORE_ASSETS);
+                    // Cache assets individually to avoid complete failure
+                    return Promise.allSettled(
+                        CORE_ASSETS.map(asset => {
+                            return fetch(asset).then(response => {
+                                if (response.ok) {
+                                    return cache.put(asset, response);
+                                }
+                                console.warn(`[SW] Failed to fetch ${asset}: ${response.status}`);
+                            }).catch(error => {
+                                console.warn(`[SW] Error caching ${asset}:`, error);
+                            });
+                        })
+                    );
                 }),
-            // Pre-cache important pages
+            // Pre-cache important pages with error handling
             caches.open(DYNAMIC_CACHE_NAME)
                 .then(cache => {
                     console.log('[SW] Pre-caching important pages');
-                    return cache.addAll(PAGES_TO_CACHE.slice(0, 3)); // Cache first 3 pages
+                    return Promise.allSettled(
+                        PAGES_TO_CACHE.slice(0, 3).map(page => {
+                            return fetch(page).then(response => {
+                                if (response.ok) {
+                                    return cache.put(page, response);
+                                }
+                                console.warn(`[SW] Failed to fetch ${page}: ${response.status}`);
+                            }).catch(error => {
+                                console.warn(`[SW] Error caching ${page}:`, error);
+                            });
+                        })
+                    );
                 })
         ])
         .then(() => {
@@ -69,6 +114,8 @@ self.addEventListener('install', event => {
         })
         .catch(error => {
             console.error('[SW] Failed to cache core assets:', error);
+            // Don't prevent installation, just log the error
+            return self.skipWaiting();
         })
     );
 });
@@ -117,7 +164,28 @@ self.addEventListener('fetch', event => {
         return;
     }
     
-    event.respondWith(handleFetch(request));
+    // Add timeout to prevent hanging requests
+    const timeoutPromise = new Promise((_, reject) => {
+        setTimeout(() => reject(new Error('Service Worker timeout')), 10000);
+    });
+    
+    event.respondWith(
+        Promise.race([
+            handleFetch(request),
+            timeoutPromise
+        ]).catch(error => {
+            console.error('[SW] Request failed:', error);
+            
+            // Emergency fallback - let the request go through normally
+            if (isHTMLPage(url.pathname) || request.headers.get('accept')?.includes('text/html')) {
+                // For HTML requests, try to serve something useful
+                return caches.match('/') || caches.match('/index.html') || fetch(request);
+            }
+            
+            // For other requests, let them fail naturally
+            return fetch(request);
+        })
+    );
 });
 
 function isAllowedExternalResource(url) {
@@ -154,34 +222,97 @@ async function handleFetch(request) {
     } catch (error) {
         console.error('[SW] Fetch error:', error);
         
-                // Fallback for HTML pages
+        // Enhanced fallback logic for HTML pages
         if (isHTMLPage(url.pathname) || request.headers.get('accept')?.includes('text/html')) {
+            // Try to serve the requested page from cache first
             const cache = await caches.open(DYNAMIC_CACHE_NAME);
-            const cachedResponse = await cache.match('/index.html');
-            if (cachedResponse) {
-                return cachedResponse;
+            const cachedPage = await cache.match(request);
+            if (cachedPage) {
+                console.log('[SW] Serving cached page:', url.pathname);
+                return cachedPage;
             }
             
-            // If no cached content, redirect to offline page with return URL
-            const offlineCache = await caches.open(STATIC_CACHE_NAME);
-            const offlinePage = await offlineCache.match('/offline.html');
+            // Try to serve homepage from cache
+            const cachedHome = await cache.match('/') || await cache.match('/index.html');
+            if (cachedHome) {
+                console.log('[SW] Serving cached homepage as fallback');
+                return cachedHome;
+            }
+            
+            // Try static cache for homepage
+            const staticCache = await caches.open(STATIC_CACHE_NAME);
+            const staticHome = await staticCache.match('/') || await staticCache.match('/index.html');
+            if (staticHome) {
+                console.log('[SW] Serving static cached homepage');
+                return staticHome;
+            }
+            
+            // Finally, try to serve offline page
+            const offlinePage = await staticCache.match('/offline.html');
             if (offlinePage) {
-                // Clone response and modify to include return URL in search params
-                const offlineContent = await offlinePage.text();
-                const modifiedContent = offlineContent.replace(
-                    "const returnUrl = urlParams.get('return') || '/';",
-                    `const returnUrl = urlParams.get('return') || '${url.pathname}';`
-                );
-                
-                return new Response(modifiedContent, {
+                console.log('[SW] Serving offline page');
+                return new Response(await offlinePage.text(), {
                     status: 200,
                     statusText: 'OK',
-                    headers: { 'Content-Type': 'text/html' }
+                    headers: { 
+                        'Content-Type': 'text/html',
+                        'Cache-Control': 'no-cache'
+                    }
                 });
             }
+            
+            // Last resort: return a basic offline message
+            return new Response(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>Offline - STC IISER TVM</title>
+                    <style>
+                        body { 
+                            font-family: Arial, sans-serif; 
+                            text-align: center; 
+                            padding: 50px; 
+                            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                            color: white;
+                            min-height: 100vh;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            flex-direction: column;
+                        }
+                        .offline-message { max-width: 400px; }
+                        .retry-btn {
+                            background: rgba(255,255,255,0.2);
+                            border: 2px solid rgba(255,255,255,0.3);
+                            color: white;
+                            padding: 12px 24px;
+                            border-radius: 25px;
+                            cursor: pointer;
+                            margin-top: 20px;
+                        }
+                        .retry-btn:hover { background: rgba(255,255,255,0.3); }
+                    </style>
+                </head>
+                <body>
+                    <div class="offline-message">
+                        <h1>📱 STC IISER TVM</h1>
+                        <h2>You're Offline</h2>
+                        <p>No internet connection detected. Please check your connection and try again.</p>
+                        <button class="retry-btn" onclick="window.location.reload()">Retry</button>
+                        <button class="retry-btn" onclick="window.location.href='/'">Go Home</button>
+                    </div>
+                </body>
+                </html>
+            `, {
+                status: 200,
+                statusText: 'OK',
+                headers: { 'Content-Type': 'text/html' }
+            });
         }
         
-        // Return a generic error response
+        // For non-HTML requests, return a simple error response
         return new Response('Offline - Content not available', {
             status: 503,
             statusText: 'Service Unavailable',
@@ -192,54 +323,96 @@ async function handleFetch(request) {
 
 // Cache First strategy
 async function cacheFirst(request, cacheName) {
-    const cache = await caches.open(cacheName);
-    const cached = await cache.match(request);
-    
-    if (cached) {
-        return cached;
+    try {
+        const cache = await caches.open(cacheName);
+        const cached = await cache.match(request);
+        
+        if (cached) {
+            // Update cache in background if online
+            if (navigator.onLine) {
+                fetch(request).then(response => {
+                    if (response.ok) {
+                        cache.put(request, response.clone());
+                    }
+                }).catch(() => {
+                    // Silently fail background update
+                });
+            }
+            return cached;
+        }
+        
+        // Not in cache, try network
+        const response = await fetch(request);
+        if (response.ok) {
+            cache.put(request, response.clone());
+        }
+        return response;
+        
+    } catch (error) {
+        console.error('[SW] Cache First error:', error);
+        // Try network as last resort
+        return fetch(request);
     }
-    
-    const response = await fetch(request);
-    if (response.status === 200) {
-        cache.put(request, response.clone());
-    }
-    return response;
 }
 
 // Network First strategy
 async function networkFirst(request, cacheName) {
-    const cache = await caches.open(cacheName);
-    
     try {
-        const response = await fetch(request);
-        if (response.status === 200) {
-            cache.put(request, response.clone());
+        const cache = await caches.open(cacheName);
+        
+        try {
+            const response = await fetch(request);
+            if (response.ok) {
+                cache.put(request, response.clone());
+            }
+            return response;
+        } catch (networkError) {
+            console.log('[SW] Network failed, trying cache for:', request.url);
+            const cached = await cache.match(request);
+            if (cached) {
+                return cached;
+            }
+            
+            // If it's an HTML request and we have no cache, try to serve homepage
+            if (isHTMLPage(new URL(request.url).pathname)) {
+                const homepage = await cache.match('/') || await cache.match('/index.html');
+                if (homepage) {
+                    return homepage;
+                }
+            }
+            
+            throw networkError;
         }
-        return response;
     } catch (error) {
-        const cached = await cache.match(request);
-        if (cached) {
-            return cached;
-        }
+        console.error('[SW] Network First error:', error);
         throw error;
     }
 }
 
 // Stale While Revalidate strategy
 async function staleWhileRevalidate(request, cacheName) {
-    const cache = await caches.open(cacheName);
-    const cached = await cache.match(request);
-    
-    const fetchPromise = fetch(request).then(response => {
-        if (response.status === 200) {
-            cache.put(request, response.clone());
-        }
-        return response;
-    }).catch(() => {
-        // Silently fail for background updates
-    });
-    
-    return cached || fetchPromise;
+    try {
+        const cache = await caches.open(cacheName);
+        const cached = await cache.match(request);
+        
+        const fetchPromise = fetch(request).then(response => {
+            if (response.ok) {
+                cache.put(request, response.clone());
+            }
+            return response;
+        }).catch(error => {
+            console.warn('[SW] Background fetch failed for:', request.url, error);
+            return null;
+        });
+        
+        // Return cached version immediately if available, otherwise wait for network
+        return cached || await fetchPromise;
+        
+    } catch (error) {
+        console.error('[SW] Stale While Revalidate error:', error);
+        // Fallback to network
+        return fetch(request);
+    }
 }
 
 // Helper functions

@@ -1474,14 +1474,42 @@
     <script src="js/data.js"></script>
     <script src="js/script.js"></script>
     
+    <!-- PWA Configuration (must load first) -->
+    <script src="js/pwa-config.js" onerror="console.warn('PWA config failed to load')"></script>
+    
     <!-- PWA Installation Manager -->
-    <script src="js/pwa-installer.js"></script>
+    <script src="js/pwa-installer.js" onerror="console.warn('PWA installer failed to load')"></script>
     
     <!-- Smart Content Sync Manager -->
-    <script src="js/smart-sync.js"></script>
+    <script src="js/smart-sync.js" onerror="console.warn('Smart sync failed to load')"></script>
+    
+    <!-- PWA Debug Utility -->
+    <script src="js/pwa-debug.js" onerror="console.warn('PWA debug failed to load')"></script>
     
     <!-- Enhanced JavaScript for new features -->
     <script>
+        // Global error monitoring for PWA debugging
+        window.addEventListener('error', (e) => {
+            console.error('Global error caught:', {
+                message: e.message,
+                filename: e.filename,
+                lineno: e.lineno,
+                colno: e.colno,
+                error: e.error
+            });
+        });
+        
+        window.addEventListener('unhandledrejection', (e) => {
+            console.error('Unhandled promise rejection:', e.reason);
+        });
+        
+        // Service Worker error monitoring
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.addEventListener('error', (e) => {
+                console.error('Service Worker error:', e);
+            });
+        }
+        
         // Navbar functionality
         document.addEventListener('DOMContentLoaded', function() {
             const hamburger = document.querySelector('.hamburger');
